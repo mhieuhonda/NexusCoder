@@ -1,0 +1,75 @@
+# Nexus Coder v0.1 - Cấu hình mặc định
+# Tác giả: Hieu Louis (2026)
+
+model:
+  name: "Nexus Coder"
+  agent_name: "Nexus"
+  author: "Hieu Louis"
+  version: "0.1.0"
+  github: "mhieuhonda"
+  year: "2026"
+
+# Kiến trúc
+architecture:
+  vocab_size: 32000
+  hidden_size: 2048
+  num_hidden_layers: 12
+  num_attention_heads: 16
+  num_kv_heads: 4              # Grouped Query Attention
+  head_dim: 128
+  intermediate_size: 5632      # per-expert
+  hidden_act: "silu"            # SwiGLU
+  norm_type: "rmsnorm"
+
+# Mixture of Experts
+moe:
+  num_experts: 24              # Tổng số chuyên gia
+  num_active_experts: 3        # Chuyên gia kích hoạt mỗi token
+  router_aux_loss_coef: 0.001
+  router_jitter_noise: 0.0
+
+# Context window
+context:
+  max_position_embeddings: 50000   # 50k tokens
+  rotary_emb_base: 10000.0
+
+# Tham số
+params:
+  total: "~10.2B"
+  active: "~1.5B"
+  expert_utilization: "12.5%"
+
+# Training defaults
+training:
+  learning_rate: 5.0e-4
+  weight_decay: 0.01
+  warmup_steps: 100
+  max_steps: 5000
+  per_device_batch_size: 4
+  gradient_accumulation_steps: 4
+  logging_steps: 10
+  save_steps: 500
+  max_grad_norm: 1.0
+  seed: 42
+
+# Inference defaults
+inference:
+  max_new_tokens: 200
+  temperature: 0.8
+  top_k: 50
+  top_p: 0.9
+  do_sample: true
+
+# Personas (hardcoded)
+personality:
+  type: "humorous"
+  language: "bilingual"          # Việt + Anh
+  specialties:
+    - programming
+    - conversation
+
+# Environment
+environment:
+  python_version: "3.12.13"
+  pytorch_version: ">=2.0"
+  cuda_required: false          # Có thể chạy trên CPU (chậm)

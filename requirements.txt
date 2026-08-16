@@ -1,0 +1,16 @@
+# Requirements for Nexus Coder
+# Python 3.12.13 (recommended)
+
+# Core deep learning
+torch>=2.0.0
+numpy>=1.24.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+
+# Optional (for advanced features)
+# transformers>=4.30.0  # For comparison/tokenizer utils
+# accelerate>=0.20.0   # For distributed training
+# bitsandbytes>=0.41.0  # For 4-bit quantization
+# flash-attn>=2.0.0     # For faster attention (GPU only)

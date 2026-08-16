@@ -1,0 +1,54 @@
+# Nexus Coder Configuration - Tiny version (for testing/demo)
+# Used for quick verification on CPU
+
+model:
+  name: "Nexus Coder Tiny"
+  agent_name: "Nexus"
+  author: "Hieu Louis"
+  version: "0.1.0-tiny"
+
+architecture:
+  vocab_size: 2000
+  hidden_size: 256
+  num_hidden_layers: 4
+  num_attention_heads: 8
+  num_kv_heads: 2
+  head_dim: 32
+  intermediate_size: 512
+  hidden_act: "silu"
+  norm_type: "rmsnorm"
+
+moe:
+  num_experts: 4
+  num_active_experts: 2
+  router_aux_loss_coef: 0.001
+
+context:
+  max_position_embeddings: 512
+  rotary_emb_base: 10000.0
+
+params:
+  total: "~8M (demo only)"
+  active: "~5M"
+  note: "This is for testing only. Use nexus_coder_10b.yaml for the real model."
+
+training:
+  learning_rate: 5.0e-4
+  weight_decay: 0.01
+  warmup_steps: 10
+  max_steps: 30
+  per_device_batch_size: 2
+  gradient_accumulation_steps: 1
+  logging_steps: 5
+  save_steps: 30
+
+inference:
+  max_new_tokens: 50
+  temperature: 0.8
+  top_k: 50
+  top_p: 0.9
+
+environment:
+  python_version: "3.12.13"
+  pytorch_version: ">=2.0"
+  cuda_required: false

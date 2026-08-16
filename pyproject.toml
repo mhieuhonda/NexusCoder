@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nexus-coder"
+version = "0.1.0"
+description = "Nexus Coder - AI Agent với kiến trúc MoE 10B/1.5B active, do Hieu Louis tạo ra"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Hieu Louis", email = "mhieuhonda@users.noreply.github.com"}
+]
+requires-python = "==3.12.*"
+dependencies = [
+    "torch>=2.0.0",
+    "numpy>=1.24.0",
+    "tqdm>=4.65.0",
+    "pyyaml>=6.0",
+]
+keywords = ["ai", "llm", "moe", "mixture-of-experts", "transformer", "nexus"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "black", "flake8"]
+gpu = ["flash-attn>=2.0.0", "bitsandbytes>=0.41.0"]
+
+[project.urls]
+Homepage = "https://github.com/mhieuhonda/NexusCoder"
+Repository = "https://github.com/mhieuhonda/NexusCoder"
+Issues = "https://github.com/mhieuhonda/NexusCoder/issues"
+
+[tool.setuptools.packages.find]
+include = ["nexus*"]
