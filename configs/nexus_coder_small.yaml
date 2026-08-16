@@ -1,0 +1,44 @@
+# Nexus Coder v0.2 - Small Variant (~125M params)
+# Fine-tune trên 1 GPU
+# Author: Hieu Louis (2026)
+
+model:
+  name: "Nexus Coder Small"
+  version: "0.2.0-small"
+  vocab_size: 16000
+  hidden_size: 768
+  num_hidden_layers: 12
+  num_attention_heads: 12
+  num_kv_heads: 4
+  head_dim: 64
+  intermediate_size: 2048
+  num_experts: 8
+  num_active_experts: 2
+  max_position_embeddings: 8192
+  use_flash_attention: false
+
+training:
+  output_dir: "./checkpoints/small"
+  learning_rate: 5e-4
+  weight_decay: 0.01
+  warmup_steps: 100
+  max_steps: 50000
+  per_device_batch_size: 8
+  gradient_accumulation_steps: 4
+  logging_steps: 50
+  save_steps: 1000
+  use_amp: true
+  amp_dtype: "bf16"
+
+data:
+  include_external: true
+  external_data_dir: "./data/processed"
+  max_length: 1024
+  shuffle: true
+
+estimated:
+  total_params: "~125M"
+  active_params: "~35M"
+  disk_fp16_mb: 250
+  disk_int8_mb: 125
+  disk_int4_mb: 63

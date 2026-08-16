@@ -5,11 +5,12 @@
 ### AI Agent with Mixture of Experts (MoE) Architecture
 
 **10B total parameters · 1.5B active parameters · 50K context window**
+**15 skills · 18+ tools · 5 data sources · Multi-variant configs**
 
 [![Python](https://img.shields.io/badge/Python-3.12.13-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-0.1.0-green.svg)]()
+[![Version](https://img.shields.io/badge/Version-0.2.0-brightgreen.svg)]()
 
 **Created by [Hieu Louis](https://github.com/mhieuhonda)** · 2026
 
@@ -21,11 +22,11 @@
 
 ## Giới thiệu
 
-**Nexus Coder** là một AI Agent (Tác tử Trí tuệ Nhân tạo) được xây dựng từ đầu với kiến trúc **Mixture of Experts (MoE)** - kiến trúc tiên tiến nhất của các mô hình ngôn ngữ lớn hiện đại như GPT-4, Mixtral, DeepSeek-V3.
+**Nexus Coder v0.2** là bản nâng cấp lớn từ v0.1, bổ sung hệ thống Skills, Tools, Data Pipeline, và nhiều module chuyên nghiệp khác. Vẫn giữ nguyên kiến trúc **Mixture of Experts (MoE)** 10B/1.5B, nhưng nay mạnh mẽ hơn rất nhiều.
 
-Được tạo ra bởi **Hieu Louis** vào năm 2026, Nexus Coder là một dự án cá nhân đầy tham vọng, chứng minh khả năng xây dựng một mô hình AI hoàn chỉnh từ con số không.
+Được tạo ra bởi **Hieu Louis** vào năm 2026, Nexus Coder là dự án cá nhân đầy tham vọng, chứng minh khả năng xây dựng một mô hình AI hoàn chỉnh từ con số không.
 
-## ✨ Tính năng chính
+## ✨ Tính năng chính v0.2
 
 | Đặc điểm | Giá trị |
 |----------|---------|
@@ -33,54 +34,63 @@
 | **Tham số kích hoạt** | ~1.5 tỷ (1.5B mỗi token) |
 | **Cửa sổ ngữ cảnh** | 50,000 tokens |
 | **Số chuyên gia (experts)** | 24 (chỉ 3 active mỗi token) |
+| **Skills** | 15 (code, reasoning, math, language, data, security, devops) |
+| **Tools** | 18+ (file, exec, web, code, math, parser, network, crypto) |
+| **Data sources** | 5 (GitHub, HuggingFace, arXiv, Wikipedia, StackOverflow) |
+| **Configs** | 5 variants (tiny → xlarge) |
 | **Ngôn ngữ lập trình** | Python 3.12.13 |
 | **Framework** | PyTorch |
 | **Tính cách** | Hài hước, thân thiện |
 | **Ngôn ngữ giao tiếp** | Song ngữ Việt - Anh |
 
-## 🏗️ Kiến trúc
+## 🏗️ Kiến trúc v0.2
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    NEXUS CODER v0.1                       │
-├─────────────────────────────────────────────────────────┤
-│  Token Embedding (vocab=32K, hidden=2048)                │
-│                                                          │
-│  ┌────────────────────────────────────────────────────┐ │
-│  │  Decoder Layer × 12                                │ │
-│  │  ┌──────────────────────────────────────────────┐ │ │
-│  │  │  RMSNorm → Multi-Head Attention (GQA + RoPE)│ │ │
-│  │  │              ↓                              │ │ │
-│  │  │  RMSNorm → MoE Layer (24 experts, 3 active) │ │ │
-│  │  │              ↓                              │ │ │
-│  │  │  Residual connections                        │ │ │
-│  │  └──────────────────────────────────────────────┘ │ │
-│  └────────────────────────────────────────────────────┘ │
-│                                                          │
-│  RMSNorm → LM Head (vocab=32K)                           │
-└─────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                    NEXUS CODER v0.2                               │
+├─────────────────────────────────────────────────────────────────┤
+│  Agent Layer                                                     │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ Memory   │  │ Planner  │  │ Router   │  │ Safety   │        │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘        │
+├─────────────────────────────────────────────────────────────────┤
+│  Skills (15)              │  Tools (18+)                         │
+│  ┌─────────────────────┐  │  ┌──────────────────────────┐       │
+│  │ Code Skills (6)     │  │  │ File Ops (4)             │       │
+│  │ Reasoning (3)       │  │  │ Exec (3)                 │       │
+│  │ Language (2)        │  │  │ Web (3)                  │       │
+│  │ Data (2)            │  │  │ Code (4)                 │       │
+│  │ Security (1)        │  │  │ Math/Parser/System (4+)  │       │
+│  │ DevOps (1)          │  │  │ Network/Crypto (4)       │       │
+│  └─────────────────────┘  │  └──────────────────────────┘       │
+├─────────────────────────────────────────────────────────────────┤
+│  Model (MoE Transformer)                                         │
+│  ┌────────────────────────────────────────────────────────────┐ │
+│  │  Token Embedding (vocab=32K, hidden=2048)                  │ │
+│  │  Decoder Layer × 12                                        │ │
+│  │  ┌──────────────────────────────────────────────────────┐  │ │
+│  │  │  RMSNorm → Multi-Head Attention (GQA + RoPE)         │  │ │
+│  │  │  RMSNorm → MoE Layer (24 experts, 3 active)          │  │ │
+│  │  │  Residual connections                                 │  │ │
+│  │  └──────────────────────────────────────────────────────┘  │ │
+│  │  RMSNorm → LM Head (vocab=32K)                             │ │
+│  └────────────────────────────────────────────────────────────┘ │
+├─────────────────────────────────────────────────────────────────┤
+│  Data Pipeline                                                   │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ Collect  │→ │ Process  │→ │  Train   │→ │ Evaluate │        │
+│  │ (5 srcs) │  │ (4 stgs) │  │ (curric) │  │ (8 benc) │        │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘        │
+├─────────────────────────────────────────────────────────────────┤
+│  Optimization & Safety                                           │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
+│  │ Quantize │  │   LoRA   │  │ Distill  │  │  Pruner  │        │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘        │
+│  ┌──────────┐  ┌──────────┐                                    │
+│  │ Safety   │  │Guardrails│                                    │
+│  └──────────┘  └──────────┘                                    │
+└─────────────────────────────────────────────────────────────────┘
 ```
-
-### Thành phần chính
-
-- **Grouped Query Attention (GQA)**: 16 heads, 4 KV heads - cân bằng giữa tốc độ và chất lượng
-- **Rotary Position Embedding (RoPE)**: hỗ trợ context 50K tokens
-- **RMSNorm**: nhanh hơn LayerNorm truyền thống
-- **SwiGLU Activation**: hàm kích hoạt hiệu quả của LLaMA/Mixtral
-- **Mixture of Experts**: 24 experts, chỉ 3 active mỗi token → đạt 10B tổng nhưng chỉ 1.5B active
-
-## 📊 Tính toán tham số
-
-| Thành phần | Tham số |
-|-----------|---------|
-| Token Embedding | 65.5M |
-| Attention (mỗi layer) | 10.5M |
-| MoE tổng (mỗi layer) | 830M |
-| MoE active (mỗi layer) | 104M |
-| **Tổng 12 layers** | **10,086M** |
-| LM Head | 65.5M |
-| **TỔNG** | **~10.22B** ✓ |
-| **ACTIVE** | **~1.50B** ✓ |
 
 ## 🚀 Cài đặt
 
@@ -100,84 +110,233 @@ pip install -r requirements.txt
 
 ## 📖 Sử dụng
 
-### 1. Kiểm tra cấu hình và đếm tham số
+### 1. Multi-variant configs
 
 ```bash
-python scripts/count_params.py
+# Tiny (CPU demo, ~5M params)
+python scripts/train.py --config tiny --steps 100
+
+# Small (1 GPU, ~125M params)
+python scripts/train.py --config small --steps 1000
+
+# Medium (4-8 GPU, ~1B params)
+python scripts/train.py --config medium --steps 5000
+
+# Large 10B (32+ GPU, default)
+python scripts/train.py --config large --steps 5000 --use-amp
+
+# XLarge 30B (research only)
+python scripts/train.py --config xlarge --steps 10000 --use-amp
 ```
 
-### 2. Chạy test nhanh
+### 2. Collect training data
 
 ```bash
-python scripts/quick_test.py
+# Collect from all sources
+python scripts/collect_data.py --source all --output ./data/raw
+
+# Specific source
+python scripts/collect_data.py --source github --max-repos 10
+python scripts/collect_data.py --source huggingface --max-datasets 5
+python scripts/collect_data.py --source arxiv --max-queries 5
+python scripts/collect_data.py --source wikipedia --language vi
+python scripts/collect_data.py --source stackoverflow --max-tags 5
 ```
 
-### 3. Huấn luyện model
+### 3. Process dataset
 
 ```bash
-# Tiny config (chạy trên CPU được)
-python scripts/train.py --steps 100 --batch_size 2
-
-# Full 10B config (cần GPU nhiều VRAM)
-python scripts/train.py --full --steps 5000
+python scripts/prepare_dataset.py --input ./data/raw --output ./data/processed
 ```
 
-### 4. Chat với Nexus Agent
+### 4. Train với external data
+
+```bash
+# Train với collected data
+python scripts/train.py --config large --include-external --steps 5000
+
+# LoRA fine-tune
+python scripts/train.py --config large --lora --lora-rank 8 --steps 1000
+
+# Resume từ checkpoint
+python scripts/train.py --resume ./checkpoints/nexus_coder-step-1000.pt
+```
+
+### 5. Chat với Nexus Agent
 
 ```bash
 python scripts/chat.py
 ```
 
-### 5. Sử dụng trong code Python
+Trong chat:
+- `skills` - Liệt kê 15 skills
+- `tools` - Liệt kê 18+ tools
+- `stats` - Thống kê session
+- `info` - Thông tin model
+- `reset` - Xóa lịch sử
+
+### 6. Quantize model
+
+```bash
+# INT8 (4x memory reduction)
+python scripts/quantize_model.py --input model.pt --method int8 --output model_int8.pt
+
+# INT4 (8x memory reduction)
+python scripts/quantize_model.py --input model.pt --method int4 --output model_int4.pt
+```
+
+### 7. Evaluate
+
+```bash
+python scripts/evaluate.py --model model.pt --benchmarks humaneval,gsm8k
+```
+
+### 8. Python API
 
 ```python
 from nexus.config import NexusConfig
 from nexus.model.nexus_coder import NexusCoderForCausalLM
 from nexus.agent.agent import NexusAgent
+from nexus.skills import get_global_registry as get_skills
+from nexus.tools import get_global_registry as get_tools
 
 # Khởi tạo
 config = NexusConfig()
 model = NexusCoderForCausalLM(config)
 
-# Tạo Agent
+# Tạo Agent v0.2
 agent = NexusAgent(config=config, name="Nexus")
+
+# Skills & Tools ready
+print(f"Skills: {len(get_skills())}")
+print(f"Tools: {len(get_tools())}")
 
 # Chat
 agent.chat()
 ```
 
-## 📁 Cấu trúc dự án
+## 📁 Cấu trúc dự án v0.2
 
 ```
 NexusCoder/
-├── nexus/                      # Package chính
+├── nexus/                          # Package chính
 │   ├── __init__.py
-│   ├── config.py               # Cấu hình model
-│   ├── model/                  # Kiến trúc model
-│   │   ├── attention.py        # Multi-head attention + GQA + RoPE
-│   │   ├── moe.py              # Mixture of Experts
-│   │   ├── transformer.py      # Decoder layer
-│   │   ├── nexus_coder.py      # Model chính
-│   │   ├── rope.py             # Rotary embedding
-│   │   └── layers.py           # RMSNorm, SwiGLU
-│   ├── tokenizer/              # Tokenizer BPE
-│   ├── training/               # Training + dataset
-│   ├── inference/              # Inference engine
-│   ├── agent/                  # AI Agent wrapper
-│   └── utils/                  # Utilities
-├── configs/                    # YAML configs
-├── scripts/                    # CLI scripts
-│   ├── train.py                # Training script
-│   ├── chat.py                 # Chat script
-│   ├── count_params.py         # Đếm tham số
-│   └── quick_test.py           # Test suite
-├── tests/                      # Unit tests
-├── docs/                       # Documentation
+│   ├── config.py                   # Multi-variant configs
+│   ├── model/                      # Kiến trúc model
+│   │   ├── attention.py
+│   │   ├── moe.py
+│   │   ├── transformer.py
+│   │   ├── nexus_coder.py
+│   │   ├── rope.py
+│   │   └── layers.py
+│   ├── tokenizer/                  # BPE Tokenizer
+│   ├── training/                   # Training + Dataset
+│   ├── inference/                  # Inference engine
+│   ├── agent/                      # Agent + Memory + Planner + Router
+│   │   ├── agent.py
+│   │   ├── memory.py              # NEW
+│   │   ├── planner.py             # NEW
+│   │   └── router.py              # NEW
+│   ├── skills/                     # 15 Skills (NEW)
+│   │   ├── base.py
+│   │   ├── registry.py
+│   │   ├── code_generation.py
+│   │   ├── code_review.py
+│   │   ├── code_refactor.py
+│   │   ├── debugging.py
+│   │   ├── documentation.py
+│   │   ├── testing.py
+│   │   ├── algorithm_design.py
+│   │   ├── data_analysis.py
+│   │   ├── translation.py
+│   │   ├── summarization.py
+│   │   ├── reasoning.py
+│   │   ├── math_skill.py
+│   │   ├── sql_generation.py
+│   │   ├── security_audit.py
+│   │   └── performance_opt.py
+│   ├── tools/                      # 18+ Tools (NEW)
+│   │   ├── base.py
+│   │   ├── registry.py
+│   │   ├── file_ops.py
+│   │   ├── shell.py
+│   │   ├── python_exec.py
+│   │   ├── git_ops.py
+│   │   ├── web_tools.py
+│   │   ├── code_tools.py
+│   │   ├── calculator.py
+│   │   ├── parsers.py
+│   │   ├── search.py
+│   │   ├── archive.py
+│   │   ├── crypto.py
+│   │   ├── datetime_tool.py
+│   │   └── network.py
+│   ├── data/                       # Data Pipeline (NEW)
+│   │   ├── collectors/
+│   │   │   ├── github_collector.py
+│   │   │   ├── huggingface_collector.py
+│   │   │   ├── arxiv_collector.py
+│   │   │   ├── wikipedia_collector.py
+│   │   │   └── stackoverflow_collector.py
+│   │   ├── processors/
+│   │   │   ├── cleaner.py
+│   │   │   ├── deduplicator.py
+│   │   │   ├── quality_filter.py
+│   │   │   └── code_formatter.py
+│   │   └── curriculum.py
+│   ├── optim/                      # Optimization (NEW)
+│   │   ├── quantization.py
+│   │   ├── lora.py
+│   │   ├── distillation.py
+│   │   └── pruning.py
+│   ├── safety/                     # Safety (NEW)
+│   │   ├── filters.py
+│   │   └── guardrails.py
+│   ├── eval/                       # Evaluation (NEW)
+│   │   ├── benchmarks.py
+│   │   └── metrics.py
+│   └── utils/
+├── configs/                        # YAML configs
+├── scripts/                        # CLI scripts
+│   ├── train.py
+│   ├── chat.py
+│   ├── count_params.py
+│   ├── quick_test.py
+│   ├── collect_data.py            # NEW
+│   ├── prepare_dataset.py         # NEW
+│   ├── quantize_model.py          # NEW
+│   └── evaluate.py                # NEW
+├── tests/
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── TRAINING.md
+│   ├── SKILLS.md                  # NEW
+│   ├── TOOLS.md                   # NEW
+│   └── DATA.md                    # NEW
 ├── requirements.txt
 ├── pyproject.toml
+├── CHANGELOG.md
 ├── LICENSE
 └── README.md
 ```
+
+## 🛡️ Safety Features
+
+- **Safety Filter**: Detect harmful content, PII
+- **Guardrails**: Configurable rules (block/warn/redact)
+- **Audit Log**: All tool calls logged to JSONL
+- **Sandboxed Execution**: Python exec in restricted namespace
+- **Confirmation Required**: For dangerous/destructive ops
+- **Blocked Commands**: Known dangerous patterns blocked
+
+## 🗺️ Roadmap
+
+- [x] v0.1 - Foundation (MoE 10B/1.5B)
+- [x] **v0.2 - Major Upgrade (Skills, Tools, Data Pipeline)** ← HIỆN TẠI
+- [ ] v0.3 - Pre-training on large dataset
+- [ ] v0.4 - Multimodal (image, audio)
+- [ ] v0.5 - Fine-tuning for chat (RLHF)
+- [ ] v1.0 - Production-ready
 
 ## 👤 Tác giả
 
@@ -198,11 +357,11 @@ NexusCoder/
 
 ## Overview
 
-**Nexus Coder** is an AI Agent built from scratch with a **Mixture of Experts (MoE)** architecture - the cutting-edge architecture used by modern large language models like GPT-4, Mixtral, and DeepSeek-V3.
+**Nexus Coder v0.2** is a major upgrade from v0.1, adding Skills system, Tools system, Data Pipeline, and many professional modules. Still using **Mixture of Experts (MoE)** 10B/1.5B architecture, but now much more powerful.
 
 Created by **Hieu Louis** in 2026, Nexus Coder is an ambitious personal project demonstrating the ability to build a complete AI model from the ground up.
 
-## ✨ Key Features
+## ✨ Key Features v0.2
 
 | Feature | Value |
 |---------|-------|
@@ -210,33 +369,14 @@ Created by **Hieu Louis** in 2026, Nexus Coder is an ambitious personal project 
 | **Active parameters** | ~1.5 billion (1.5B per token) |
 | **Context window** | 50,000 tokens |
 | **Number of experts** | 24 (only 3 active per token) |
+| **Skills** | 15 (code, reasoning, math, language, data, security, devops) |
+| **Tools** | 18+ (file, exec, web, code, math, parser, network, crypto) |
+| **Data sources** | 5 (GitHub, HuggingFace, arXiv, Wikipedia, StackOverflow) |
+| **Configs** | 5 variants (tiny → xlarge) |
 | **Python version** | 3.12.13 |
 | **Framework** | PyTorch |
 | **Personality** | Humorous, friendly |
 | **Languages** | Bilingual (Vietnamese + English) |
-
-## 🏗️ Architecture
-
-### Core Components
-
-- **Grouped Query Attention (GQA)**: 16 heads, 4 KV heads - balances speed and quality
-- **Rotary Position Embedding (RoPE)**: supports 50K context
-- **RMSNorm**: faster than traditional LayerNorm
-- **SwiGLU Activation**: efficient activation from LLaMA/Mixtral
-- **Mixture of Experts**: 24 experts, only 3 active per token → 10B total but only 1.5B active
-
-## 📊 Parameter Math
-
-| Component | Parameters |
-|-----------|------------|
-| Token Embedding | 65.5M |
-| Attention (per layer) | 10.5M |
-| MoE total (per layer) | 830M |
-| MoE active (per layer) | 104M |
-| **12 layers total** | **10,086M** |
-| LM Head | 65.5M |
-| **TOTAL** | **~10.22B** ✓ |
-| **ACTIVE** | **~1.50B** ✓ |
 
 ## 🚀 Installation
 
@@ -250,26 +390,38 @@ pip install -r requirements.txt
 
 ## 📖 Usage
 
-### Verify parameters
+### Multi-variant configs
 
 ```bash
-python scripts/count_params.py
+# Tiny (CPU, ~5M params)
+python scripts/train.py --config tiny --steps 100
+
+# Small (1 GPU, ~125M params)
+python scripts/train.py --config small --steps 1000
+
+# Large 10B (32+ GPU, default)
+python scripts/train.py --config large --steps 5000 --use-amp
+
+# XLarge 30B (research)
+python scripts/train.py --config xlarge --steps 10000 --use-amp
 ```
 
-### Run tests
+### Collect training data
 
 ```bash
-python scripts/quick_test.py
+python scripts/collect_data.py --source all --output ./data/raw
 ```
 
-### Train
+### Process dataset
 
 ```bash
-# Tiny (CPU-friendly)
-python scripts/train.py --steps 100 --batch_size 2
+python scripts/prepare_dataset.py --input ./data/raw --output ./data/processed
+```
 
-# Full 10B (requires GPU)
-python scripts/train.py --full --steps 5000
+### Train with external data + LoRA
+
+```bash
+python scripts/train.py --config large --include-external --lora --steps 5000
 ```
 
 ### Chat
@@ -278,68 +430,34 @@ python scripts/train.py --full --steps 5000
 python scripts/chat.py
 ```
 
-### Python API
+### Quantize
 
-```python
-from nexus.config import NexusConfig
-from nexus.model.nexus_coder import NexusCoderForCausalLM
-from nexus.agent.agent import NexusAgent
-
-config = NexusConfig()
-model = NexusCoderForCausalLM(config)
-agent = NexusAgent(config=config, name="Nexus")
-agent.chat()
+```bash
+python scripts/quantize_model.py --input model.pt --method int8 --output model_int8.pt
 ```
 
-## 📁 Project Structure
+### Evaluate
 
-```
-NexusCoder/
-├── nexus/                      # Main package
-│   ├── config.py               # Model configuration
-│   ├── model/                  # Model architecture
-│   ├── tokenizer/              # BPE tokenizer
-│   ├── training/               # Training + dataset
-│   ├── inference/              # Inference engine
-│   ├── agent/                  # AI Agent wrapper
-│   └── utils/                  # Utilities
-├── configs/                    # YAML configs
-├── scripts/                    # CLI scripts
-├── tests/                      # Unit tests
-├── docs/                       # Documentation
-└── README.md
+```bash
+python scripts/evaluate.py --model model.pt --benchmarks humaneval,gsm8k
 ```
 
-## 📝 Training Data
+## 🛡️ Safety
 
-The model is **hardcoded** with author information so it always knows it was created by **Hieu Louis**. The training data includes:
-
-- Q&A about the author (Vietnamese + English)
-- Sample coding questions
-- Small talk with personality
-
-See `nexus/training/dataset.py` for details.
-
-## ⚠️ Important Note
-
-This is **v0.1** - a foundational release focusing on:
-- ✅ Correct architecture implementation (MoE 10B/1.5B active)
-- ✅ Hardcoded author knowledge
-- ✅ Bilingual support
-- ✅ Working training pipeline
-- ✅ AI Agent wrapper
-
-To make the model produce fluent responses, you'll need to:
-1. Train on a large dataset (not included in v0.1)
-2. Use sufficient GPU resources (training 10B model needs multiple GPUs)
-3. Fine-tune on conversational data
+- Content filter (violence, hate, self-harm)
+- PII detection (email, phone, SSN, API keys)
+- Audit logging
+- Sandboxed execution
+- Confirmation required for dangerous ops
 
 ## 🗺️ Roadmap
 
-- [x] v0.1 - Foundation (current)
-- [ ] v0.2 - Pre-training on larger dataset
-- [ ] v0.5 - Fine-tuning for chat
-- [ ] v1.0 - Production-ready model
+- [x] v0.1 - Foundation (MoE 10B/1.5B)
+- [x] **v0.2 - Major Upgrade (Skills, Tools, Data Pipeline)** ← CURRENT
+- [ ] v0.3 - Pre-training on large dataset
+- [ ] v0.4 - Multimodal (image, audio)
+- [ ] v0.5 - Fine-tuning for chat (RLHF)
+- [ ] v1.0 - Production-ready
 
 ## 👤 Author
 
@@ -354,7 +472,7 @@ To make the model produce fluent responses, you'll need to:
 
 <div align="center">
 
-**Nexus Coder** - *"Built from scratch with passion, powered by MoE architecture"*
+**Nexus Coder v0.2** - *"15 skills · 18+ tools · 5 data sources · MoE 10B/1.5B"*
 
 Made with ❤️ by Hieu Louis · 2026
 

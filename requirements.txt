@@ -1,16 +1,48 @@
-# Requirements for Nexus Coder
+# Requirements for Nexus Coder v0.2
 # Python 3.12.13 (recommended)
 
-# Core deep learning
+# === Core deep learning ===
 torch>=2.0.0
 numpy>=1.24.0
 
-# Utilities
+# === Utilities ===
 tqdm>=4.65.0
 pyyaml>=6.0
 
-# Optional (for advanced features)
-# transformers>=4.30.0  # For comparison/tokenizer utils
-# accelerate>=0.20.0   # For distributed training
-# bitsandbytes>=0.41.0  # For 4-bit quantization
-# flash-attn>=2.0.0     # For faster attention (GPU only)
+# === Data pipeline (v0.2 NEW) ===
+# HuggingFace datasets for collecting training data
+datasets>=2.14.0
+# For deduplication
+datasketch>=1.6.0
+
+# === Code tools (v0.2 NEW) ===
+# Linting and formatting
+ruff>=0.1.0
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+
+# === Optimization (v0.2 NEW) ===
+# Quantization (INT4)
+bitsandbytes>=0.41.0; platform_system == "Linux"
+
+# === Web tools (v0.2 NEW) ===
+requests>=2.31.0
+aiohttp>=3.9.0
+
+# === Crypto tools (v0.2 NEW) ===
+cryptography>=41.0.0
+
+# === Parser tools (v0.2 NEW) ===
+PyYAML>=6.0
+tomli>=2.0.1; python_version < "3.11"
+
+# === Optional advanced features ===
+# For distributed training
+# accelerate>=0.20.0
+# For faster attention (GPU only)
+# flash-attn>=2.0.0
+# For LoRA fine-tuning (alternative implementation)
+# peft>=0.6.0
+# For evaluation benchmarks
+# lm-eval>=0.3.0

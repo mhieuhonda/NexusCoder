@@ -1,0 +1,45 @@
+# Nexus Coder v0.2 - Medium Variant (~1B params)
+# Pretrain trên 4-8 GPU
+# Author: Hieu Louis (2026)
+
+model:
+  name: "Nexus Coder Medium"
+  version: "0.2.0-medium"
+  vocab_size: 32000
+  hidden_size: 1536
+  num_hidden_layers: 24
+  num_attention_heads: 16
+  num_kv_heads: 4
+  head_dim: 96
+  intermediate_size: 4096
+  num_experts: 16
+  num_active_experts: 2
+  max_position_embeddings: 16384
+  use_flash_attention: true
+
+training:
+  output_dir: "./checkpoints/medium"
+  learning_rate: 3e-4
+  weight_decay: 0.1
+  warmup_steps: 500
+  max_steps: 100000
+  per_device_batch_size: 4
+  gradient_accumulation_steps: 8
+  logging_steps: 100
+  save_steps: 2000
+  use_amp: true
+  amp_dtype: "bf16"
+  gradient_checkpointing: true
+
+data:
+  include_external: true
+  external_data_dir: "./data/processed"
+  max_length: 2048
+  shuffle: true
+
+estimated:
+  total_params: "~1B"
+  active_params: "~250M"
+  disk_fp16_mb: 2000
+  disk_int8_mb: 1000
+  disk_int4_mb: 500

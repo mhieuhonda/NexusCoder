@@ -1,0 +1,233 @@
+# Nexus Coder v0.2 - Training Data Sources Configuration
+# Cấu hình các nguồn dữ liệu huấn luyện
+# Author: Hieu Louis (2026)
+
+github:
+  enabled: true
+  cache_dir: "./data_cache/github"
+  max_concurrent: 4
+  max_files_per_repo: 1000
+  max_file_size_kb: 100
+  
+  # Curated repos (60+ repos)
+  repos:
+    # Python core
+    - {owner: "python", name: "cpython", languages: ["python"], max_files: 2000}
+    - {owner: "pallets", name: "flask", languages: ["python"]}
+    - {owner: "pallets", name: "django", languages: ["python"], max_files: 2000}
+    - {owner: "psf", name: "requests", languages: ["python"]}
+    
+    # Data science
+    - {owner: "numpy", name: "numpy", languages: ["python"], max_files: 2000}
+    - {owner: "pandas-dev", name: "pandas", languages: ["python"], max_files: 2000}
+    - {owner: "scipy", name: "scipy", languages: ["python"], max_files: 2000}
+    - {owner: "matplotlib", name: "matplotlib", languages: ["python"], max_files: 2000}
+    - {owner: "scikit-learn", name: "scikit-learn", languages: ["python"], max_files: 2000}
+    
+    # ML/DL
+    - {owner: "pytorch", name: "pytorch", languages: ["python", "cpp"], max_files: 2000}
+    - {owner: "tensorflow", name: "tensorflow", languages: ["python", "cpp"], max_files: 2000}
+    - {owner: "huggingface", name: "transformers", languages: ["python"], max_files: 2000}
+    - {owner: "huggingface", name: "datasets", languages: ["python"]}
+    - {owner: "langchain-ai", name: "langchain", languages: ["python"], max_files: 2000}
+    
+    # Web frameworks
+    - {owner: "tiangolo", name: "fastapi", languages: ["python"], max_files: 2000}
+    - {owner: "encode", name: "starlette", languages: ["python"]}
+    - {owner: "encode", name: "uvicorn", languages: ["python"]}
+    
+    # Tools
+    - {owner: "pytest-dev", name: "pytest", languages: ["python"]}
+    - {owner: "psf", name: "black", languages: ["python"]}
+    - {owner: "pydantic", name: "pydantic", languages: ["python"]}
+    
+    # JavaScript/TypeScript
+    - {owner: "facebook", name: "react", languages: ["javascript", "typescript"], max_files: 2000}
+    - {owner: "vuejs", name: "vue", languages: ["javascript", "typescript"], max_files: 2000}
+    - {owner: "vercel", name: "next.js", languages: ["javascript", "typescript"], max_files: 2000}
+    - {owner: "microsoft", name: "TypeScript", languages: ["typescript"], max_files: 2000}
+    - {owner: "nodejs", name: "node", languages: ["javascript", "c++"], max_files: 2000}
+    
+    # Go
+    - {owner: "golang", name: "go", languages: ["go"], max_files: 2000}
+    - {owner: "gin-gonic", name: "gin", languages: ["go"]}
+    - {owner: "kubernetes", name: "kubernetes", languages: ["go"], max_files: 2000}
+    - {owner: "prometheus", name: "prometheus", languages: ["go"], max_files: 2000}
+    - {owner: "hashicorp", name: "terraform", languages: ["go"], max_files: 2000}
+    
+    # Rust
+    - {owner: "rust-lang", name: "rust", languages: ["rust"], max_files: 2000}
+    - {owner: "tokio-rs", name: "tokio", languages: ["rust"], max_files: 2000}
+    - {owner: "serde-rs", name: "serde", languages: ["rust"]}
+    - {owner: "BurntSushi", name: "ripgrep", languages: ["rust"]}
+
+huggingface:
+  enabled: true
+  cache_dir: "./data_cache/hf"
+  
+  # Curated datasets (20+)
+  datasets:
+    # Code datasets
+    - {name: "codeparrot/codeparrot-clean", max_samples: 50000, language: "python"}
+    - {name: "codeparrot/github-code", max_samples: 30000, language: "multiple"}
+    - {name: "bigcode/the-stack-dedup", max_samples: 20000, language: "multiple"}
+    - {name: "nampdn-ai/tiny-codes", max_samples: 30000, language: "multiple"}
+    - {name: "HuggingFaceH4/CodeAlpaca_20K", max_samples: 20000, language: "python"}
+    
+    # Vietnamese + English text
+    - {name: "wikimedia/wikipedia", subset: "20231101.vi", max_samples: 20000}
+    - {name: "wikimedia/wikipedia", subset: "20231101.en", max_samples: 20000}
+    - {name: "oscar-corpus/OSCAR-2301", subset: "vi", max_samples: 10000}
+    
+    # Conversational
+    - {name: "HuggingFaceH4/ultrachat_200k", max_samples: 20000}
+    - {name: "Open-Orca/OpenOrca", max_samples: 15000}
+    - {name: "teknium/OpenHermes-2.5", max_samples: 20000}
+    - {name: "databricks/databricks-dolly-15k", max_samples: 15000}
+    
+    # Math
+    - {name: "meta-math/MetaMathQA", max_samples: 20000}
+    - {name: "gsm8k", max_samples: 8000}
+    
+    # Vietnamese specific
+    - {name: "vietgpt/news_corpus", max_samples: 10000}
+
+arxiv:
+  enabled: true
+  delay_seconds: 3.0  # Rate limit: 1 req per 3s
+  
+  queries:
+    - "transformer architecture"
+    - "mixture of experts"
+    - "large language model"
+    - "attention mechanism"
+    - "code generation"
+    - "program synthesis"
+    - "neural machine translation"
+    - "retrieval augmented generation"
+    - "instruction tuning"
+    - "reinforcement learning human feedback"
+    - "chain of thought reasoning"
+    - "prompt engineering"
+    - "fine-tuning language model"
+    - "quantization neural network"
+    - "knowledge distillation"
+    - "multi-agent systems"
+    - "tool use language model"
+    - "code completion"
+    - "static analysis"
+    - "program verification"
+
+wikipedia:
+  enabled: true
+  
+  languages:
+    - "vi"
+    - "en"
+  
+  topics:
+    vi:
+      - "Trí tuệ nhân tạo"
+      - "Học máy"
+      - "Mạng nơ-ron nhân tạo"
+      - "Python (ngôn ngữ lập trình)"
+      - "JavaScript"
+      - "Linux"
+      - "Cơ sở dữ liệu"
+      - "Thuật toán"
+      - "Cấu trúc dữ liệu"
+      - "Lập trình hướng đối tượng"
+      - "API"
+      - "JSON"
+      - "Git"
+      - "Hệ điều hành"
+      - "Học sâu"
+      - "Xử lý ngôn ngữ tự nhiên"
+      - "Big data"
+      - "Điện toán đám mây"
+    en:
+      - "Artificial intelligence"
+      - "Machine learning"
+      - "Neural network"
+      - "Python (programming language)"
+      - "JavaScript"
+      - "Linux"
+      - "Database"
+      - "Algorithm"
+      - "Data structure"
+      - "Object-oriented programming"
+      - "API"
+      - "JSON"
+      - "Git"
+      - "Operating system"
+      - "Deep learning"
+      - "Natural language processing"
+      - "Big data"
+      - "Cloud computing"
+      - "Transformer (deep learning model)"
+      - "Large language model"
+
+stackoverflow:
+  enabled: true
+  page_size: 100
+  min_score: 5
+  
+  tags:
+    - "python"
+    - "javascript"
+    - "java"
+    - "c#"
+    - "php"
+    - "android"
+    - "html"
+    - "jquery"
+    - "c++"
+    - "css"
+    - "ios"
+    - "mysql"
+    - "sql"
+    - "node.js"
+    - "reactjs"
+    - "ruby-on-rails"
+    - "vue.js"
+    - "typescript"
+    - "docker"
+    - "git"
+    - "go"
+    - "rust"
+    - "machine-learning"
+    - "deep-learning"
+    - "pytorch"
+    - "tensorflow"
+    - "pandas"
+    - "numpy"
+    - "regex"
+    - "algorithm"
+
+# Processing pipeline settings
+processing:
+  cleaner:
+    remove_html: true
+    remove_urls: false
+    normalize_whitespace: true
+    min_length: 50
+    max_length: 100000
+  
+  quality_filter:
+    min_length: 50
+    max_length: 100000
+    min_words: 10
+    min_unique_ratio: 0.3
+    max_repetition: 0.5
+  
+  deduplicator:
+    ngram_size: 5
+    num_perm: 128
+    similarity_threshold: 0.8
+  
+  curriculum:
+    stages:
+      - {name: "easy",    min_length: 50,    max_length: 500,    min_quality: 0.7}
+      - {name: "medium",  min_length: 500,   max_length: 5000,   min_quality: 0.6}
+      - {name: "hard",    min_length: 5000,  max_length: 30000,  min_quality: 0.7}
+      - {name: "expert",  min_length: 30000, max_length: 100000, min_quality: 0.8}
