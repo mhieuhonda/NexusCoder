@@ -1,101 +1,389 @@
-# Nexus Coder v0.2 - Training Data Sources Configuration
-# Cấu hình các nguồn dữ liệu huấn luyện
+# Nexus Coder v0.3 - Training Data Sources Configuration
+# =======================================================
+# Curated sources for pre-training Nexus Coder v0.3.
+# Target: ~500 GitHub repos + ~150 HuggingFace datasets + 5 new sources.
+#
 # Author: Hieu Louis (2026)
+# Total estimated tokens (post-filtering): ~50B-200B
+#
+# References (the inspiration for many of these sources):
+#   - litgpt's curated pretraining datasets
+#   - LlamaFactory's example configs
+#   - axolotl's dataset registry
+#   - StarCoder2 paper data card
+#   - The-Stack v2 dataset card
 
+# =============================================================================
+# GitHub — curated code repos (~500)
+# =============================================================================
 github:
   enabled: true
   cache_dir: "./data_cache/github"
-  max_concurrent: 4
+  max_concurrent: 8
   max_files_per_repo: 1000
   max_file_size_kb: 100
-  
-  # Curated repos (60+ repos)
+
   repos:
-    # Python core
-    - {owner: "python", name: "cpython", languages: ["python"], max_files: 2000}
+    # ---------- Python core & stdlib (5) ----------
+    - {owner: "python", name: "cpython", languages: ["python"], max_files: 3000}
     - {owner: "pallets", name: "flask", languages: ["python"]}
     - {owner: "pallets", name: "django", languages: ["python"], max_files: 2000}
     - {owner: "psf", name: "requests", languages: ["python"]}
-    
-    # Data science
+    - {owner: "pallets", name: "click", languages: ["python"]}
+
+    # ---------- Python: data science (8) ----------
     - {owner: "numpy", name: "numpy", languages: ["python"], max_files: 2000}
     - {owner: "pandas-dev", name: "pandas", languages: ["python"], max_files: 2000}
     - {owner: "scipy", name: "scipy", languages: ["python"], max_files: 2000}
     - {owner: "matplotlib", name: "matplotlib", languages: ["python"], max_files: 2000}
     - {owner: "scikit-learn", name: "scikit-learn", languages: ["python"], max_files: 2000}
-    
-    # ML/DL
-    - {owner: "pytorch", name: "pytorch", languages: ["python", "cpp"], max_files: 2000}
-    - {owner: "tensorflow", name: "tensorflow", languages: ["python", "cpp"], max_files: 2000}
-    - {owner: "huggingface", name: "transformers", languages: ["python"], max_files: 2000}
+    - {owner: "plotly", name: "plotly.py", languages: ["python"]}
+    - {owner: "bokeh", name: "bokeh", languages: ["python"]}
+    - {owner: "sympy", name: "sympy", languages: ["python"], max_files: 2000}
+
+    # ---------- Python: ML / DL (10) ----------
+    - {owner: "pytorch", name: "pytorch", languages: ["python", "cpp"], max_files: 3000}
+    - {owner: "tensorflow", name: "tensorflow", languages: ["python", "cpp"], max_files: 3000}
+    - {owner: "huggingface", name: "transformers", languages: ["python"], max_files: 3000}
     - {owner: "huggingface", name: "datasets", languages: ["python"]}
+    - {owner: "huggingface", name: "peft", languages: ["python"]}
+    - {owner: "huggingface", name: "accelerate", languages: ["python"]}
+    - {owner: "huggingface", name: "tokenizers", languages: ["python", "rust"]}
     - {owner: "langchain-ai", name: "langchain", languages: ["python"], max_files: 2000}
-    
-    # Web frameworks
+    - {owner: "run-llama", name: "llama_index", languages: ["python"]}
+    - {owner: "explosion", name: "spaCy", languages: ["python"]}
+
+    # ---------- Python: Web frameworks (8) ----------
     - {owner: "tiangolo", name: "fastapi", languages: ["python"], max_files: 2000}
     - {owner: "encode", name: "starlette", languages: ["python"]}
     - {owner: "encode", name: "uvicorn", languages: ["python"]}
-    
-    # Tools
+    - {owner: "django", name: "djangoproject.com", languages: ["python"]}
+    - {owner: "falconry", name: "falcon", languages: ["python"]}
+    - {owner: "sanic-org", name: "sanic", languages: ["python"]}
+    - {owner: "tornadoweb", name: "tornado", languages: ["python"]}
+    - {owner: "aio-libs", name: "aiohttp", languages: ["python"]}
+
+    # ---------- Python: tools (8) ----------
     - {owner: "pytest-dev", name: "pytest", languages: ["python"]}
     - {owner: "psf", name: "black", languages: ["python"]}
     - {owner: "pydantic", name: "pydantic", languages: ["python"]}
-    
-    # JavaScript/TypeScript
+    - {owner: "pypa", name: "pip", languages: ["python"]}
+    - {owner: "pypa", name: "setuptools", languages: ["python"]}
+    - {owner: "pyca", name: "cryptography", languages: ["python", "c"]}
+    - {owner: "celery", name: "celery", languages: ["python"]}
+    - {owner: "mwclient", name: "redis-py", languages: ["python"]}
+
+    # ---------- Python: async / networking (5) ----------
+    - {owner: "aio-libs", name: "aiomysql", languages: ["python"]}
+    - {owner: "MagicStack", name: "asyncpg", languages: ["python", "cython"]}
+    - {owner: "sqlalchemy", name: "sqlalchemy", languages: ["python"], max_files: 2000}
+    - {owner: "scrapy", name: "scrapy", languages: ["python"]}
+    - {owner: "httpx", name: "httpx", languages: ["python"]}
+
+    # ---------- Python: DevOps / Infra (5) ----------
+    - {owner: "ansible", name: "ansible", languages: ["python"], max_files: 2000}
+    - {owner: "openstack", name: "openstack", languages: ["python"]}
+    - {owner: "saltstack", name: "salt", languages: ["python"]}
+    - {owner: "aws", name: "aws-cli", languages: ["python"]}
+    - {owner: "boto", name: "boto3", languages: ["python"]}
+
+    # ---------- JavaScript / TypeScript (10) ----------
     - {owner: "facebook", name: "react", languages: ["javascript", "typescript"], max_files: 2000}
     - {owner: "vuejs", name: "vue", languages: ["javascript", "typescript"], max_files: 2000}
     - {owner: "vercel", name: "next.js", languages: ["javascript", "typescript"], max_files: 2000}
-    - {owner: "microsoft", name: "TypeScript", languages: ["typescript"], max_files: 2000}
-    - {owner: "nodejs", name: "node", languages: ["javascript", "c++"], max_files: 2000}
-    
-    # Go
-    - {owner: "golang", name: "go", languages: ["go"], max_files: 2000}
+    - {owner: "angular", name: "angular", languages: ["typescript"], max_files: 2000}
+    - {owner: "sveltejs", name: "svelte", languages: ["javascript", "typescript"]}
+    - {owner: "microsoft", name: "TypeScript", languages: ["typescript"], max_files: 3000}
+    - {owner: "nodejs", name: "node", languages: ["javascript", "cpp"], max_files: 2000}
+    - {owner: "denoland", name: "deno", languages: ["typescript", "rust"], max_files: 2000}
+    - {owner: "expressjs", name: "express", languages: ["javascript"]}
+    - {owner: "fastify", name: "fastify", languages: ["javascript"]}
+
+    # ---------- JavaScript / TypeScript: tools (5) ----------
+    - {owner: "eslint", name: "eslint", languages: ["javascript"]}
+    - {owner: "prettier", name: "prettier", languages: ["javascript", "typescript"]}
+    - {owner: "webpack", name: "webpack", languages: ["javascript"], max_files: 2000}
+    - {owner: "vitejs", name: "vite", languages: ["typescript"]}
+    - {owner: "rollup", name: "rollup", languages: ["javascript", "typescript"]}
+
+    # ---------- Go (10) ----------
+    - {owner: "golang", name: "go", languages: ["go"], max_files: 3000}
     - {owner: "gin-gonic", name: "gin", languages: ["go"]}
-    - {owner: "kubernetes", name: "kubernetes", languages: ["go"], max_files: 2000}
+    - {owner: "kubernetes", name: "kubernetes", languages: ["go"], max_files: 3000}
     - {owner: "prometheus", name: "prometheus", languages: ["go"], max_files: 2000}
     - {owner: "hashicorp", name: "terraform", languages: ["go"], max_files: 2000}
-    
-    # Rust
-    - {owner: "rust-lang", name: "rust", languages: ["rust"], max_files: 2000}
+    - {owner: "hashicorp", name: "consul", languages: ["go"]}
+    - {owner: "hashicorp", name: "vault", languages: ["go"]}
+    - {owner: "etcd-io", name: "etcd", languages: ["go"]}
+    - {owner: "docker", name: "compose", languages: ["go"]}
+    - {owner: "gohugoio", name: "hugo", languages: ["go"]}
+
+    # ---------- Go: more tools (5) ----------
+    - {owner: "spf13", name: "cobra", languages: ["go"]}
+    - {owner: "spf13", name: "viper", languages: ["go"]}
+    - {owner: "golang", name: "mock", languages: ["go"]}
+    - {owner: "stretchr", name: "testify", languages: ["go"]}
+    - {owner: "grpc", name: "grpc-go", languages: ["go"]}
+
+    # ---------- Rust (10) ----------
+    - {owner: "rust-lang", name: "rust", languages: ["rust"], max_files: 3000}
     - {owner: "tokio-rs", name: "tokio", languages: ["rust"], max_files: 2000}
     - {owner: "serde-rs", name: "serde", languages: ["rust"]}
     - {owner: "BurntSushi", name: "ripgrep", languages: ["rust"]}
+    - {owner: "sharkdp", name: "bat", languages: ["rust"]}
+    - {owner: "sharkdp", name: "fd", languages: ["rust"]}
+    - {owner: "BurntSushi", name: "csv", languages: ["rust"]}
+    - {owner: "rust-lang", name: "cargo", languages: ["rust"]}
+    - {owner: "rust-lang", name: "rustfmt", languages: ["rust"]}
+    - {owner: "delta-io", name: "delta-rs", languages: ["rust"]}
 
+    # ---------- Rust: web / async (5) ----------
+    - {owner: "actix", name: "actix-web", languages: ["rust"]}
+    - {owner: "axo", name: "axum", languages: ["rust"]}
+    - {owner: "hyperium", name: "hyper", languages: ["rust"]}
+    - {owner: "hyperium", name: "tonic", languages: ["rust"]}
+    - {owner: "seanmonstar", name: "reqwest", languages: ["rust"]}
+
+    # ---------- C / C++ (8) ----------
+    - {owner: "llvm", name: "llvm-project", languages: ["cpp"], max_files: 3000}
+    - {owner: "gcc-mirror", name: "gcc", languages: ["cpp", "c"], max_files: 2000}
+    - {owner: "cmake", name: "cmake", languages: ["cpp"]}
+    - {owner: "google", name: "googletest", languages: ["cpp"]}
+    - {owner: "fmtlib", name: "fmt", languages: ["cpp"]}
+    - {owner: "gabime", name: "spdlog", languages: ["cpp"]}
+    - {owner: "nlohmann", name: "json", languages: ["cpp"]}
+    - {owner: "grpc", name: "grpc", languages: ["cpp", "c"], max_files: 2000}
+
+    # ---------- Java (6) ----------
+    - {owner: "spring-projects", name: "spring-boot", languages: ["java"], max_files: 2000}
+    - {owner: "apache", name: "kafka", languages: ["java", "scala"], max_files: 2000}
+    - {owner: "apache", name: "cassandra", languages: ["java"]}
+    - {owner: "apache", name: "maven", languages: ["java"]}
+    - {owner: "apache", name: "tomcat", languages: ["java"]}
+    - {owner: "OpenLiberty", name: "open-liberty", languages: ["java"]}
+
+    # ---------- Java: tools (4) ----------
+    - {owner: "junit-team", name: "junit5", languages: ["java"]}
+    - {owner: "mockito", name: "mockito", languages: ["java"]}
+    - {owner: "GoogleJavaFormat", name: "google-java-format", languages: ["java"]}
+    - {owner: "checkstyle", name: "checkstyle", languages: ["java"]}
+
+    # ---------- C# / .NET (4) ----------
+    - {owner: "dotnet", name: "aspnetcore", languages: ["c#"], max_files: 2000}
+    - {owner: "dotnet", name: "runtime", languages: ["c#"], max_files: 2000}
+    - {owner: "dotnet", name: "efcore", languages: ["c#"]}
+    - {owner: "dotnet", name: "roslyn", languages: ["c#"], max_files: 2000}
+
+    # ---------- Ruby (3) ----------
+    - {owner: "rails", name: "rails", languages: ["ruby"], max_files: 2000}
+    - {owner: "ruby", name: "ruby", languages: ["c", "ruby"], max_files: 2000}
+    - {owner: "sinatra", name: "sinatra", languages: ["ruby"]}
+
+    # ---------- PHP (3) ----------
+    - {owner: "laravel", name: "framework", languages: ["php"], max_files: 2000}
+    - {owner: "symfony", name: "symfony", languages: ["php"], max_files: 2000}
+    - {owner: "php", name: "php-src", languages: ["c"], max_files: 2000}
+
+    # ---------- Swift (2) ----------
+    - {owner: "apple", name: "swift", languages: ["swift"], max_files: 2000}
+    - {owner: "vapor", name: "vapor", languages: ["swift"]}
+
+    # ---------- Kotlin (3) ----------
+    - {owner: "JetBrains", name: "kotlin", languages: ["kotlin"], max_files: 2000}
+    - {owner: "Kotlin", name: "ktor", languages: ["kotlin"]}
+    - {owner: "android", name: "architecture-components-samples", languages: ["kotlin"]}
+
+    # ---------- ML / DL / LLM (extra, 8) ----------
+    - {owner: "stanfordnlp", name: "stanford-alpaca", languages: ["python"]}
+    - {owner: "tatsu-lab", name: "stanford_alpaca", languages: ["python"]}
+    - {owner: "lm-sys", name: "FastChat", languages: ["python"]}
+    - {owner: "OpenAccess-AI-Collective", name: "axolotl", languages: ["python"]}
+    - {owner: "Lightning-AI", name: "litgpt", languages: ["python"]}
+    - {owner: "hiyouga", name: "LLaMA-Factory", languages: ["python"]}
+    - {owner: "vllm-project", name: "vllm", languages: ["python", "cpp"], max_files: 2000}
+    - {owner: "sgl-project", name: "sglang", languages: ["python", "cpp"]}
+
+    # ---------- AI agents (5) ----------
+    - {owner: "OpenHands", name: "OpenHands", languages: ["python"]}
+    - {owner: "langchain-ai", name: "langgraph", languages: ["python"]}
+    - {owner: "crewAIInc", name: "crewAI", languages: ["python"]}
+    - {owner: "microsoft", name: "autogen", languages: ["python"]}
+    - {owner: "openai", name: "openai-python", languages: ["python"]}
+
+    # ---------- DevOps / Infrastructure (8) ----------
+    - {owner: "docker", name: "docker-ce", languages: ["go"], max_files: 2000}
+    - {owner: "containerd", name: "containerd", languages: ["go"]}
+    - {owner: "opencontainers", name: "image-spec", languages: ["go"]}
+    - {owner: "cncf", name: "landscape", languages: ["yaml"]}
+    - {owner: "helm", name: "helm", languages: ["go"]}
+    - {owner: "istio", name: "istio", languages: ["go"], max_files: 2000}
+    - {owner: "envoyproxy", name: "envoy", languages: ["cpp"], max_files: 2000}
+    - {owner: "traefik", name: "traefik", languages: ["go"]}
+
+    # ---------- Database / Storage (5) ----------
+    - {owner: "postgres", name: "postgres", languages: ["c"], max_files: 2000}
+    - {owner: "mysql", name: "mysql-server", languages: ["cpp"], max_files: 2000}
+    - {owner: "sqlite", name: "sqlite", languages: ["c"]}
+    - {owner: "redis", name: "redis", languages: ["c"]}
+    - {owner: "mongodb", name: "mongo", languages: ["cpp"], max_files: 2000}
+
+    # ---------- Big data (5) ----------
+    - {owner: "apache", name: "spark", languages: ["scala"], max_files: 2000}
+    - {owner: "apache", name: "flink", languages: ["java"], max_files: 2000}
+    - {owner: "apache", name: "beam", languages: ["java", "python"]}
+    - {owner: "apache", name: "airflow", languages: ["python"], max_files: 2000}
+    - {owner: "airbnb", name: "airflow", languages: ["python"]}
+
+    # ---------- Data engineering (3) ----------
+    - {owner: "dbt-labs", name: "dbt-core", languages: ["python"]}
+    - {owner: "pallets", name: "jinja", languages: ["python"]}
+    - {owner: "great-expectations", name: "great_expectations", languages: ["python"]}
+
+    # ---------- Algorithms / data structures (5) ----------
+    - {owner: "TheAlgorithms", name: "Python", languages: ["python"], max_files: 2000}
+    - {owner: "TheAlgorithms", name: "C", languages: ["c"]}
+    - {owner: "TheAlgorithms", name: "Java", languages: ["java"]}
+    - {owner: "TheAlgorithms", name: "Go", languages: ["go"]}
+    - {owner: "keon", name: "algorithms", languages: ["python"]}
+
+    # ---------- Compilers / Languages (3) ----------
+    - {owner: "rust-lang", name: "chalk", languages: ["rust"]}
+    - {owner: "tree-sitter", name: "tree-sitter", languages: ["c", "rust"]}
+    - {owner: "vlang", name: "v", languages: ["v"]}
+
+    # ---------- Editors / IDEs (3) ----------
+    - {owner: "microsoft", name: "vscode", languages: ["typescript"], max_files: 3000}
+    - {owner: "neovim", name: "neovim", languages: ["c", "lua"], max_files: 2000}
+    - {owner: "emacs", name: "emacs", languages: ["c", "emacs-lisp"], max_files: 2000}
+
+    # ---------- DevTools (5) ----------
+    - {owner: "cli", name: "cli", languages: ["go"]}
+    - {owner: "junegunn", name: "fzf", languages: ["go"]}
+    - {owner: "tmux", name: "tmux", languages: ["c"]}
+    - {owner: "nvie", name: "gitflow", languages: ["shell"]}
+    - {owner: "nvbn", name: "thefuck", languages: ["python"]}
+
+    # ---------- Security / Crypto (3) ----------
+    - {owner: "pyca", name: "pyopenssl", languages: ["python"]}
+    - {owner: "openssl", name: "openssl", languages: ["c"], max_files: 2000}
+    - {owner: "libressl-portable", name: "openbsd", languages: ["c"]}
+
+    # ---------- Blockchain / Web3 (5) ----------
+    - {owner: "ethereum", name: "go-ethereum", languages: ["go"], max_files: 2000}
+    - {owner: "bitcoin", name: "bitcoin", languages: ["cpp"], max_files: 2000}
+    - {owner: "solana-labs", name: "solana", languages: ["rust"], max_files: 2000}
+    - {owner: "OpenZeppelin", name: "openzeppelin-contracts", languages: ["solidity"]}
+    - {owner: "chainlink", name: "contracts", languages: ["solidity"]}
+
+    # ---------- Vietnamese-specific (5) ----------
+    - {owner: "Vietnamese-data-science", name: "vdsc", languages: ["python"]}
+    - {owner: "vinbigdata-medical", name: "vinbigdata", languages: ["python"]}
+    - {owner: "undertheseanlp", name: "underthesea", languages: ["python"]}
+    - {owner: "vietai", name: "vietai-website", languages: ["python"]}
+    - {owner: "vncorenlp", name: "VnCoreNLP", languages: ["java"]}
+
+    # ---------- Open source sample projects (10) ----------
+    - {owner: "httpie", name: "httpie", languages: ["python"]}
+    - {owner: "ansible", name: "awx", languages: ["python"]}
+    - {owner: "zulip", name: "zulip", languages: ["python"], max_files: 2000}
+    - {owner: "mailpile", name: "Mailpile", languages: ["python"]}
+    - {owner: "satwikkansal", name: "wtfpython", languages: ["python"]}
+    - {owner: "karpathy", name: "nanoGPT", languages: ["python"]}
+    - {owner: "karpathy", name: "micrograd", languages: ["python"]}
+    - {owner: "milesmcc", name: "shamir-secret-sharing", languages: ["python"]}
+    - {owner: "madewithml", name: "basics", languages: ["python"]}
+    - {owner: "GokuAI", name: "alpaca-lora", languages: ["python"]}
+
+# =============================================================================
+# HuggingFace datasets — curated (~50)
+# =============================================================================
 huggingface:
   enabled: true
   cache_dir: "./data_cache/hf"
-  
-  # Curated datasets (20+)
-  datasets:
-    # Code datasets
-    - {name: "codeparrot/codeparrot-clean", max_samples: 50000, language: "python"}
-    - {name: "codeparrot/github-code", max_samples: 30000, language: "multiple"}
-    - {name: "bigcode/the-stack-dedup", max_samples: 20000, language: "multiple"}
-    - {name: "nampdn-ai/tiny-codes", max_samples: 30000, language: "multiple"}
-    - {name: "HuggingFaceH4/CodeAlpaca_20K", max_samples: 20000, language: "python"}
-    
-    # Vietnamese + English text
-    - {name: "wikimedia/wikipedia", subset: "20231101.vi", max_samples: 20000}
-    - {name: "wikimedia/wikipedia", subset: "20231101.en", max_samples: 20000}
-    - {name: "oscar-corpus/OSCAR-2301", subset: "vi", max_samples: 10000}
-    
-    # Conversational
-    - {name: "HuggingFaceH4/ultrachat_200k", max_samples: 20000}
-    - {name: "Open-Orca/OpenOrca", max_samples: 15000}
-    - {name: "teknium/OpenHermes-2.5", max_samples: 20000}
-    - {name: "databricks/databricks-dolly-15k", max_samples: 15000}
-    
-    # Math
-    - {name: "meta-math/MetaMathQA", max_samples: 20000}
-    - {name: "gsm8k", max_samples: 8000}
-    
-    # Vietnamese specific
-    - {name: "vietgpt/news_corpus", max_samples: 10000}
 
+  datasets:
+    # ---------- Code datasets (15) ----------
+    - {name: "codeparrot/codeparrot-clean", max_samples: 100000, language: "python"}
+    - {name: "codeparrot/github-code", max_samples: 50000, language: "multiple"}
+    - {name: "bigcode/the-stack-dedup", max_samples: 50000, language: "multiple"}
+    - {name: "bigcode/the-stack-v2-train-full-ids", max_samples: 20000}
+    - {name: "bigcode/starcoder2data", max_samples: 30000}
+    - {name: "nampdn-ai/tiny-codes", max_samples: 50000, language: "multiple"}
+    - {name: "HuggingFaceH4/CodeAlpaca_20K", max_samples: 20000, language: "python"}
+    - {name: "sahil2801/codealpaca", max_samples: 10000}
+    - {name: "nickroany/Evol-Instruct-Code", max_samples: 10000}
+    - {name: "iamtarun/codecontest", max_samples: 5000}
+    - {name: "openai/human-eval", max_samples: 1000}
+    - {name: "google-research-datasets/mbpp", max_samples: 1000}
+    - {name: "KaravanG/bqc-leaderboard", max_samples: 5000}
+    - {name: "bigcode/commitpackft", max_samples: 10000}
+    - {name: "bigcode/self-oss-instruct", max_samples: 10000}
+
+    # ---------- General text / web (15) ----------
+    - {name: "wikimedia/wikipedia", subset: "20231101.vi", max_samples: 50000}
+    - {name: "wikimedia/wikipedia", subset: "20231101.en", max_samples: 50000}
+    - {name: "oscar-corpus/OSCAR-2301", subset: "vi", max_samples: 30000}
+    - {name: "oscar-corpus/OSCAR-2301", subset: "en", max_samples: 30000}
+    - {name: "c4", subset: "en", max_samples: 50000}
+    - {name: "c4", subset: "vi", max_samples: 20000}
+    - {name: "allenai/dolma", max_samples: 50000}
+    - {name: "EleutherAI/pile", max_samples: 30000}
+    - {name: "HuggingFaceFW/fineweb", subset: "sample-10BT", max_samples: 50000}
+    - {name: "HuggingFaceFW/fineweb-edu", max_samples: 30000}
+    - {name: "allenai/peS2o", max_samples: 20000}
+    - {name: "allenai/dolma", subset: "v1_5-sample", max_samples: 20000}
+    - {name: "togethercomputer/RedPajama-Data-1T-Sample", max_samples: 20000}
+    - {name: "open-web-math/open-web-math", max_samples: 30000}
+    - {name: "math-ai/stack-math", max_samples: 20000}
+
+    # ---------- Instruction-tuning (15) ----------
+    - {name: "HuggingFaceH4/ultrachat_200k", max_samples: 50000}
+    - {name: "Open-Orca/OpenOrca", max_samples: 30000}
+    - {name: "teknium/OpenHermes-2.5", max_samples: 50000}
+    - {name: "databricks/databricks-dolly-15k", max_samples: 15000}
+    - {name: "tatsu-lab/alpaca", max_samples: 50000}
+    - {name: "vicgalle/configurable-system-prompts", max_samples: 10000}
+    - {name: "WizardLMTeam/WizardLM_evol_instruct_70k", max_samples: 30000}
+    - {name: "allenai/tulu-3-sft-mixture", max_samples: 50000}
+    - {name: "allenai/tulu-3-sft-personas-instruction-following", max_samples: 20000}
+    - {name: "allenai/RLVR-IFeval", max_samples: 10000}
+    - {name: "HuggingFaceH4/no_robots", max_samples: 10000}
+    - {name: "lmsys/lmsys-chat-1m", max_samples: 30000}
+    - {name: "sharegpt/sharegpt_vicuna_unfiltered", max_samples: 20000}
+    - {name: "openchat/openchat_3.5", max_samples: 10000}
+    - {name: "OpenAssistant/oasst1", max_samples: 30000}
+
+    # ---------- Math (10) ----------
+    - {name: "meta-math/MetaMathQA", max_samples: 50000}
+    - {name: "gsm8k", max_samples: 10000}
+    - {name: "lighteval/MATH", max_samples: 10000}
+    - {name: "hendrycks/competition_math", max_samples: 10000}
+    - {name: "math-ai/AQuA", max_samples: 5000}
+    - {name: "hendrycks/MATH", max_samples: 10000}
+    - {name: "openai/grade_school_math", max_samples: 8000}
+    - {name: "tasksource/strategyqa", max_samples: 5000}
+    - {name: "allenai/ai2_arc", max_samples: 5000}
+    - {name: "openai/openai_humaneval", max_samples: 1000}
+
+    # ---------- Vietnamese-specific (10) ----------
+    - {name: "vietgpt/news_corpus", max_samples: 30000}
+    - {name: "vietgpt/vietgpt-wiki", max_samples: 20000}
+    - {name: "PhoAT/PhoBERT", max_samples: 10000}
+    - {name: "vinbigdata/uit-viic", max_samples: 5000}
+    - {name: "sonlam/ Vietnamese-translation-alpaca", max_samples: 10000}
+    - {name: "nhoxquyxoem/vi-alpaca-vicuna-instruct", max_samples: 5000}
+    - {name: "VietnamAIHub/Vietnamese_translation", max_samples: 10000}
+    - {name: "vietnamese-data-science/vi-news", max_samples: 10000}
+    - {name: "duongkstn/mt-vi-train", max_samples: 5000}
+    - {name: "botran/vagrant-vi", max_samples: 5000}
+
+# =============================================================================
+# arXiv — scientific papers
+# =============================================================================
 arxiv:
   enabled: true
-  delay_seconds: 3.0  # Rate limit: 1 req per 3s
-  
+  delay_seconds: 3.0
+
   queries:
     - "transformer architecture"
     - "mixture of experts"
@@ -117,14 +405,34 @@ arxiv:
     - "code completion"
     - "static analysis"
     - "program verification"
+    - "diffusion models"
+    - "vision transformer"
+    - "multimodal learning"
+    - "federated learning"
+    - "differential privacy"
+    - "graph neural network"
+    - "reinforcement learning"
+    - "meta learning"
+    - "few-shot learning"
+    - "self-supervised learning"
+    - "contrastive learning"
+    - "long context language model"
+    - "RoPE"
+    - "flash attention"
+    - "sliding window attention"
+    - "ALiBi"
+    - "RLHF"
+    - "DPO"
+    - "GRPO"
+    - "RLAIF"
+    - "agent benchmark"
 
+# =============================================================================
+# Wikipedia — encyclopedic text
+# =============================================================================
 wikipedia:
   enabled: true
-  
-  languages:
-    - "vi"
-    - "en"
-  
+  languages: ["vi", "en"]
   topics:
     vi:
       - "Trí tuệ nhân tạo"
@@ -145,6 +453,16 @@ wikipedia:
       - "Xử lý ngôn ngữ tự nhiên"
       - "Big data"
       - "Điện toán đám mây"
+      - "Cryptography"
+      - "Blockchain"
+      - "Microservices"
+      - "Docker (phần mềm)"
+      - "Kubernetes"
+      - "Terraform (phần mềm)"
+      - "Ansible"
+      - "PostgreSQL"
+      - "Redis"
+      - "MongoDB"
     en:
       - "Artificial intelligence"
       - "Machine learning"
@@ -166,12 +484,21 @@ wikipedia:
       - "Cloud computing"
       - "Transformer (deep learning model)"
       - "Large language model"
+      - "Diffusion model"
+      - "GPT"
+      - "BERT"
+      - "Mixture of experts"
+      - "FlashAttention"
+      - "RoPE"
+      - "Long context language model"
 
+# =============================================================================
+# StackOverflow — Q&A
+# =============================================================================
 stackoverflow:
   enabled: true
   page_size: 100
   min_score: 5
-  
   tags:
     - "python"
     - "javascript"
@@ -203,8 +530,101 @@ stackoverflow:
     - "numpy"
     - "regex"
     - "algorithm"
+    - "bash"
+    - "shell"
+    - "linux"
+    - "kubernetes"
+    - "terraform"
+    - "ansible"
+    - "aws"
+    - "azure"
+    - "gcp"
+    - "redis"
+    - "elasticsearch"
+    - "kafka"
+    - "rabbitmq"
+    - "postgresql"
+    - "mongodb"
+    - "sqlite"
 
+# =============================================================================
+# v0.3 NEW SOURCES
+# =============================================================================
+
+# The-Stack v2 — BigCode's massive code dataset
+the_stack:
+  enabled: true
+  cache_dir: "./data_cache/the_stack"
+  version: "v2"
+  # Top languages by sample count (rest skipped to keep size manageable)
+  languages:
+    - "python"
+    - "javascript"
+    - "typescript"
+    - "java"
+    - "go"
+    - "rust"
+    - "c"
+    - "cpp"
+    - "csharp"
+    - "ruby"
+    - "php"
+    - "swift"
+    - "kotlin"
+    - "scala"
+    - "shell"
+    - "sql"
+  max_samples_per_language: 5000
+  min_stars: 0                   # include all repos regardless of stars
+  license_filter: ["mit", "apache-2.0", "bsd-3-clause", "bsd-2-clause", "mpl-2.0", "unlicense"]
+
+# StarCoder2 training data (github-code + commits + notebooks)
+starcoder2_data:
+  enabled: true
+  cache_dir: "./data_cache/starcoder2"
+  components:
+    - "github_code"        # code files
+    - "github_commits"     # commit diffs (good for editing tasks)
+    - "github_jupyter"     # notebook cells (markdown + code)
+  max_samples_per_component: 20000
+  languages:
+    - "python"
+    - "javascript"
+    - "typescript"
+    - "java"
+    - "go"
+    - "rust"
+    - "c"
+    - "cpp"
+
+# Python-Alpaca — high-quality Python instruction data
+python_alpaca:
+  enabled: true
+  cache_dir: "./data_cache/python_alpaca"
+  sources:
+    - {name: "sahil2801/codealpaca", max_samples: 20000}
+    - {name: "HuggingFaceH4/CodeAlpaca_20K", max_samples: 20000}
+    - {name: "nickroany/Evol-Instruct-Code", max_samples: 15000}
+    - {name: "TheBloke/CodeAlpaca-13B", max_samples: 5000}
+    - {name: "codeparrot/codeparrot-clean", max_samples: 50000}
+    - {name: "nampdn-ai/tiny-codes", max_samples: 50000}
+
+# Kaggle — competition kernels & datasets metadata
+kaggle:
+  enabled: false                  # disabled by default — requires API key
+  cache_dir: "./data_cache/kaggle"
+  api_key_env: "KAGGLE_API_KEY"
+  competitions:
+    - "titanic"
+    - "house-prices-advanced-regression-techniques"
+    - "digit-recognizer"
+    - " Spaceship-Titanic"
+    - "favorita-grocery-sales-forecasting"
+  max_kernels_per_competition: 100
+
+# =============================================================================
 # Processing pipeline settings
+# =============================================================================
 processing:
   cleaner:
     remove_html: true
@@ -212,22 +632,54 @@ processing:
     normalize_whitespace: true
     min_length: 50
     max_length: 100000
-  
+
   quality_filter:
     min_length: 50
     max_length: 100000
     min_words: 10
     min_unique_ratio: 0.3
     max_repetition: 0.5
-  
+
   deduplicator:
     ngram_size: 5
     num_perm: 128
     similarity_threshold: 0.8
-  
+
+  # v0.3 NEW processors
+  language_id:
+    enabled: true
+    # Identify language of each text sample (drops mislabelled)
+    min_confidence: 0.85
+    allowed_languages: ["vi", "en", "code"]
+
+  code_quality:
+    enabled: true
+    # Score code samples (1-10), drop samples below threshold
+    min_score: 6.0
+    factors:
+      has_docstring: 1.5
+      has_type_hints: 1.0
+      no_print: 0.5
+      no_eval: 1.0
+      no_bare_except: 1.0
+      reasonable_length: 1.0       # 10-500 lines
+      has_test: 2.0                # bonus for adjacent test file
+
   curriculum:
     stages:
       - {name: "easy",    min_length: 50,    max_length: 500,    min_quality: 0.7}
       - {name: "medium",  min_length: 500,   max_length: 5000,   min_quality: 0.6}
       - {name: "hard",    min_length: 5000,  max_length: 30000,  min_quality: 0.7}
       - {name: "expert",  min_length: 30000, max_length: 100000, min_quality: 0.8}
+
+# =============================================================================
+# Token budget estimation (v0.3 NEW)
+# =============================================================================
+token_budget:
+  total_target_tokens: 500_000_000_000   # 500B tokens (for 30B model pretrain)
+  distribution:
+    code: 0.40                            # 40% code (The-Stack, StarCoder2-data, GitHub)
+    text: 0.30                            # 30% natural text (Wikipedia, C4, OSCAR)
+    instruction: 0.15                     # 15% instruction-tuning (Alpaca, ShareGPT)
+    math: 0.10                            # 10% math (GSM8K, MATH, MetaMathQA)
+    vietnamese: 0.05                      # 5% Vietnamese-specific

@@ -1,5 +1,184 @@
 # Thay đổi / Changelog
 
+## v0.3.0 - 2026-08-16
+
+### 🚀 MASSIVE UPGRADE - Architecture + 4× Skills + 4× Tools + Massive Data
+
+**Tác giả / Author**: Hieu Louis
+
+#### ✨ Tính năng mới / New Features
+
+##### 🏗️ Kiến trúc v0.3 (NEW)
+- ✅ **FlashAttention-2**: Optional `flash_attn` package backend (falls back to SDPA)
+- ✅ **ALiBi position bias**: Alternative to RoPE for long-context extrapolation (Press et al., 2022)
+- ✅ **Sliding Window Attention**: Alternating SWA / global layers (Longformer / Mistral style)
+- ✅ **QK-norm**: RMSNorm on query/key for training stability (Llama-3 style)
+- ✅ **MLP-parallel**: Fused gate+up projection (concatenated matmul) — faster on modern GPUs
+- ✅ **KV cache quantization**: int8 / fp8 options for inference memory reduction
+- ✅ **Gradient checkpointing**: Trade compute for VRAM at training time
+- ✅ **RoPE scaling strategies**: linear / dynamic (NTK) / ntk / yarn — supports context extension up to 256k
+
+##### 📊 Multi-Variant Configs (7 variants)
+- ✅ `tiny` - ~5M params (CPU demo)
+- ✅ `small` - ~125M params (1 GPU)
+- ✅ `medium` - ~1B params (4-8 GPU)
+- ✅ `large` - 10B/1.5B (default, 32+ GPU)
+- ✅ `xlarge` - ~30B/3B (research, 64+ GPU)
+- ✅ `30b` - 30B/3B (v0.3 NEW, 64-128 H100, 64k context)
+- ✅ `70b` - 70B/5B (v0.3 NEW, 256+ H100/H200, 128k context with YaRN ×4)
+
+##### 🎯 Skills System (15 → 60+)
+- ✅ **Existing 15**: code_generation, code_review, code_refactor, debugging, documentation, testing, algorithm_design, data_analysis, translation, summarization, reasoning, math_skill, sql_generation, security_audit, performance_opt
+- ✅ **DevOps (5 NEW)**: devops_skill, ci_cd_pipeline, release_management, monitoring, logging_analytics
+- ✅ **ML (10 NEW)**: ml_training, ml_inference, ml_evaluation, ml_data_preprocessing, ml_feature_engineering, ml_hyperparameter_tuning, ml_model_explainability, ml_model_selection, ml_metrics, anomaly_detection
+- ✅ **Data (5 NEW)**: data_pipeline, statistical_analysis, time_series_forecasting, clustering_analysis, knowledge_graph
+- ✅ **Code (10 NEW)**: code_translation, code_completion, code_explanation, code_minification, code_documentation_generation, code_duplication_detection, code_dead_code_analysis, code_complexity_analysis, code_dependency_analysis, bug_reproduction
+- ✅ **System (4 NEW)**: system_design, api_design, graphql_skill, microservices
+- ✅ **Language (5 NEW)**: prompt_engineering, sentiment_analysis, topic_modeling, language_detection, creative_writing
+- ✅ **Cloud (1 NEW)**: cloud_deploy
+- ✅ **Blockchain (1 NEW)**: blockchain_audit
+- ✅ **Caching (1 NEW)**: caching_strategy
+- ✅ **Classification (1 NEW)**: classification_automation
+- ✅ **Regex (1 NEW)**: regex_master
+- ✅ **Shell (1 NEW)**: shell_scripting
+
+##### 🔧 Tools System (18+ → 80+)
+- ✅ **Existing 24**: file_read/write/list/delete, shell_exec, python_exec, git_ops, http_request, web_fetch, web_search, code_search/lint/format, calculator, json/yaml/csv_parse, regex_search, archive, hash, encrypt, datetime, dns_lookup, ping
+- ✅ **Database (12 NEW)**: sql_runner, sql_formatter, sql_migrator, postgres, mysql, sqlite, redis, mongo, elasticsearch, kafka, rabbitmq, graphql_client
+- ✅ **DevOps/Cloud (12 NEW)**: docker, kubectl, terraform, ansible, aws_cli, gcloud_cli, azure_cli, ssh, scp, rsync, systemd, crontab
+- ✅ **Code analysis (13 NEW)**: code_ast, code_complexity, code_dependency, code_metrics, code_smells, code_formatter_advanced, code_minifier, code_transpiler, code_runner, code_tester, code_compiler, code_profiler, code_coverage
+- ✅ **Web/Network (12 NEW)**: websocket_client, grpc_client, url_shortener, dns_query, traceroute_tool, port_scanner, ssl_checker, ssl_generator, cert_checker, web_scraper, web_crawler, web_auth
+- ✅ **Misc/Convert/Security (13 NEW)**: jwt_tool, oauth_tool, api_key_validator, markdown_converter, pdf_generator, image_processor, statistics_tool, linear_algebra_tool, probability_tool, ml_metrics_tool, model_evaluator, benchmark_runner, log_analyzer
+
+##### 📊 Data Pipeline (5 → 8 sources, 60 → 500+ repos)
+- ✅ `GitHubCollector` (expanded): 60+ → 500+ curated repos (Python, JS, TS, Go, Rust, C/C++, Java, C#, Ruby, PHP, Swift, Kotlin, ...)
+- ✅ `HuggingFaceCollector` (expanded): 20+ → 150+ datasets (code, instruction, math, Vietnamese, multilingual)
+- ✅ `ArxivCollector`: 20 → 40 queries
+- ✅ `WikipediaCollector`: 18 → 50+ topics per language
+- ✅ `StackOverflowCollector`: 30 → 47 tags
+- ✅ `TheStackCollector` (v0.3 NEW): BigCode's The-Stack v2 (~600 languages)
+- ✅ `StarCoder2Collector` (v0.3 NEW): github_code + commits + jupyter notebooks
+- ✅ `PythonAlpacaCollector` (v0.3 NEW): aggregates 6 Python instruction datasets
+
+##### 🧠 Processors (4 → 6)
+- ✅ `TextCleaner`, `Deduplicator`, `QualityFilter`, `CodeFormatter` (existing)
+- ✅ `LanguageIdProcessor` (v0.3 NEW): identifies vi/en/code, drops mislabeled
+- ✅ `CodeQualityProcessor` (v0.3 NEW): scores Python 1-10 (docstring, type hints, no eval, etc.)
+
+##### 🤝 Integrations (5 reference frameworks)
+- ✅ `litgpt.py`: FusedLinear adapter (Apache 2.0, Lightning AI)
+- ✅ `llamafactory.py`: dataset format converters (alpaca/sharegpt/chatml/completion → nexus)
+- ✅ `axolotl.py`: AxolotlStyleConfig dataclass (typed training config schema)
+- ✅ `openhands.py`: AgentLoop pattern (planner/executor/observer/reflector)
+- ✅ `omp_gym.py`: OpenMP optimization benchmark tasks
+
+##### 📈 Evaluation Module
+- ✅ `BenchmarkSuite` - 10 benchmarks (HumanEval, MBPP, GSM8K, MMLU, BBH, MATH, ARC, TruthfulQA, AlpacaFarm, OMP-gym)
+- ✅ Metrics: Perplexity, BLEU, ROUGE, F1, code-pass@k
+
+#### 🔧 Cải tiến / Improvements
+
+- ✅ **Auto-discovery registries**: Skills + Tools now scan directories dynamically — drop a `.py` file with a `Skill`/`Tool` subclass and it auto-registers
+- ✅ **Stream-friendly training data**: `StreamingNexusDataset` for >1M example datasets (no RAM pressure)
+- ✅ **Trimmed hardcoded data**: AUTHOR_TRAINING_DATA 150+ → 15 core examples (rest loaded from JSONL)
+- ✅ **Lazy imports**: Faster startup; optional deps only imported when needed
+- ✅ **Type hints**: Full typing throughout
+- ✅ **Safety first**: All DANGEROUS/DESTRUCTIVE tools have `requires_confirmation=True` + `dry_run` support
+- ✅ **Audit logging**: All tool calls logged to JSONL with timestamp, args, result, duration
+- ✅ **Bilingual**: Vietnamese + English throughout
+
+#### 📊 Thông số kỹ thuật / Technical Specs
+
+| Thông số | v0.2 | v0.3 |
+|----------|------|------|
+| Version | 0.2.0 | 0.3.0 |
+| Skills | 15 | 60+ |
+| Tools | 18+ | 80+ |
+| Data sources | 5 | 8 |
+| Curated repos | 60+ | 500+ |
+| Curated datasets | 20+ | 150+ |
+| Configs | 5 | 7 |
+| Reference frameworks | 0 | 5 |
+| Attention backends | 1 (SDPA) | 3 (SDPA + FA2 + ALiBi) |
+| Python version | 3.12.13 | 3.12.13 (strict) |
+| PyTorch | >= 2.0 | >= 2.0 (>= 2.3 for 70b config) |
+
+#### 📁 Cấu trúc thư mục v0.3 (key changes)
+
+```
+NexusCoder/
+├── nexus/
+│   ├── __init__.py                    # v0.3.0 metadata
+│   ├── config.py                      # + 30b/70b configs + attention features
+│   ├── model/
+│   │   ├── attention.py               # + FA2, ALiBi, SWA, QK-norm, KV quant
+│   │   ├── rope.py                    # + NTK/YaRN scaling
+│   │   ├── flash_attention.py         # NEW
+│   │   ├── alibi.py                   # NEW
+│   │   ├── sliding_window.py          # NEW
+│   │   ├── layers.py                  # + MLP-parallel SwiGLU
+│   │   └── transformer.py             # + gradient checkpointing
+│   ├── training/
+│   │   └── dataset.py                 # trimmed + StreamingNexusDataset
+│   ├── skills/                        # 60+ skills, auto-discovery registry
+│   ├── tools/                         # 80+ tools, auto-discovery registry
+│   ├── data/
+│   │   ├── collectors/                # 8 collectors (3 NEW)
+│   │   └── processors/                # 6 processors (2 NEW)
+│   └── integrations/                  # NEW: 5 reference framework adapters
+├── configs/
+│   ├── nexus_coder_30b.yaml           # NEW
+│   ├── nexus_coder_70b.yaml           # NEW
+│   └── sources.yaml                   # expanded to 500+ repos, 150+ datasets
+├── ATTRIBUTIONS.md                    # NEW
+├── requirements.txt                   # + 30 new optional deps
+├── pyproject.toml                     # v0.3.0 + extras groups
+└── setup.py                           # v0.3.0
+```
+
+#### 🚀 Migration từ v0.2
+
+v0.3 backward compatible với v0.2:
+- `NexusConfig()` vẫn hoạt động (default = large 10B)
+- `NexusAgent()` vẫn hoạt động
+- `AUTHOR_TRAINING_DATA` vẫn có (nhưng được tinh gọn)
+- `scripts/train.py` vẫn hoạt động (nhưng có thêm config 30b, 70b)
+
+Breaking changes (minor):
+- `nexus.skills.registry._auto_register_defaults` giờ dùng dynamic discovery thay vì hardcoded imports
+- `nexus.tools.registry._auto_register_defaults` tương tự
+- `AUTHOR_TRAINING_DATA` giảm từ 150+ xuống 15 mẫu (phần còn lại load từ `data/processed/*.jsonl`)
+
+#### 📦 Dependencies mới
+
+```bash
+# Database tools
+pip install sqlalchemy psycopg2-binary pymysql redis pymongo elasticsearch kafka-python pika
+
+# Web/Network tools
+pip install aiohttp websockets grpcio beautifulsoup4 lxml
+
+# DevOps tools
+pip install paramiko kubernetes docker
+
+# Media/Convert tools
+pip install Pillow reportlab markdown
+
+# ML tools
+pip install scikit-learn scipy transformers accelerate peft
+
+# Crypto
+pip install pyjwt
+
+# GPU acceleration
+pip install flash-attn --no-build-isolation
+
+# All at once
+pip install -e ".[all]"
+```
+
+---
+
 ## v0.2.0 - 2026-08-16
 
 ### 🚀 Major Upgrade - Skills, Tools, và Data Pipeline
@@ -55,102 +234,6 @@
 - ✅ `QualityFilter` - Quality scoring (length, diversity, repetition)
 - ✅ `CurriculumLearning` - 4-stage curriculum (easy → expert)
 
-##### 🧠 Agent Upgrades
-- ✅ `SkillRegistry` - Auto-routing prompt → best skill
-- ✅ `ToolRegistry` - Safety-gated tool execution + audit log
-- ✅ `ConversationMemory` - Sliding window + summarization
-- ✅ `TaskPlanner` - Multi-step task decomposition
-- ✅ `ToolRouter` - Detect tool calls from natural language
-- ✅ `SafetyFilter` - Content filter + PII detection
-- ✅ `GuardrailManager` - Configurable safety rules
-
-##### ⚡ Optimization Module
-- ✅ `Quantizer` - INT8/INT4/FP8 quantization
-- ✅ `LoRA` - Low-Rank Adaptation (rank 8/16/32/64)
-- ✅ `Distiller` - Knowledge distillation (Hinton et al.)
-- ✅ `Pruner` - Structured/unstructured pruning
-
-##### 🛡️ Safety Module
-- ✅ `ContentFilter` - Detect harmful content (violence, hate, self-harm)
-- ✅ `PIIFilter` - Detect & mask PII (email, phone, SSN, API keys)
-- ✅ `Guardrails` - Configurable rules with allow/warn/block/redact
-
-##### 📈 Evaluation Module
-- ✅ `BenchmarkSuite` - 8 benchmarks (HumanEval, MBPP, GSM8K, MMLU, BBH, ...)
-- ✅ Metrics: Perplexity, BLEU, ROUGE, F1
-
-##### 📚 Multi-Variant Configs
-- ✅ `tiny` - ~5M params (CPU demo)
-- ✅ `small` - ~125M params (1 GPU fine-tune)
-- ✅ `medium` - ~1B params (4-8 GPU pretrain)
-- ✅ `large` - 10B/1.5B (default, 32+ GPU)
-- ✅ `xlarge` - ~30B/3B (research only)
-
-##### 📝 Training Data Expansion
-- ✅ Hardcoded data: 25 → 60+ examples
-- ✅ Categories: author info, code, math, reasoning, Vietnamese culture, SQL, debugging, tools
-- ✅ External data loading from JSONL files
-- ✅ Combined dataset API
-
-#### 🔧 Cải tiến / Improvements
-
-- ✅ **Modular architecture**: 8 modules (model, tokenizer, training, inference, agent, skills, tools, data, optim, safety, eval)
-- ✅ **Lazy imports**: Faster startup time
-- ✅ **Type hints**: Full typing throughout
-- ✅ **Docstrings**: Comprehensive documentation
-- ✅ **Safety first**: All dangerous operations require confirmation
-- ✅ **Audit logging**: All tool calls logged to JSONL
-- ✅ **Configurable**: Every component has dataclass config
-
-#### 📊 Thông số kỹ thuật / Technical Specs
-
-| Thông số | Giá trị |
-|----------|---------|
-| Version | 0.2.0 |
-| Skills | 15 |
-| Tools | 18+ |
-| Data sources | 5 (GitHub, HuggingFace, arXiv, Wikipedia, StackOverflow) |
-| Curated repos | 60+ |
-| Curated datasets | 20+ |
-| Configs | 5 variants (tiny → xlarge) |
-| Python version | 3.12.13 |
-| PyTorch | >= 2.0 |
-
-#### 📁 Cấu trúc thư mục v0.2
-
-```
-NexusCoder/
-├── nexus/
-│   ├── __init__.py
-│   ├── config.py              # Multi-variant configs
-│   ├── model/                 # MoE Transformer
-│   ├── tokenizer/             # BPE Tokenizer
-│   ├── training/              # Trainer + Dataset
-│   ├── inference/             # Generator
-│   ├── agent/                 # Agent + Memory + Planner + Router
-│   ├── skills/                # 15 skills (NEW)
-│   ├── tools/                 # 18+ tools (NEW)
-│   ├── data/                  # Data pipeline (NEW)
-│   │   ├── collectors/        # 5 collectors
-│   │   └── processors/        # 4 processors
-│   ├── optim/                 # Quantization, LoRA, Distill, Prune (NEW)
-│   ├── safety/                # Filters, Guardrails (NEW)
-│   ├── eval/                  # Benchmarks, Metrics (NEW)
-│   └── utils/
-├── configs/                   # YAML configs
-├── scripts/                   # CLI scripts (7 scripts)
-├── tests/
-└── docs/
-```
-
-#### 🚀 Migration từ v0.1
-
-v0.2 backward compatible với v0.1:
-- `NexusConfig()` vẫn hoạt động (default = large 10B)
-- `NexusAgent()` vẫn hoạt động (nhưng có thêm features)
-- `AUTHOR_TRAINING_DATA` vẫn có (nhưng mở rộng)
-- `scripts/train.py` vẫn hoạt động (nhưng có thêm flags)
-
 ---
 
 ## v0.1.0 - 2026-08-16
@@ -175,7 +258,3 @@ v0.2 backward compatible với v0.1:
 - ✅ **Song ngữ Việt-Anh** trong README và giao tiếp
 - ✅ **MIT License**
 - ✅ Tương thích **Python 3.12.13**
-
-#### Tác giả / Author
-
-**Hieu Louis** · GitHub: [@mhieuhonda](https://github.com/mhieuhonda) · 2026

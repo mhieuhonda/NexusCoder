@@ -1,15 +1,15 @@
-# Nexus Coder v0.1 - Cấu hình mặc định
-# Tác giả: Hieu Louis (2026)
+# Nexus Coder Configuration - Large (10B/1.5B) v0.3 - DEFAULT
+# Author: Hieu Louis (2026)
+# Default model. 32+ GPU recommended for full pretrain.
 
 model:
   name: "Nexus Coder"
   agent_name: "Nexus"
   author: "Hieu Louis"
-  version: "0.1.0"
+  version: "0.3.0"
   github: "mhieuhonda"
   year: "2026"
 
-# Kiến trúc
 architecture:
   vocab_size: 32000
   hidden_size: 2048
@@ -21,25 +21,48 @@ architecture:
   hidden_act: "silu"            # SwiGLU
   norm_type: "rmsnorm"
 
-# Mixture of Experts
 moe:
   num_experts: 24              # Tổng số chuyên gia
   num_active_experts: 3        # Chuyên gia kích hoạt mỗi token
   router_aux_loss_coef: 0.001
   router_jitter_noise: 0.0
 
-# Context window
 context:
   max_position_embeddings: 50000   # 50k tokens
   rotary_emb_base: 10000.0
+  rope_scaling_type: null
+  rope_scaling_factor: 1.0
 
-# Tham số
+# v0.3 NEW attention features
+attention:
+  use_flash_attention: true       # PyTorch SDPA
+  use_flash_attention_2: false     # FlashAttention-2 (optional, install flash-attn)
+  use_alibi: false                 # ALiBi alternative to RoPE
+  alibi_max_slope: 8.0
+  use_sliding_window: true         # alternating SWA / global layers
+  sliding_window_size: 4096
+  sliding_window_layers: null     # null = alternate even/odd layers
+  use_qk_norm: true                # RMSNorm on Q and K (Llama-3 style)
+  qk_norm_eps: 1.0e-6
+  mlp_parallel: true               # fused gate+up projection
+
+compute:
+  use_kv_cache: true
+  kv_cache_quantization: null      # null | "int8" | "fp8"
+  gradient_checkpointing: false
+  tensor_parallel_size: 1
+  pipeline_parallel_size: 1
+  expert_parallel_size: 1
+  sequence_parallel: false
+
 params:
-  total: "~10.2B"
-  active: "~1.5B"
+  total: "~10.22B"
+  active: "~1.50B"
   expert_utilization: "12.5%"
+  estimated_disk_mb_fp16: 19500
+  estimated_disk_mb_int8: 9750
+  estimated_disk_mb_int4: 4875
 
-# Training defaults
 training:
   learning_rate: 5.0e-4
   weight_decay: 0.01
@@ -51,8 +74,8 @@ training:
   save_steps: 500
   max_grad_norm: 1.0
   seed: 42
+  use_amp: true
 
-# Inference defaults
 inference:
   max_new_tokens: 200
   temperature: 0.8
@@ -60,16 +83,38 @@ inference:
   top_p: 0.9
   do_sample: true
 
-# Personas (hardcoded)
 personality:
   type: "humorous"
-  language: "bilingual"          # Việt + Anh
+  language: "bilingual"
   specialties:
     - programming
     - conversation
+    - devops
+    - ml
+    - security
 
-# Environment
+# v0.3 NEW capabilities
+capabilities:
+  skills_count: 60
+  tools_count: 80
+  data_sources:
+    - github
+    - huggingface
+    - arxiv
+    - wikipedia
+    - stackoverflow
+    - the_stack
+    - starcoder2_data
+    - python_alpaca
+  training_frameworks_referenced:
+    - litgpt
+    - llamafactory
+    - axolotl
+    - openhands
+    - omp_gym
+
 environment:
   python_version: "3.12.13"
   pytorch_version: ">=2.0"
-  cuda_required: false          # Có thể chạy trên CPU (chậm)
+  cuda_required: false          # có thể chạy trên CPU (chậm)
+  recommended_gpus: "32+ H100 80GB for full pretrain"

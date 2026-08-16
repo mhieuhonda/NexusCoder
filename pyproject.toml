@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nexus-coder"
-version = "0.2.0"
-description = "Nexus Coder v0.2 - AI Agent với MoE 10B/1.5B, 15 skills, 18+ tools, do Hieu Louis tạo ra"
+version = "0.3.0"
+description = "Nexus Coder v0.3 - AI Agent với MoE 10B/1.5B + FlashAttention-2 + ALiBi + Sliding Window, 60+ skills, 80+ tools, do Hieu Louis tạo ra"
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
     {name = "Hieu Louis", email = "mhieuhonda@users.noreply.github.com"}
 ]
-requires-python = "==3.12.*"
+requires-python = "==3.12.13"
 dependencies = [
     "torch>=2.0.0",
     "numpy>=1.24.0",
@@ -33,20 +33,69 @@ classifiers = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "black", "flake8", "ruff"]
-gpu = ["flash-attn>=2.0.0", "bitsandbytes>=0.41.0"]
-data = ["datasets>=2.14.0", "datasketch>=1.6.0"]
-tools = ["ruff>=0.1.0", "black>=23.0.0", "isort>=5.12.0"]
-crypto = ["cryptography>=41.0.0"]
+gpu = ["flash-attn>=2.0.0", "bitsandbytes>=0.41.0", "triton>=2.0.0"]
+data = ["datasets>=2.14.0", "datasketch>=1.6.0", "langdetect>=1.0.9"]
+tools = ["ruff>=0.1.0", "black>=23.0.0", "isort>=5.12.0", "sqlparse>=0.4.4", "jsbeautifier>=1.14.0"]
+crypto = ["cryptography>=41.0.0", "pyjwt>=2.8.0"]
+database = [
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "pymysql>=1.1.0",
+    "redis>=5.0.0",
+    "pymongo>=4.5.0",
+    "elasticsearch>=8.0.0",
+    "kafka-python>=2.0.2",
+    "pika>=1.3.0",
+]
+web = [
+    "aiohttp>=3.9.0",
+    "websockets>=12.0",
+    "grpcio>=1.59.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.0",
+]
+devops = ["paramiko>=3.4.0", "kubernetes>=28.1.0", "docker>=7.0.0"]
+media = ["Pillow>=10.0.0", "reportlab>=4.0.0", "markdown>=3.5.0"]
+ml = ["scikit-learn>=1.3.0", "scipy>=1.11.0", "transformers>=4.35.0", "accelerate>=0.24.0", "peft>=0.6.0", "lm-eval>=0.3.0"]
+distributed = ["deepspeed>=0.12.0", "accelerate>=0.24.0", "flash-attn>=2.0.0"]
 all = [
     "flash-attn>=2.0.0",
     "bitsandbytes>=0.41.0",
+    "triton>=2.0.0",
     "datasets>=2.14.0",
     "datasketch>=1.6.0",
+    "langdetect>=1.0.9",
     "ruff>=0.1.0",
     "black>=23.0.0",
     "isort>=5.12.0",
+    "sqlparse>=0.4.4",
+    "jsbeautifier>=1.14.0",
     "cryptography>=41.0.0",
+    "pyjwt>=2.8.0",
     "aiohttp>=3.9.0",
+    "websockets>=12.0",
+    "grpcio>=1.59.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.0",
+    "sqlalchemy>=2.0.0",
+    "psycopg2-binary>=2.9.0",
+    "pymysql>=1.1.0",
+    "redis>=5.0.0",
+    "pymongo>=4.5.0",
+    "elasticsearch>=8.0.0",
+    "kafka-python>=2.0.2",
+    "pika>=1.3.0",
+    "paramiko>=3.4.0",
+    "kubernetes>=28.1.0",
+    "docker>=7.0.0",
+    "Pillow>=10.0.0",
+    "reportlab>=4.0.0",
+    "markdown>=3.5.0",
+    "scikit-learn>=1.3.0",
+    "scipy>=1.11.0",
+    "transformers>=4.35.0",
+    "accelerate>=0.24.0",
+    "peft>=0.6.0",
 ]
 
 [project.urls]

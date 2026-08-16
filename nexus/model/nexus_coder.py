@@ -24,6 +24,7 @@ from ..config import NexusConfig
 from .layers import RMSNorm
 from .transformer import NexusDecoderLayer
 from .moe import load_balancing_loss_func
+from .sliding_window import get_layer_attention_pattern
 
 
 class NexusCoder(nn.Module):
@@ -36,14 +37,35 @@ class NexusCoder(nn.Module):
         # Token embeddings
         self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size)
 
+        # Per-layer attention pattern: alternating SWA / global
+        layer_patterns = get_layer_attention_pattern(
+            num_layers=config.num_hidden_layers,
+            use_sliding_window=config.use_sliding_window,
+            sliding_window_layers=config.sliding_window_layers,
+        )
+
         # Decoder layers
         self.layers = nn.ModuleList([
-            NexusDecoderLayer(config, layer_idx=i)
+            NexusDecoderLayer(
+                config,
+                layer_idx=i,
+                attention_pattern=layer_patterns[i],
+            )
             for i in range(config.num_hidden_layers)
         ])
 
         # Final norm
         self.norm = RMSNorm(config.hidden_size, eps=config.layer_norm_epsilon)
+
+    def enable_gradient_checkpointing(self):
+        """Enable gradient checkpointing on all layers."""
+        for layer in self.layers:
+            layer.gradient_checkpointing = True
+
+    def disable_gradient_checkpointing(self):
+        """Disable gradient checkpointing on all layers."""
+        for layer in self.layers:
+            layer.gradient_checkpointing = False
 
     def forward(
         self,

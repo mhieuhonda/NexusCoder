@@ -1,10 +1,16 @@
-# Nexus Coder v0.2 - Medium Variant (~1B params)
-# Pretrain trên 4-8 GPU
+# Nexus Coder Configuration - Medium version v0.3
+# ~1B params, pretrain on 4-8 GPU
 # Author: Hieu Louis (2026)
 
 model:
   name: "Nexus Coder Medium"
-  version: "0.2.0-medium"
+  agent_name: "Nexus"
+  author: "Hieu Louis"
+  version: "0.3.0-medium"
+  github: "mhieuhonda"
+  year: "2026"
+
+architecture:
   vocab_size: 32000
   hidden_size: 1536
   num_hidden_layers: 24
@@ -12,34 +18,63 @@ model:
   num_kv_heads: 4
   head_dim: 96
   intermediate_size: 4096
+  hidden_act: "silu"
+  norm_type: "rmsnorm"
+
+moe:
   num_experts: 16
   num_active_experts: 2
+  router_aux_loss_coef: 0.001
+
+context:
   max_position_embeddings: 16384
+  rotary_emb_base: 10000.0
+
+attention:
   use_flash_attention: true
+  use_flash_attention_2: false
+  use_alibi: false
+  use_sliding_window: true
+  sliding_window_size: 2048
+  use_qk_norm: true
+  mlp_parallel: true
+
+compute:
+  use_kv_cache: true
+  kv_cache_quantization: null
+  gradient_checkpointing: false
+
+params:
+  total: "~1.1B"
+  active: "~250M"
+  expert_utilization: "12.5%"
 
 training:
-  output_dir: "./checkpoints/medium"
-  learning_rate: 3e-4
-  weight_decay: 0.1
-  warmup_steps: 500
-  max_steps: 100000
+  learning_rate: 3.0e-4
+  weight_decay: 0.01
+  warmup_steps: 100
+  max_steps: 5000
   per_device_batch_size: 4
-  gradient_accumulation_steps: 8
-  logging_steps: 100
-  save_steps: 2000
+  gradient_accumulation_steps: 4
+  logging_steps: 10
+  save_steps: 500
+  max_grad_norm: 1.0
+  seed: 42
   use_amp: true
-  amp_dtype: "bf16"
-  gradient_checkpointing: true
 
-data:
-  include_external: true
-  external_data_dir: "./data/processed"
-  max_length: 2048
-  shuffle: true
+inference:
+  max_new_tokens: 200
+  temperature: 0.8
+  top_k: 50
+  top_p: 0.9
+  do_sample: true
 
-estimated:
-  total_params: "~1B"
-  active_params: "~250M"
-  disk_fp16_mb: 2000
-  disk_int8_mb: 1000
-  disk_int4_mb: 500
+personality:
+  type: "humorous"
+  language: "bilingual"
+
+environment:
+  python_version: "3.12.13"
+  pytorch_version: ">=2.0"
+  cuda_required: true
+  min_gpu_memory_gb: 16

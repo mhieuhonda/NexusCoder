@@ -18,11 +18,14 @@ from .layers import SwiGLU
 
 
 class Expert(nn.Module):
-    """Một chuyên gia (expert) - thực chất là một SwiGLU FFN."""
+    """Một chuyên gia (expert) - thực chất là một SwiGLU FFN.
 
-    def __init__(self, hidden_size: int, intermediate_size: int):
+    v0.3: hỗ trợ MLP-parallel (gate/up concat thành 1 matmul).
+    """
+
+    def __init__(self, hidden_size: int, intermediate_size: int, parallel: bool = True):
         super().__init__()
-        self.ffn = SwiGLU(hidden_size, intermediate_size)
+        self.ffn = SwiGLU(hidden_size, intermediate_size, parallel=parallel)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return self.ffn(x)
@@ -84,9 +87,10 @@ class MixtureOfExperts(nn.Module):
         # Router
         self.router = Router(config.hidden_size, self.num_experts)
 
-        # Experts
+        # Experts (v0.3: MLP-parallel by default)
+        mlp_parallel = getattr(config, "mlp_parallel", True)
         self.experts = nn.ModuleList([
-            Expert(config.hidden_size, config.intermediate_size)
+            Expert(config.hidden_size, config.intermediate_size, parallel=mlp_parallel)
             for _ in range(self.num_experts)
         ])
 

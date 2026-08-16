@@ -1,0 +1,92 @@
+# Nexus Coder Configuration - XLarge (~30B/3B) v0.3
+# Research-only. Requires 64+ H100 80GB GPUs.
+# Author: Hieu Louis (2026)
+
+model:
+  name: "Nexus Coder XLarge"
+  agent_name: "Nexus"
+  author: "Hieu Louis"
+  version: "0.3.0-xlarge"
+  github: "mhieuhonda"
+  year: "2026"
+
+architecture:
+  vocab_size: 64000
+  hidden_size: 4096
+  num_hidden_layers: 24
+  num_attention_heads: 32
+  num_kv_heads: 8
+  head_dim: 128
+  intermediate_size: 11264
+  hidden_act: "silu"
+  norm_type: "rmsnorm"
+
+moe:
+  num_experts: 48
+  num_active_experts: 4
+  router_aux_loss_coef: 0.001
+
+context:
+  max_position_embeddings: 65536     # 64k tokens
+  rotary_emb_base: 10000.0
+  rope_scaling_type: "dynamic"       # NTK-aware for 2× context extension
+  rope_scaling_factor: 2.0
+
+attention:
+  use_flash_attention: true
+  use_flash_attention_2: true          # recommended at this scale
+  use_alibi: false
+  use_sliding_window: true
+  sliding_window_size: 8192
+  use_qk_norm: true
+  mlp_parallel: true
+
+compute:
+  use_kv_cache: true
+  kv_cache_quantization: "int8"        # saves KV cache memory at long context
+  gradient_checkpointing: true         # essential at this scale
+  tensor_parallel_size: 4
+  pipeline_parallel_size: 1
+  expert_parallel_size: 4
+  sequence_parallel: false
+
+params:
+  total: "~30B"
+  active: "~3B"
+  expert_utilization: "8.3%"
+  estimated_disk_mb_fp16: 60000
+  estimated_disk_mb_int8: 30000
+  estimated_disk_mb_int4: 15000
+
+training:
+  learning_rate: 2.0e-4
+  weight_decay: 0.01
+  warmup_steps: 500
+  max_steps: 10000
+  per_device_batch_size: 1
+  gradient_accumulation_steps: 32
+  logging_steps: 10
+  save_steps: 1000
+  max_grad_norm: 1.0
+  seed: 42
+  use_amp: true
+  use_deepspeed: true
+  deepspeed_config: "configs/ds_config_zero3.json"
+
+inference:
+  max_new_tokens: 500
+  temperature: 0.7
+  top_k: 50
+  top_p: 0.9
+  do_sample: true
+
+personality:
+  type: "humorous"
+  language: "bilingual"
+
+environment:
+  python_version: "3.12.13"
+  pytorch_version: ">=2.0"
+  cuda_required: true
+  min_gpu_memory_gb: 80
+  recommended_gpus: "64+ H100 80GB"

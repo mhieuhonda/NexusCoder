@@ -1,0 +1,106 @@
+# Nexus Coder Configuration - 70B/5B v0.3 NEW (frontier research)
+# Author: Hieu Louis (2026)
+# RESEARCH ONLY. Requires 256+ H100/H200 GPUs or equivalent.
+# Uses YaRN RoPE scaling for 4× context extension → 128k tokens.
+
+model:
+  name: "Nexus Coder 70B"
+  agent_name: "Nexus"
+  author: "Hieu Louis"
+  version: "0.3.0-70b"
+  github: "mhieuhonda"
+  year: "2026"
+
+architecture:
+  vocab_size: 128000                  # tiktoken-style tokenizer
+  hidden_size: 6144
+  num_hidden_layers: 32
+  num_attention_heads: 48
+  num_kv_heads: 8                     # heavy GQA (6:1 ratio)
+  head_dim: 128
+  intermediate_size: 16384
+  hidden_act: "silu"
+  norm_type: "rmsnorm"
+
+moe:
+  num_experts: 64                     # Frontier-scale MoE
+  num_active_experts: 4
+  router_aux_loss_coef: 0.001
+  router_jitter_noise: 0.0
+
+context:
+  max_position_embeddings: 131072    # 128k tokens
+  rotary_emb_base: 500000.0            # larger base for long context
+  rope_scaling_type: "yarn"            # YaRN — SOTA for 4×+ extension
+  rope_scaling_factor: 4.0
+  yarn_beta_fast: 32.0
+  yarn_beta_slow: 1.0
+
+attention:
+  use_flash_attention: true
+  use_flash_attention_2: true
+  use_alibi: false                    # YaRN handles long context
+  use_sliding_window: true
+  sliding_window_size: 16384
+  use_qk_norm: true
+  qk_norm_eps: 1.0e-6
+  mlp_parallel: true
+
+compute:
+  use_kv_cache: true
+  kv_cache_quantization: "fp8"        # FP8 KV cache for memory efficiency
+  gradient_checkpointing: true
+  tensor_parallel_size: 8
+  pipeline_parallel_size: 2
+  expert_parallel_size: 8
+  sequence_parallel: true               # enable sequence parallel for long context
+
+params:
+  total: "~70B"
+  active: "~5B"
+  expert_utilization: "6.25%"
+  estimated_disk_mb_fp16: 140000
+  estimated_disk_mb_int8: 70000
+  estimated_disk_mb_int4: 35000
+  kv_cache_mb_per_token_fp16: 0.050
+  kv_cache_mb_per_token_fp8: 0.025
+
+training:
+  learning_rate: 1.5e-4
+  weight_decay: 0.01
+  warmup_steps: 2000
+  max_steps: 50000
+  per_device_batch_size: 1
+  gradient_accumulation_steps: 128
+  logging_steps: 10
+  save_steps: 2000
+  max_grad_norm: 1.0
+  seed: 42
+  use_amp: true
+  use_deepspeed: true
+  deepspeed_config: "configs/ds_config_zero3_offload.json"
+  total_tokens_target: 1_500_000_000_000   # 1.5T tokens
+
+inference:
+  max_new_tokens: 2000
+  temperature: 0.7
+  top_k: 50
+  top_p: 0.9
+  do_sample: true
+
+personality:
+  type: "humorous"
+  language: "bilingual"
+
+capabilities:
+  skills_count: 60
+  tools_count: 80
+
+environment:
+  python_version: "3.12.13"
+  pytorch_version: ">=2.3"
+  cuda_required: true
+  min_gpu_memory_gb: 80
+  recommended_gpus: "256+ H100/H200 80GB"
+  estimated_training_time: "~90 days on 256 H100s"
+  notes: "This config is research-only. Use 30B or 10B for production."

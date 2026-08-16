@@ -1,11 +1,14 @@
-# Nexus Coder Configuration - Tiny version (for testing/demo)
-# Used for quick verification on CPU
+# Nexus Coder Configuration - Tiny version v0.3
+# Used for quick verification on CPU (~5M params)
+# Author: Hieu Louis (2026)
 
 model:
   name: "Nexus Coder Tiny"
   agent_name: "Nexus"
   author: "Hieu Louis"
-  version: "0.1.0-tiny"
+  version: "0.3.0-tiny"
+  github: "mhieuhonda"
+  year: "2026"
 
 architecture:
   vocab_size: 2000
@@ -22,15 +25,33 @@ moe:
   num_experts: 4
   num_active_experts: 2
   router_aux_loss_coef: 0.001
+  router_jitter_noise: 0.0
 
 context:
   max_position_embeddings: 512
   rotary_emb_base: 10000.0
+  rope_scaling_type: null
+  rope_scaling_factor: 1.0
+
+# v0.3 NEW architecture features (most OFF for tiny — too small to benefit)
+attention:
+  use_flash_attention: false
+  use_flash_attention_2: false
+  use_alibi: false
+  use_sliding_window: false
+  sliding_window_size: 256
+  use_qk_norm: false
+  mlp_parallel: true
+
+compute:
+  use_kv_cache: true
+  kv_cache_quantization: null
+  gradient_checkpointing: false
 
 params:
   total: "~8M (demo only)"
   active: "~5M"
-  note: "This is for testing only. Use nexus_coder_10b.yaml for the real model."
+  note: "For testing only. Use nexus_coder_10b.yaml for the real model."
 
 training:
   learning_rate: 5.0e-4
@@ -47,6 +68,11 @@ inference:
   temperature: 0.8
   top_k: 50
   top_p: 0.9
+  do_sample: true
+
+personality:
+  type: "humorous"
+  language: "bilingual"
 
 environment:
   python_version: "3.12.13"

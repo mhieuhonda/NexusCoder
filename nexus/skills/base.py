@@ -19,6 +19,17 @@ class SkillCategory(str, Enum):
     DATA = "data"
     DEVOPS = "devops"
     SECURITY = "security"
+    # v0.3 NEW categories
+    ML = "ml"
+    CLOUD = "cloud"
+    SYSTEM = "system"
+    BLOCKCHAIN = "blockchain"
+    DATABASE = "database"
+    NETWORK = "network"
+    ALGORITHM = "algorithm"
+    DOCUMENTATION = "documentation"
+    TESTING = "testing"
+    MATH = "math"
 
 
 class SkillPriority(str, Enum):
@@ -100,7 +111,7 @@ class Skill(ABC):
     
     @property
     def version(self) -> str:
-        return "0.2.0"
+        return "0.3.0"
     
     @property
     def author(self) -> str:

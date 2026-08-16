@@ -1,8 +1,14 @@
 """
-RMSNorm và các module cơ bản cho Nexus Coder.
+RMSNorm + SwiGLU layers v0.3
+============================
+- RMSNorm (Zhang & Sennrich, 2019) — unchanged
+- SwiGLU — adds MLP-parallel variant (compute gate/up in parallel)
 """
+from __future__ import annotations
+
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 
 class RMSNorm(nn.Module):
@@ -25,18 +31,36 @@ class RMSNorm(nn.Module):
 
 class SwiGLU(nn.Module):
     """SwiGLU activation: SiLU(gate(x)) * up(x).
-    Dùng trong FFN của các model hiện đại như LLaMA, Mixtral.
+
+    v0.3: adds MLP-parallel variant — gate_proj and up_proj are computed
+    as a single concatenated matmul (faster on modern GPUs).
     """
 
-    def __init__(self, hidden_size: int, intermediate_size: int):
+    def __init__(self, hidden_size: int, intermediate_size: int, parallel: bool = True):
         super().__init__()
-        self.gate_proj = nn.Linear(hidden_size, intermediate_size, bias=False)
-        self.up_proj = nn.Linear(hidden_size, intermediate_size, bias=False)
+        self.parallel = parallel
+        if parallel:
+            # Concatenated gate + up projection (mathematically identical, faster)
+            self.gate_up_proj = nn.Linear(
+                hidden_size, 2 * intermediate_size, bias=False,
+            )
+            self.gate_proj = None
+            self.up_proj = None
+        else:
+            self.gate_proj = nn.Linear(hidden_size, intermediate_size, bias=False)
+            self.up_proj = nn.Linear(hidden_size, intermediate_size, bias=False)
+            self.gate_up_proj = None
         self.down_proj = nn.Linear(intermediate_size, hidden_size, bias=False)
+        self.intermediate_size = intermediate_size
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        gate = torch.nn.functional.silu(self.gate_proj(x))
-        up = self.up_proj(x)
+        if self.parallel:
+            gate_up = self.gate_up_proj(x)
+            gate, up = gate_up[..., : self.intermediate_size], gate_up[..., self.intermediate_size :]
+            gate = F.silu(gate)
+        else:
+            gate = F.silu(self.gate_proj(x))
+            up = self.up_proj(x)
         return self.down_proj(gate * up)
 
 

@@ -31,6 +31,17 @@ class ToolCategory(str, Enum):
     NETWORK = "network"
     CRYPTO = "crypto"
     DATA = "data"
+    # v0.3 NEW categories
+    DATABASE = "database"
+    DEVOPS = "devops"
+    CLOUD = "cloud"
+    ML = "ml"
+    SECURITY = "security"
+    CONVERT = "convert"
+    GIT = "git"
+    MONITOR = "monitor"
+    BLOCKCHAIN = "blockchain"
+    MEDIA = "media"
 
 
 @dataclass
@@ -109,7 +120,7 @@ class Tool(ABC):
     
     @property
     def version(self) -> str:
-        return "0.2.0"
+        return "0.3.0"
     
     @property
     def author(self) -> str:
