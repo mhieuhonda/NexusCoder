@@ -218,26 +218,44 @@ class NexusTrainer:
         return {"global_step": global_step, "elapsed": elapsed}
 
     def _save_checkpoint(self, step: int, final: bool = False) -> None:
-        """Lưu checkpoint."""
+        """Lưu checkpoint (v0.4: include AMP scaler state for safe resume)."""
         suffix = "final" if final else f"step-{step}"
         path = os.path.join(self.output_dir, f"nexus_coder-{suffix}.pt")
+        # v0.4 fix: persist GradScaler state so AMP can resume safely without
+        # scale-factor NaNs on first few steps.
+        scaler_state = None
+        scaler = getattr(self, "scaler", None)
+        if scaler is not None and hasattr(scaler, "state_dict"):
+            try:
+                scaler_state = scaler.state_dict()
+            except Exception:
+                scaler_state = None
         torch.save({
             "model_state_dict": self.model.state_dict(),
             "optimizer_state_dict": self.optimizer.state_dict(),
             "scheduler_state_dict": self.scheduler.state_dict(),
+            "scaler_state_dict": scaler_state,
             "step": step,
             "config": self.config.__dict__,
         }, path)
-        print(f"  💾 Saved checkpoint: {path}")
+        print(f"  Checkpoint saved: {path}")
 
     def _load_checkpoint(self, path: str) -> int:
-        """Load checkpoint."""
+        """Load checkpoint (v0.4: also restore AMP scaler if present)."""
         checkpoint = torch.load(path, map_location=self.device, weights_only=False)
         self.model.load_state_dict(checkpoint["model_state_dict"])
         self.optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
         self.scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
+        # v0.4 fix: restore scaler state if present
+        scaler_state = checkpoint.get("scaler_state_dict")
+        scaler = getattr(self, "scaler", None)
+        if scaler_state is not None and scaler is not None and hasattr(scaler, "load_state_dict"):
+            try:
+                scaler.load_state_dict(scaler_state)
+            except Exception:
+                pass
         step = checkpoint.get("step", 0)
-        print(f"  📂 Resumed from checkpoint at step {step}")
+        print(f"  Resumed from checkpoint at step {step}")
         return step
 
     def _save_logs(self) -> None:

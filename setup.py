@@ -2,13 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name="nexus-coder",
-    version="0.3.0",
-    description="Nexus Coder v0.3 - AI Agent với MoE 10B/1.5B + FlashAttention-2 + ALiBi + Sliding Window",
+    version="0.4.0",
+    description="Nexus Coder v0.4 - CyberForge edition. MoE 423B/39B + 3M context + CyberGym training.",
     long_description=open("README.md", "r", encoding="utf-8").read() if __import__("os").path.exists("README.md") else "",
     long_description_content_type="text/markdown",
     author="Hieu Louis",
     author_email="mhieuhonda@users.noreply.github.com",
     url="https://github.com/mhieuhonda/NexusCoder",
+    license="NAL-1.0 (Attribution Required)",
     packages=find_packages(),
     python_requires="==3.12.13",
     install_requires=[
@@ -41,7 +42,7 @@ setup(
     },
     classifiers=[
         "Development Status :: 4 - Beta",
-        "License :: OSI Approved :: MIT License",
+        "License :: Other/Proprietary License",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.12.13",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",

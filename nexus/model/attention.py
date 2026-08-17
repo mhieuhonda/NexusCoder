@@ -103,23 +103,34 @@ class Attention(nn.Module):
         self.kv_cache_quantization = config.kv_cache_quantization
         self.kv_cache_bits = config.kv_cache_bits
 
-    def _quantize_kv_cache(self, x: torch.Tensor) -> torch.Tensor:
-        """Quantize KV cache tensor to int8/fp8 to save memory (only at inference)."""
+    def _quantize_kv_cache(self, x: torch.Tensor):
+        """Quantize KV cache tensor to int8/fp8 to save memory (only at inference).
+
+        Returns:
+            - For int8: (quantized_tensor_int8, scale_tensor)
+            - For fp8:  (tensor_fp8, None)
+            - None / float input: (x, None)
+        """
         if self.kv_cache_quantization is None or not torch.is_floating_point(x):
-            return x
+            return x, None
         if self.kv_cache_quantization == "int8":
-            # Symmetric int8 quantization
+            # Symmetric int8 quantization, scale stored alongside (per-row)
             abs_max = x.abs().amax(dim=-1, keepdim=True).clamp(min=1e-8)
             scale = abs_max / 127.0
-            return (x / scale).round().clamp(-128, 127).to(torch.int8), scale
+            q = (x / scale).round().clamp(-128, 127).to(torch.int8)
+            return q, scale
         elif self.kv_cache_quantization == "fp8":
-            return x.to(torch.float8_e4m3fn)
-        return x
+            return x.to(torch.float8_e4m3fn), None
+        return x, None
 
     def _dequantize_kv_cache(self, x, scale=None) -> torch.Tensor:
+        """Dequantize KV cache back to float (no-op if already float)."""
         if self.kv_cache_quantization is None or torch.is_floating_point(x):
             return x
         if self.kv_cache_quantization == "int8":
+            if scale is None:
+                # Cannot recover without scale → return zeros (graceful degradation)
+                return torch.zeros_like(x, dtype=torch.float32)
             return x.to(torch.float32) * scale
         elif self.kv_cache_quantization == "fp8":
             return x.to(torch.float32)
@@ -159,21 +170,24 @@ class Attention(nn.Module):
 
         # KV cache
         if past_key_value is not None:
-            cached_k, cached_v = past_key_value
+            # Unpack: past_key_value is (cached_k, cached_v, k_scale, v_scale) for int8
+            if isinstance(past_key_value, tuple) and len(past_key_value) == 4:
+                cached_k, cached_v, k_scale, v_scale = past_key_value
+            else:
+                cached_k, cached_v = past_key_value
+                k_scale, v_scale = None, None
             # dequantize if needed
-            cached_k = self._dequantize_kv_cache(cached_k)
-            cached_v = self._dequantize_kv_cache(cached_v)
+            cached_k = self._dequantize_kv_cache(cached_k, k_scale)
+            cached_v = self._dequantize_kv_cache(cached_v, v_scale)
             key_states = torch.cat([cached_k, key_states], dim=2)
             value_states = torch.cat([cached_v, value_states], dim=2)
         past_key_value = None
         if use_cache:
-            # Quantize for storage
-            k_cached = self._quantize_kv_cache(key_states)
-            v_cached = self._quantize_kv_cache(value_states)
-            if isinstance(k_cached, tuple):
-                past_key_value = (k_cached[0], v_cached[0])  # discard scale for simplicity
-            else:
-                past_key_value = (k_cached, v_cached)
+            # Quantize for storage (scales preserved)
+            k_cached, k_scale = self._quantize_kv_cache(key_states)
+            v_cached, v_scale = self._quantize_kv_cache(value_states)
+            # Always return 4-tuple so downstream code knows the layout
+            past_key_value = (k_cached, v_cached, k_scale, v_scale)
 
         # Repeat K, V cho GQA
         if self.num_kv_groups > 1:

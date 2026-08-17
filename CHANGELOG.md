@@ -1,5 +1,94 @@
 # Thay đổi / Changelog
 
+## v0.4.0 - 2026-08-17 — CyberForge Edition
+
+### SUPREME UPGRADE — 423B params, 3M context, CyberGym training methodology
+
+**Tác giả / Author**: Hieu Louis
+
+#### New Features
+
+##### Model architecture — 423B / 39B / 3M context
+- New config `423b` (DEFAULT for v0.4): 423B total / 39B active params
+- 24 layers, hidden 7168, 48 experts (4 active), inter 16384
+- 3,000,000-token context window via YaRN RoPE scaling (×60)
+- Sliding window 32k + QK-norm + KV cache int8 + gradient checkpointing
+- Adaptive Density Routing: top-2 → top-8 active experts based on input entropy
+
+##### CyberGym training methodology (NEW)
+- **Code Genome Initialization (CGI)**: weight init from code motifs
+- **Mutation Pressure Training (MPT)**: beneficial weight perturbations during training
+- **Expert Speciation Curriculum (ESC)**: 48 experts → 48 species (Python/JS/Rust/Go/...)
+- **Recursive Self-Compression (RSC)**: periodic self-distillation snapshots
+- **Context Expansion Protocol (CEP)**: progressive 32k → 3M context extension
+- **Adaptive Density Routing (ADR)**: entropy-based top-k routing
+- Orchestrator `CyberForgeTrainer` wires all components together
+
+##### Data pipeline — Code corpus curated
+- `configs/code_corpus.yaml`: 1000+ curated GitHub repos across 17 categories
+- Categories: python_core, python_web, python_data, python_ml, python_dl,
+  python_tools, javascript_core, javascript_frameworks, rust_core, go_core,
+  java_core, c_cpp, devops, security, ai_tools, scientific, systems
+
+#### Bug Fixes (48 total)
+
+##### CRITICAL (6 fixes)
+- `nexus/safety/__init__.py`: missing `get_default_guardrails` export broke `nexus.agent`
+- `nexus/data/processors/deduplicator.py`: wrong import path (`.._logging_helpers` → `...utils.logging`)
+- `nexus/model/attention.py`: INT8 KV cache quantization discarded scale → crash on 2nd decode step
+- `scripts/collect_data.py`: `CURATED_TAGS` was a class attribute, not module-level → ImportError
+- `nexus/agent/planner.py`: invalid dependency IDs silently treated as "met" (security bug)
+- `nexus/config.py`: 30B / 70B configs were 5×–9× off their advertised size
+
+##### MAJOR (22 fixes)
+- MoE never received `attention_mask` (padded tokens polluted aux loss)
+- LoRA `target_modules` listed `gate_proj`/`up_proj` but v0.3 SwiGLU fuses them into `gate_up_proj`
+- `python_exec` sandbox: when run as script, `__builtins__` was a module → sandbox escape
+- `python_exec`: timeout was computed but never enforced → infinite loops could hang the agent
+- `shell.py`: dead `if False` branch with unimported `os`
+- ALiBi `max_slope` parameter was hardcoded to 8.0 (parameter had no effect)
+- ALiBi non-power-of-2 head count subselection was wrong (took first N, not closest N)
+- GitHub collector: `"c++"` language key didn't exist in EXTENSIONS (should be `"cpp"`)
+- GitHub collector: hardcoded `--branch main` failed for repos using `master`
+- arXiv collector: `.find().text` without None check crashed entire parse on missing element
+- arXiv collector: query string not URL-encoded
+- `compute_rouge`: rouge_1 was precision, not recall (corrected to F1)
+- `compute_bleu`: empty references list crashed `min()` call
+- FP8 quantization skip_layers comparison never matched (all params got FP8-quantized)
+- Attention mask shape mismatch with KV cache + sliding window
+- Trainer: AMP scaler state not checkpointed (resume caused NaN gradients)
+- `quality_filter`: off-by-one in 10-gram repetition window
+- `dataset.py`: hardcoded pad id 0 (collided with token 0 if user changed `pad_token_id`)
+- Tokenizer: Vietnamese char `Ẵ` was duplicated as `Ẳ` (missing `Ẵ`)
+- Tokenizer: BPE merge lost `</w>` marker when first symbol had it
+- Tokenizer: `tuple(k.split("|"))` broke when token contained `|`
+- `scripts/train.py`: `--config` choices missing `30b`, `70b`, `423b`
+
+##### MINOR (20 fixes)
+- Various unused imports, dead code, type hints
+- See git log for full list
+
+#### License change
+- Switched from MIT to **NexusCoder Attribution License v1.0 (NAL-1.0)**
+- Free use for any purpose (commercial/non-commercial/research)
+- Mandatory attribution: "Hieu Louis" + link to original repo
+- See [LICENSE](LICENSE) for full terms
+
+#### Files added
+- `nexus/cybergym/__init__.py`
+- `nexus/cybergym/mutation.py`
+- `nexus/cybergym/genome.py`
+- `nexus/cybergym/adaptive_routing.py`
+- `nexus/cybergym/speciation.py`
+- `nexus/cybergym/compression.py`
+- `nexus/cybergym/context_expansion.py`
+- `nexus/cybergym/trainer.py`
+- `configs/nexus_coder_423b.yaml`
+- `configs/code_corpus.yaml`
+- `ADVERTISEMENT.txt`
+
+---
+
 ## v0.3.0 - 2026-08-16
 
 ### 🚀 MASSIVE UPGRADE - Architecture + 4× Skills + 4× Tools + Massive Data

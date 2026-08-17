@@ -1,8 +1,8 @@
 """Shell Execution Tool - chạy bash commands (sandboxed)."""
 from __future__ import annotations
 
+import os
 import subprocess
-import shlex
 from typing import Dict, Any, List
 
 from .base import Tool, ToolResult, ToolContext, ToolCategory, ToolSafety
@@ -61,10 +61,8 @@ class ShellExecTool(Tool):
         cwd = args.get("cwd") or context.working_dir
         timeout = args.get("timeout", context.timeout)
         extra_env = args.get("env", {})
-        
-        env = dict(os.environ.copy()) if False else None  # lazy
-        import os as _os
-        env = _os.environ.copy()
+
+        env = os.environ.copy()
         env.update(extra_env)
         env.update(context.env)
         

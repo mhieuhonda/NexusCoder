@@ -149,7 +149,7 @@ class Deduplicator:
             yield sample
         
         if seen > 0:
-            from .._logging_helpers import get_logger
+            from ...utils.logging import get_logger
             logger = get_logger()
             logger.info(f"Dedup: {seen} → {seen - deduped} (removed {deduped})")
     

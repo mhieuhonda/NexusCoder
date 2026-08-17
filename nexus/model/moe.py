@@ -48,14 +48,50 @@ def load_balancing_loss_func(
     top_k: int,
     attention_mask: Optional[torch.Tensor] = None,
 ) -> torch.Tensor:
-    """Tính auxiliary loss cho load balancing (Switch Transformer)."""
-    if gate_logits is None:
-        return torch.tensor(0.0, device=gate_logits.device if gate_logits is not None else "cpu")
+    """Tính auxiliary loss cho load balancing (Switch Transformer).
 
+    attention_mask có thể là:
+      - None:                        tất cả token đều valid
+      - 2D bool [B, T]:              True = valid token
+      - 2D int  [B, T]:             1 = valid, 0 = padding
+      - 4D float [B, 1, 1, T]:      0 = valid, large_negative = padding
+    """
+    if gate_logits is None:
+        # gate_logits is None → cannot compute; return 0 on proper device
+        return torch.tensor(0.0)
+
+    # Normalize attention_mask → 1D bool [N_valid]
     if attention_mask is None:
         tokens_per_expert = gate_logits.shape[0] * gate_logits.shape[1]
+        # 2D shape: [B, T] already flattened by caller, so gate_logits.shape[0] is N
+        if gate_logits.dim() == 2:
+            tokens_per_expert = gate_logits.shape[0]
     else:
-        tokens_per_expert = attention_mask.sum().item()
+        # Convert 4D mask to 2D bool
+        if attention_mask.dim() == 4:
+            # [B, 1, 1, T] with 0 / -inf values
+            mask_2d = attention_mask.squeeze(1).squeeze(1)  # [B, T]
+            mask_bool = mask_2d > -1e9
+        elif attention_mask.dim() == 3:
+            mask_bool = attention_mask.squeeze(1) > 0
+        elif attention_mask.dim() == 2:
+            if attention_mask.dtype == torch.bool:
+                mask_bool = attention_mask
+            else:
+                # 0/1 or 0/-inf
+                if attention_mask.dtype.is_floating_point:
+                    mask_bool = attention_mask > -1e9
+                else:
+                    mask_bool = attention_mask > 0
+        else:
+            mask_bool = None
+
+        if mask_bool is None:
+            tokens_per_expert = gate_logits.shape[0]
+        else:
+            tokens_per_expert = mask_bool.sum().item()
+            if tokens_per_expert < 1:
+                tokens_per_expert = gate_logits.shape[0]
 
     routing_weights = F.softmax(gate_logits, dim=-1)
     _, selected_experts = torch.topk(routing_weights, top_k, dim=-1)
@@ -68,7 +104,7 @@ def load_balancing_loss_func(
 
     aux_loss = (
         num_experts * (tokens_per_expert_normalized * router_prob_per_expert).sum()
-    ) / tokens_per_expert
+    ) / max(tokens_per_expert, 1)
 
     return aux_loss
 

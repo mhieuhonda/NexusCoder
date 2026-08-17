@@ -28,24 +28,29 @@ class SOQuestion:
     answers: List[Dict] = None
 
 
+# v0.4 fix: expose at module level (was inside the class, broke `from ... import CURATED_TAGS`)
+CURATED_TAGS = [
+    "python", "javascript", "java", "c#", "php", "android",
+    "html", "jquery", "c++", "css", "ios", "mysql",
+    "sql", "node.js", "reactjs", "ruby-on-rails", "vue.js",
+    "typescript", "docker", "git", "go", "rust",
+    "machine-learning", "deep-learning", "pytorch", "tensorflow",
+    "pandas", "numpy", "regex", "algorithm", "data-structures",
+    "unit-testing", "debugging", "performance", "security",
+]
+
+
 class StackOverflowCollector:
     """Collect Q&A từ StackOverflow API.
-    
+
     StackOverflow API: 10000 requests/day without key, 50000 with key.
     Rate limit: 30 requests/second.
     """
-    
+
     BASE_URL = "https://api.stackexchange.com/2.3"
-    
-    CURATED_TAGS = [
-        "python", "javascript", "java", "c#", "php", "android",
-        "html", "jquery", "c++", "css", "ios", "mysql",
-        "sql", "node.js", "reactjs", "ruby-on-rails", "vue.js",
-        "typescript", "docker", "git", "go", "rust",
-        "machine-learning", "deep-learning", "pytorch", "tensorflow",
-        "pandas", "numpy", "regex", "algorithm", "data-structures",
-        "unit-testing", "debugging", "performance", "security",
-    ]
+
+    # Backward-compat alias (deprecation: prefer module-level CURATED_TAGS)
+    CURATED_TAGS = CURATED_TAGS
     
     def __init__(
         self,

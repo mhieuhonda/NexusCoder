@@ -14,16 +14,20 @@ class LoRAConfig:
     rank: int = 8              # LoRA rank (r)
     alpha: int = 16            # LoRA scaling factor (α)
     dropout: float = 0.0       # LoRA dropout
+    # v0.4 fix: thay "gate_proj"+"up_proj" → "gate_up_proj" vì v0.3 SwiGLU(parallel=True)
+    # fuses gate+up thành 1 matmul. Nếu không có gate_up_proj, có thể truyền cả 3.
     target_modules: List[str] = field(default_factory=lambda: [
         "q_proj", "k_proj", "v_proj", "o_proj",  # attention
-        "gate_proj", "up_proj", "down_proj",      # FFN
+        "gate_up_proj", "down_proj",                  # FFN (MLP-parallel)
     ])
     bias: str = "none"         # "none", "all", "lora_only"
     modules_to_save: List[str] = field(default_factory=list)  # Full-finetune these
     fan_in_fan_out: bool = False
-    
+
     @property
     def scaling(self) -> float:
+        if self.rank <= 0:
+            return 0.0
         return self.alpha / self.rank
 
 

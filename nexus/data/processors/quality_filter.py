@@ -92,10 +92,11 @@ class QualityFilter:
         has_special = bool(re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", text))
         
         # Repetition: check if any 10-word sequence repeats more than 3 times
+        # v0.4 fix: range(word_count - 9) so the last window (words[-10:]) is included.
         repetition_score = 0.0
         if word_count > 30:
             sequences = {}
-            for i in range(word_count - 10):
+            for i in range(word_count - 9):
                 seq = " ".join(words[i:i+10]).lower()
                 sequences[seq] = sequences.get(seq, 0) + 1
             max_repeat = max(sequences.values()) if sequences else 0

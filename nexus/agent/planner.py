@@ -40,16 +40,23 @@ class Plan:
         self.tasks.append(task)
     
     def get_next_task(self) -> Optional[Task]:
-        """Get next pending task whose dependencies are met."""
+        """Get next pending task whose dependencies are met.
+
+        v0.4 fix: out-of-range dep IDs are treated as UNMET (not silently ignored).
+        """
         for task in self.tasks:
             if task.status != TaskStatus.PENDING:
                 continue
             # Check dependencies
-            deps_met = all(
-                self.tasks[dep_id].status in (TaskStatus.COMPLETED, TaskStatus.SKIPPED)
-                for dep_id in task.depends_on
-                if dep_id < len(self.tasks)
-            )
+            deps_met = True
+            for dep_id in task.depends_on:
+                if dep_id < 0 or dep_id >= len(self.tasks):
+                    # Invalid dep ID → mark unmet, do NOT silently pass
+                    deps_met = False
+                    break
+                if self.tasks[dep_id].status not in (TaskStatus.COMPLETED, TaskStatus.SKIPPED):
+                    deps_met = False
+                    break
             if deps_met:
                 return task
         return None

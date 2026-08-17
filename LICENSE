@@ -1,21 +1,193 @@
-MIT License
+NexusCoder Attribution License v1.0 (NAL-1.0)
+==============================================
+Copyright (c) 2026 Hieu Louis (https://github.com/mhieuhonda)
 
-Copyright (c) 2026 Hieu Louis
+This license applies to the Nexus Coder project, including all source code,
+configuration files, documentation, model architecture, training methodology,
+and associated materials contained in this repository.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+By exercising any rights granted by this license, you accept and agree to be
+bound by its terms and conditions.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+----------------------------------------------------------------------
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. DEFINITIONS
+
+   "Project" means the Nexus Coder project, including all software, model
+   architecture code, training scripts, configurations, documentation, and
+   data pipeline code contained in this repository.
+
+   "Author" means Hieu Louis, the original creator of the Project
+   (GitHub: https://github.com/mhieuhonda).
+
+   "Derivative Work" means any work, model, software, or artifact that is
+   based on, derived from, or incorporates any part of the Project, including
+   but not limited to:
+     - Fine-tuned or modified versions of the Project
+     - Models trained using the Project's architecture or methodology
+     - Software that redistributes, modifies, or builds upon the Project
+     - Repackaged versions of the Project, in whole or in part
+
+   "Attribution" means clearly and prominently crediting the Author as
+   the original creator of the Project, in the manner specified in
+   Section 3 below.
+
+   "You" or "Your" means any person or entity exercising rights under
+   this license.
+
+----------------------------------------------------------------------
+
+2. GRANTED RIGHTS
+
+   Subject to the terms of this license, the Author grants You a worldwide,
+   royalty-free, non-exclusive, perpetual license to:
+
+   (a) Use, copy, modify, merge, publish, distribute, sublicense, and/or
+       sell copies of the Project, in whole or in part.
+
+   (b) Train, fine-tune, distill, prune, quantize, or otherwise create
+       Derivative Works based on the Project, for any commercial or
+       non-commercial purpose.
+
+   (c) Use the Project's architecture, methodology, training pipeline,
+       code corpus, or any other component to build Your own products,
+       services, research, or any other work.
+
+   (d) Distribute Derivative Works under any license You choose, provided
+       that You comply with the Attribution requirement (Section 3).
+
+----------------------------------------------------------------------
+
+3. ATTRIBUTION REQUIREMENT (MANDATORY)
+
+   You MUST attribute the Author (Hieu Louis) as the original creator of
+   the Project in all of the following circumstances:
+
+   (a) REDISTRIBUTION: When You distribute, publish, or make available
+       the Project (or any Derivative Work), You must include:
+         - The Author's name: "Hieu Louis"
+         - A link to the original project:
+           https://github.com/mhieuhonda/NexusCoder
+         - A notice that the work is based on or derived from the Project
+
+   (b) MODELS TRAINED USING THE PROJECT: If You train, fine-tune, or
+       otherwise create a model using the Project's architecture,
+       methodology, training pipeline, code, or any other component:
+         - You MUST include in the model card, README, documentation,
+           or any other accompanying material:
+             "Built using Nexus Coder by Hieu Louis
+              (https://github.com/mhieuhonda/NexusCoder)"
+         - This attribution MUST be visible to end users of the model,
+           including in API responses, UI, model cards, or download pages
+           where reasonable and customary.
+
+   (c) PRODUCTS & SERVICES: If You build a product, service, or application
+       that uses the Project or any Derivative Work:
+         - You MUST include in the product's documentation, About page,
+           or credits section: "Powered by Nexus Coder by Hieu Louis"
+         - If the product has an "About" or "Credits" UI element,
+           the attribution must appear there.
+
+   (d) RESEARCH PUBLICATIONS: If You publish research that used the
+       Project, You MUST cite:
+         Hieu Louis. "Nexus Coder: AI Code & Security Engine (CyberForge
+         Edition)." https://github.com/mhieuhonda/NexusCoder, 2026.
+
+   (e) FORKED REPOSITORIES: If You fork the Project on GitHub or any
+       similar platform:
+         - You MUST keep the attribution in the README and LICENSE
+         - You MUST NOT claim to be the original author
+         - You MAY add Your own authorship for Your own contributions
+
+----------------------------------------------------------------------
+
+4. ATTRIBUTION FORMAT
+
+   The attribution must be clear, visible, and accessible to end users.
+   Acceptable formats include (but are not limited to):
+
+   Short form (for UI, API responses, footers):
+       "Powered by Nexus Coder by Hieu Louis"
+
+   Medium form (for README, docs):
+       "Built using Nexus Coder by Hieu Louis
+        (https://github.com/mhieuhonda/NexusCoder)"
+
+   Full form (for model cards, academic publications):
+       "This work is based on Nexus Coder (v0.4.0, CyberForge Edition),
+        created by Hieu Louis (https://github.com/mhieuhonda/NexusCoder)
+        and licensed under NAL-1.0."
+
+----------------------------------------------------------------------
+
+5. NO WARRANTIES
+
+   The Project is provided "AS IS", without warranty of any kind, express
+   or implied, including but not limited to the warranties of
+   merchantability, fitness for a particular purpose, and non-infringement.
+   In no event shall the Author be liable for any claim, damages, or
+   other liability, whether in an action of contract, tort, or otherwise,
+   arising from, out of, or in connection with the Project or the use or
+   other dealings in the Project.
+
+----------------------------------------------------------------------
+
+6. NO ENDORSEMENT
+
+   You MUST NOT use the Author's name, the Project's name, or any
+   associated trademarks to imply endorsement of Your product, service,
+   or research without prior written permission from the Author.
+
+----------------------------------------------------------------------
+
+7. NON-INTERFERENCE WITH ATTRIBUTION
+
+   You MUST NOT remove, obscure, or alter any attribution notices
+   included in the Project. You MUST NOT implement technical measures
+   (e.g., watermark removal, fine-tuning that erases embedded authorship
+   information) that would have the effect of obscuring or removing the
+   Author's attribution.
+
+----------------------------------------------------------------------
+
+8. TERMINATION
+
+   Your rights under this license terminate automatically if You fail to
+   comply with any of its terms, especially the Attribution requirement
+   (Section 3). Upon termination, You must cease all use and distribution
+   of the Project and any Derivative Works, and destroy all copies in
+   Your possession or control.
+
+----------------------------------------------------------------------
+
+9. VERSIONING
+
+   This is version 1.0 of the NexusCoder Attribution License ("NAL-1.0").
+   Future versions of the license, if any, will be designated by incrementing
+   the version number. The Author may release updated versions of this
+   license to address new use cases or clarify existing terms, but such
+   updates will not retroactively change the terms under which You received
+   the Project unless You explicitly choose to adopt the new version.
+
+----------------------------------------------------------------------
+
+10. ENTIRE AGREEMENT
+
+    This license constitutes the entire agreement between You and the
+    Author with respect to the Project. If any provision of this license
+    is held to be unenforceable, the remaining provisions shall remain
+    in full force and effect.
+
+----------------------------------------------------------------------
+
+For questions or to request alternative licensing terms, contact:
+
+    Hieu Louis
+    GitHub: https://github.com/mhieuhonda
+    Year: 2026
+
+----------------------------------------------------------------------
+
+By using, copying, modifying, distributing, or training on the Project,
+You acknowledge that You have read, understood, and agree to be bound by
+the terms of this NexusCoder Attribution License v1.0.

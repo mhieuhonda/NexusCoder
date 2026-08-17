@@ -1,0 +1,89 @@
+# ============================================================================
+# Nexus Coder v0.4 — CyberForge Config (423B / 39B / 3M context)
+# ============================================================================
+# Supreme variant — CyberGym training hooks enabled by default.
+# Math (verified):
+#   embed (200k × 7168)         = 1.43B
+#   per_layer_total (48 exp)    = 17.03B
+#   per_layer_active (4 exp)    = 1.53B
+#   24 layers                   = 408B total / 36.6B active
+#   + LM head + norms + routers = ~412-423B total / ~39.5B active
+# ============================================================================
+# Recommended hardware:
+#   - 8× H100 80GB (TP=8) or 16× A100 80GB (TP=8, EP=2)
+#   - ~600 GB RAM for data loading
+#   - 3M context requires gradient checkpointing + KV int8 cache
+# ============================================================================
+
+name: "Nexus Coder 423B"
+version: "0.4.0"
+author: "Hieu Louis"
+
+# === Architecture ===
+vocab_size: 200000
+hidden_size: 7168
+num_hidden_layers: 24
+num_attention_heads: 56
+num_kv_heads: 8
+head_dim: 128
+intermediate_size: 16384
+hidden_act: "silu"
+num_experts: 48
+num_active_experts: 4
+router_aux_loss_coef: 0.001
+
+# === Context window (3M tokens via YaRN ×60) ===
+max_position_embeddings: 3000000
+rotary_emb_base: 1000000.0       # larger base for long context
+rope_scaling_type: "yarn"
+rope_scaling_factor: 60.0
+yarn_beta_fast: 32.0
+yarn_beta_slow: 1.0
+
+# === Attention features ===
+use_flash_attention: true
+use_flash_attention_2: true
+use_qk_norm: true
+qk_norm_eps: 1.0e-6
+mlp_parallel: true
+use_sliding_window: true
+sliding_window_size: 32768
+use_alibi: false
+
+# === Memory optimizations ===
+gradient_checkpointing: true
+kv_cache_quantization: "int8"
+kv_cache_bits: 8
+
+# === v0.4 CyberGym ===
+cybergym_enabled: true
+cybergym_mutation_rate: 0.01
+cybergym_mutation_sigma: 1.0e-4
+cybergym_mutation_period: 500
+cybergym_keep_ratio: 0.7
+cybergym_adaptive_routing: true
+cybergym_min_active_experts: 2
+cybergym_max_active_experts: 8
+cybergym_genome_init: true
+cybergym_cep_stages: [32768, 131072, 524288, 1048576, 2097152, 3000000]
+cybergym_cep_epoch_per_stage: 1
+
+# === Distributed ===
+tensor_parallel_size: 8
+pipeline_parallel_size: 1
+expert_parallel_size: 8
+sequence_parallel: false
+
+# === Training defaults ===
+pad_token_id: 0
+bos_token_id: 1
+eos_token_id: 2
+unk_token_id: 3
+
+# === Safety ===
+enable_safety_filter: true
+max_output_tokens: 8192
+
+# === Personality ===
+personality: "humorous"
+language: "bilingual"

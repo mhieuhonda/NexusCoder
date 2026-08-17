@@ -1,0 +1,5346 @@
+# ============================================================================
+# Nexus Coder v0.4 — Code Corpus (curated GitHub repos)
+# ============================================================================
+# Curated list of high-quality open-source GitHub repositories used as
+# training data for the CyberForge training pipeline (Code Genome Init +
+# Expert Speciation Curriculum).
+#
+# Each repo: (owner, name, languages, max_files)
+# Languages: list of primary languages (e.g. ["python", "c"])
+# max_files: cap on number of files to extract from this repo
+#
+# Author: Hieu Louis (2026)
+# ============================================================================
+
+version: 0.4.0
+total_repos: 1030
+last_updated: '2026-08-17'
+categories:
+  python_core:
+    description: Core Python language, stdlib, tooling
+    repos:
+    - owner: python
+      name: cpython
+      languages:
+      - python
+      - c
+      max_files: 5000
+    - owner: pypa
+      name: pip
+      languages:
+      - python
+      max_files: 2000
+    - owner: pypa
+      name: setuptools
+      languages:
+      - python
+      max_files: 1500
+    - owner: pypa
+      name: wheel
+      languages:
+      - python
+      max_files: 500
+    - owner: pypa
+      name: build
+      languages:
+      - python
+      max_files: 500
+    - owner: pypa
+      name: virtualenv
+      languages:
+      - python
+      max_files: 1500
+    - owner: pypa
+      name: packaging
+      languages:
+      - python
+      max_files: 500
+    - owner: python
+      name: peps
+      languages:
+      - python
+      max_files: 1000
+    - owner: python
+      name: typeshed
+      languages:
+      - python
+      max_files: 5000
+    - owner: python
+      name: mypy
+      languages:
+      - python
+      max_files: 3000
+    - owner: python
+      name: pyperformance
+      languages:
+      - python
+      max_files: 500
+    - owner: psf
+      name: requests
+      languages:
+      - python
+      max_files: 1000
+    - owner: psf
+      name: black
+      languages:
+      - python
+      max_files: 2000
+    - owner: pycqa
+      name: flake8
+      languages:
+      - python
+      max_files: 1000
+    - owner: pycqa
+      name: isort
+      languages:
+      - python
+      max_files: 500
+    - owner: pycqa
+      name: pytest
+      languages:
+      - python
+      max_files: 3000
+    - owner: pycqa
+      name: pylint
+      languages:
+      - python
+      max_files: 3000
+    - owner: pycqa
+      name: bandit
+      languages:
+      - python
+      max_files: 500
+    - owner: pycqa
+      name: coveragepy
+      languages:
+      - python
+      max_files: 2000
+    - owner: pycqa
+      name: astroid
+      languages:
+      - python
+      max_files: 1500
+    - owner: python-attrs
+      name: attrs
+      languages:
+      - python
+      max_files: 800
+    - owner: pydantic
+      name: pydantic
+      languages:
+      - python
+      max_files: 2000
+    - owner: encode
+      name: httpx
+      languages:
+      - python
+      max_files: 1500
+    - owner: encode
+      name: starlette
+      languages:
+      - python
+      max_files: 1000
+    - owner: encode
+      name: uvicorn
+      languages:
+      - python
+      max_files: 800
+  python_web:
+    description: Python web frameworks (Django, Flask, ...)
+    repos:
+    - owner: django
+      name: django
+      languages:
+      - python
+      max_files: 5000
+    - owner: pallets
+      name: flask
+      languages:
+      - python
+      max_files: 2000
+    - owner: pallets
+      name: werkzeug
+      languages:
+      - python
+      max_files: 1000
+    - owner: pallets
+      name: jinja
+      languages:
+      - python
+      max_files: 1000
+    - owner: pallets
+      name: click
+      languages:
+      - python
+      max_files: 800
+    - owner: pallets
+      name: itsdangerous
+      languages:
+      - python
+      max_files: 300
+    - owner: pallets
+      name: markupsafe
+      languages:
+      - python
+      - c
+      max_files: 500
+    - owner: tiangolo
+      name: fastapi
+      languages:
+      - python
+      max_files: 2000
+    - owner: sanic-org
+      name: sanic
+      languages:
+      - python
+      max_files: 2000
+    - owner: tornadoweb
+      name: tornado
+      languages:
+      - python
+      max_files: 3000
+    - owner: pyramid
+      name: pyramid
+      languages:
+      - python
+      max_files: 1500
+    - owner: bottlepy
+      name: bottle
+      languages:
+      - python
+      max_files: 800
+    - owner: falconry
+      name: falcon
+      languages:
+      - python
+      max_files: 1500
+    - owner: django
+      name: djangorestframework
+      languages:
+      - python
+      max_files: 3000
+    - owner: wagtail
+      name: wagtail
+      languages:
+      - python
+      max_files: 5000
+    - owner: mezzanine
+      name: mezzanine
+      languages:
+      - python
+      max_files: 2000
+    - owner: viewflow
+      name: viewflow
+      languages:
+      - python
+      max_files: 1000
+    - owner: python-restx
+      name: flask-restx
+      languages:
+      - python
+      max_files: 800
+    - owner: flask-admin
+      name: flask-admin
+      languages:
+      - python
+      max_files: 1000
+    - owner: flask-login
+      name: flask-login
+      languages:
+      - python
+      max_files: 500
+    - owner: flask-cors
+      name: flask-cors
+      languages:
+      - python
+      max_files: 300
+    - owner: marshmallow-code
+      name: marshmallow
+      languages:
+      - python
+      max_files: 2000
+    - owner: sloria
+      name: textblob
+      languages:
+      - python
+      max_files: 800
+    - owner: zopefoundation
+      name: zope
+      languages:
+      - python
+      max_files: 1500
+    - owner: elastic
+      name: elasticsearch-py
+      languages:
+      - python
+      max_files: 1000
+    - owner: andymccurdy
+      name: redis-py
+      languages:
+      - python
+      max_files: 1500
+    - owner: mongodb
+      name: mongo-python-driver
+      languages:
+      - python
+      max_files: 3000
+    - owner: sqlalchemy
+      name: sqlalchemy
+      languages:
+      - python
+      max_files: 5000
+    - owner: coleifer
+      name: peewee
+      languages:
+      - python
+      max_files: 1500
+    - owner: aws
+      name: chalice
+      languages:
+      - python
+      max_files: 1000
+    - owner: graphql-python
+      name: graphene
+      languages:
+      - python
+      max_files: 2000
+    - owner: graphql-python
+      name: graphql-core
+      languages:
+      - python
+      max_files: 1500
+    - owner: strawberry-graphql
+      name: strawberry
+      languages:
+      - python
+      max_files: 2000
+    - owner: ariadne
+      name: ariadne
+      languages:
+      - python
+      max_files: 1000
+    - owner: celery
+      name: celery
+      languages:
+      - python
+      max_files: 4000
+    - owner: celery
+      name: kombu
+      languages:
+      - python
+      max_files: 2000
+    - owner: celery
+      name: vine
+      languages:
+      - python
+      max_files: 500
+    - owner: python-rq
+      name: rq
+      languages:
+      - python
+      max_files: 1000
+    - owner: profx
+      name: rq
+      languages:
+      - python
+      max_files: 1000
+    - owner: apache
+      name: airflow
+      languages:
+      - python
+      max_files: 8000
+    - owner: spotify
+      name: luigi
+      languages:
+      - python
+      max_files: 2000
+    - owner: joblib
+      name: joblib
+      languages:
+      - python
+      max_files: 1500
+    - owner: jupyter
+      name: notebook
+      languages:
+      - python
+      max_files: 5000
+    - owner: jupyter
+      name: jupyterlab
+      languages:
+      - python
+      - typescript
+      max_files: 5000
+    - owner: jupyter
+      name: ipython
+      languages:
+      - python
+      max_files: 4000
+    - owner: jupyter
+      name: nbformat
+      languages:
+      - python
+      max_files: 500
+    - owner: jupyter
+      name: nbconvert
+      languages:
+      - python
+      max_files: 1500
+    - owner: jupyter-server
+      name: jupyter_server
+      languages:
+      - python
+      max_files: 1500
+    - owner: ipython
+      name: ipykernel
+      languages:
+      - python
+      max_files: 500
+    - owner: jupyter
+      name: qtconsole
+      languages:
+      - python
+      max_files: 800
+    - owner: jupyter-widgets
+      name: ipywidgets
+      languages:
+      - python
+      max_files: 1500
+  python_data:
+    description: Python data science (pandas, numpy, polars)
+    repos:
+    - owner: pandas-dev
+      name: pandas
+      languages:
+      - python
+      - c
+      max_files: 8000
+    - owner: numpy
+      name: numpy
+      languages:
+      - python
+      - c
+      max_files: 5000
+    - owner: scipy
+      name: scipy
+      languages:
+      - python
+      - c
+      - fortran
+      max_files: 5000
+    - owner: pola-rs
+      name: polars
+      languages:
+      - python
+      - rust
+      max_files: 3000
+    - owner: dask
+      name: dask
+      languages:
+      - python
+      max_files: 5000
+    - owner: apache
+      name: arrow
+      languages:
+      - python
+      - c++
+      max_files: 8000
+    - owner: modin-project
+      name: modin
+      languages:
+      - python
+      max_files: 2000
+    - owner: vaexio
+      name: vaex
+      languages:
+      - python
+      max_files: 2000
+    - owner: pydata
+      name: xarray
+      languages:
+      - python
+      max_files: 3000
+    - owner: numba
+      name: numba
+      languages:
+      - python
+      - c
+      max_files: 4000
+    - owner: cupy
+      name: cupy
+      languages:
+      - python
+      - c++
+      max_files: 4000
+    - owner: h5py
+      name: h5py
+      languages:
+      - python
+      - c
+      max_files: 2000
+    - owner: pytables
+      name: pytables
+      languages:
+      - python
+      - c
+      max_files: 1500
+    - owner: zarr-developers
+      name: zarr
+      languages:
+      - python
+      max_files: 1500
+    - owner: intake
+      name: intake
+      languages:
+      - python
+      max_files: 800
+    - owner: glue-viz
+      name: glue
+      languages:
+      - python
+      max_files: 1500
+    - owner: google
+      name: jax
+      languages:
+      - python
+      max_files: 8000
+    - owner: arrayfire
+      name: arrayfire
+      languages:
+      - python
+      - c++
+      max_files: 1500
+    - owner: numexpr
+      name: numexpr
+      languages:
+      - python
+      - c
+      max_files: 800
+    - owner: bloomberg
+      name: bqplot
+      languages:
+      - python
+      max_files: 1000
+    - owner: bokeh
+      name: bokeh
+      languages:
+      - python
+      max_files: 5000
+    - owner: matplotlib
+      name: matplotlib
+      languages:
+      - python
+      max_files: 8000
+    - owner: plotly
+      name: plotly.py
+      languages:
+      - python
+      max_files: 5000
+    - owner: altair-viz
+      name: altair
+      languages:
+      - python
+      max_files: 2000
+    - owner: seaborn
+      name: seaborn
+      languages:
+      - python
+      max_files: 2000
+    - owner: pyvista
+      name: pyvista
+      languages:
+      - python
+      max_files: 2000
+    - owner: datashader
+      name: datashader
+      languages:
+      - python
+      max_files: 1500
+    - owner: holoviz
+      name: holoviews
+      languages:
+      - python
+      max_files: 2500
+    - owner: panel
+      name: panel
+      languages:
+      - python
+      max_files: 2000
+    - owner: vega
+      name: vega-lite
+      languages:
+      - python
+      max_files: 1000
+  python_ml:
+    description: Python ML (scikit-learn, xgboost, ...)
+    repos:
+    - owner: scikit-learn
+      name: scikit-learn
+      languages:
+      - python
+      - c
+      max_files: 10000
+    - owner: dmlc
+      name: xgboost
+      languages:
+      - python
+      - c++
+      max_files: 3000
+    - owner: microsoft
+      name: LightGBM
+      languages:
+      - python
+      - c++
+      max_files: 2500
+    - owner: catboost
+      name: catboost
+      languages:
+      - python
+      - c++
+      max_files: 3000
+    - owner: scikit-learn-contrib
+      name: imbalanced-learn
+      languages:
+      - python
+      max_files: 1500
+    - owner: scikit-learn-contrib
+      name: category-encoders
+      languages:
+      - python
+      max_files: 1000
+    - owner: scikit-learn-contrib
+      name: hmmlearn
+      languages:
+      - python
+      max_files: 800
+    - owner: scikit-learn-contrib
+      name: metric-learn
+      languages:
+      - python
+      max_files: 800
+    - owner: scikit-learn-contrib
+      name: scikit-learn-extra
+      languages:
+      - python
+      max_files: 1000
+    - owner: scikit-optimize
+      name: scikit-optimize
+      languages:
+      - python
+      max_files: 1000
+    - owner: hyperopt
+      name: hyperopt
+      languages:
+      - python
+      max_files: 1000
+    - owner: optuna
+      name: optuna
+      languages:
+      - python
+      max_files: 3000
+    - owner: ray-project
+      name: ray
+      languages:
+      - python
+      - c++
+      max_files: 8000
+    - owner: interpretml
+      name: interpret
+      languages:
+      - python
+      max_files: 1500
+    - owner: shap
+      name: shap
+      languages:
+      - python
+      - c++
+      max_files: 2000
+    - owner: lime-ml
+      name: lime
+      languages:
+      - python
+      max_files: 800
+    - owner: pycaret
+      name: pycaret
+      languages:
+      - python
+      max_files: 2500
+    - owner: alibaba
+      name: EasyNLP
+      languages:
+      - python
+      max_files: 2000
+    - owner: PyTorchLightning
+      name: pytorch-lightning
+      languages:
+      - python
+      max_files: 4000
+    - owner: PyTorchLightning
+      name: lightning-flash
+      languages:
+      - python
+      max_files: 1500
+    - owner: huggingface
+      name: accelerate
+      languages:
+      - python
+      max_files: 2000
+    - owner: huggingface
+      name: tokenizers
+      languages:
+      - python
+      - rust
+      max_files: 2000
+    - owner: huggingface
+      name: datasets
+      languages:
+      - python
+      max_files: 3000
+    - owner: huggingface
+      name: evaluate
+      languages:
+      - python
+      max_files: 800
+    - owner: huggingface
+      name: peft
+      languages:
+      - python
+      max_files: 1000
+    - owner: huggingface
+      name: transformers
+      languages:
+      - python
+      max_files: 12000
+    - owner: explosion
+      name: spaCy
+      languages:
+      - python
+      - cython
+      max_files: 8000
+    - owner: explosion
+      name: thinc
+      languages:
+      - python
+      - cython
+      max_files: 2000
+    - owner: explosion
+      name: cymem
+      languages:
+      - python
+      - c
+      max_files: 300
+    - owner: explosion
+      name: preshed
+      languages:
+      - python
+      - c
+      max_files: 300
+    - owner: explosion
+      name: srsly
+      languages:
+      - python
+      - c
+      max_files: 300
+    - owner: explosion
+      name: murmurhash
+      languages:
+      - python
+      - c
+      max_files: 300
+    - owner: explosion
+      name: catalogue
+      languages:
+      - python
+      max_files: 200
+    - owner: explosion
+      name: confection
+      languages:
+      - python
+      max_files: 200
+    - owner: nltk
+      name: nltk
+      languages:
+      - python
+      max_files: 3000
+    - owner: RasaHQ
+      name: rasa
+      languages:
+      - python
+      max_files: 5000
+    - owner: RasaHQ
+      name: rasa-sdk
+      languages:
+      - python
+      max_files: 800
+    - owner: cltk
+      name: cltk
+      languages:
+      - python
+      max_files: 1500
+    - owner: stanfordnlp
+      name: stanza
+      languages:
+      - python
+      max_files: 2500
+    - owner: stanfordnlp
+      name: CoreNLP
+      languages:
+      - java
+      max_files: 3000
+    - owner: allenai
+      name: allennlp
+      languages:
+      - python
+      max_files: 4000
+    - owner: allenai
+      name: allennlp-models
+      languages:
+      - python
+      max_files: 1500
+    - owner: facebookresearch
+      name: fairseq
+      languages:
+      - python
+      max_files: 5000
+    - owner: facebookresearch
+      name: ParlAI
+      languages:
+      - python
+      max_files: 3000
+    - owner: facebookresearch
+      name: DrQA
+      languages:
+      - python
+      max_files: 1000
+    - owner: facebookresearch
+      name: fastText
+      languages:
+      - python
+      - c++
+      max_files: 2500
+    - owner: facebookresearch
+      name: LASER
+      languages:
+      - python
+      max_files: 1000
+    - owner: facebookresearch
+      name: XLM
+      languages:
+      - python
+      max_files: 1500
+    - owner: facebookresearch
+      name: UnsupervisedMT
+      languages:
+      - python
+      max_files: 800
+    - owner: facebookresearch
+      name: MUSE
+      languages:
+      - python
+      max_files: 1000
+    - owner: google-research
+      name: bert
+      languages:
+      - python
+      max_files: 1000
+    - owner: google-research
+      name: albert
+      languages:
+      - python
+      max_files: 500
+    - owner: google-research
+      name: electra
+      languages:
+      - python
+      max_files: 500
+    - owner: google-research
+      name: t5
+      languages:
+      - python
+      max_files: 1500
+    - owner: google-research
+      name: vision_transformer
+      languages:
+      - python
+      max_files: 500
+    - owner: google-research
+      name: scenic
+      languages:
+      - python
+      max_files: 1000
+    - owner: openai
+      name: gpt-2
+      languages:
+      - python
+      max_files: 1500
+    - owner: openai
+      name: whisper
+      languages:
+      - python
+      max_files: 1000
+    - owner: openai
+      name: tiktoken
+      languages:
+      - python
+      - rust
+      max_files: 800
+    - owner: openai
+      name: evals
+      languages:
+      - python
+      max_files: 1500
+    - owner: openai
+      name: openai-python
+      languages:
+      - python
+      max_files: 1500
+    - owner: microsoft
+      name: DeepSpeed
+      languages:
+      - python
+      - c++
+      max_files: 3000
+    - owner: microsoft
+      name: Megatron-DeepSpeed
+      languages:
+      - python
+      max_files: 2000
+    - owner: microsoft
+      name: DeBERTa
+      languages:
+      - python
+      max_files: 1000
+    - owner: microsoft
+      name: unilm
+      languages:
+      - python
+      max_files: 2000
+    - owner: microsoft
+      name: nni
+      languages:
+      - python
+      max_files: 3000
+    - owner: microsoft
+      name: CodeBERT
+      languages:
+      - python
+      max_files: 500
+    - owner: microsoft
+      name: graphcodebert
+      languages:
+      - python
+      max_files: 500
+    - owner: EleutherAI
+      name: gpt-neo
+      languages:
+      - python
+      max_files: 2000
+    - owner: EleutherAI
+      name: gpt-j
+      languages:
+      - python
+      max_files: 1500
+    - owner: EleutherAI
+      name: gpt-neox
+      languages:
+      - python
+      max_files: 2500
+    - owner: EleutherAI
+      name: lm-evaluation-harness
+      languages:
+      - python
+      max_files: 1500
+    - owner: bigscience-workshop
+      name: t-zero
+      languages:
+      - python
+      max_files: 1000
+    - owner: bigscience-workshop
+      name: data_tooling
+      languages:
+      - python
+      max_files: 800
+  python_dl:
+    description: Python deep learning (torch, tf, jax)
+    repos:
+    - owner: pytorch
+      name: pytorch
+      languages:
+      - python
+      - c++
+      max_files: 15000
+    - owner: pytorch
+      name: vision
+      languages:
+      - python
+      max_files: 3000
+    - owner: pytorch
+      name: audio
+      languages:
+      - python
+      - c++
+      max_files: 2000
+    - owner: pytorch
+      name: text
+      languages:
+      - python
+      max_files: 2000
+    - owner: pytorch
+      name: serve
+      languages:
+      - python
+      max_files: 1500
+    - owner: pytorch
+      name: ignite
+      languages:
+      - python
+      max_files: 1500
+    - owner: pytorch
+      name: captum
+      languages:
+      - python
+      max_files: 1500
+    - owner: pytorch
+      name: fairseq
+      languages:
+      - python
+      max_files: 4000
+    - owner: pytorch
+      name: examples
+      languages:
+      - python
+      max_files: 2000
+    - owner: pytorch
+      name: xla
+      languages:
+      - python
+      - c++
+      max_files: 2000
+    - owner: tensorflow
+      name: tensorflow
+      languages:
+      - python
+      - c++
+      max_files: 15000
+    - owner: tensorflow
+      name: tensorboard
+      languages:
+      - python
+      max_files: 3000
+    - owner: tensorflow
+      name: datasets
+      languages:
+      - python
+      max_files: 2000
+    - owner: tensorflow
+      name: agents
+      languages:
+      - python
+      max_files: 1500
+    - owner: tensorflow
+      name: probability
+      languages:
+      - python
+      max_files: 2000
+    - owner: tensorflow
+      name: addons
+      languages:
+      - python
+      - c++
+      max_files: 1500
+    - owner: tensorflow
+      name: models
+      languages:
+      - python
+      max_files: 5000
+    - owner: keras-team
+      name: keras
+      languages:
+      - python
+      max_files: 5000
+    - owner: keras-team
+      name: keras-applications
+      languages:
+      - python
+      max_files: 1000
+    - owner: keras-team
+      name: keras-tuner
+      languages:
+      - python
+      max_files: 1500
+    - owner: keras-team
+      name: autokeras
+      languages:
+      - python
+      max_files: 2000
+    - owner: google
+      name: jax
+      languages:
+      - python
+      max_files: 8000
+    - owner: google
+      name: flax
+      languages:
+      - python
+      max_files: 2500
+    - owner: google
+      name: optax
+      languages:
+      - python
+      max_files: 1000
+    - owner: google
+      name: haiku
+      languages:
+      - python
+      max_files: 1000
+    - owner: microsoft
+      name: CNTK
+      languages:
+      - python
+      - c++
+      max_files: 3000
+    - owner: apple
+      name: mlx
+      languages:
+      - python
+      - c++
+      max_files: 2000
+    - owner: openai
+      name: CLIP
+      languages:
+      - python
+      max_files: 1000
+    - owner: openai
+      name: consistency_models
+      languages:
+      - python
+      max_files: 500
+    - owner: openai
+      name: improved-diffusion
+      languages:
+      - python
+      max_files: 800
+    - owner: openai
+      name: guided-diffusion
+      languages:
+      - python
+      max_files: 1000
+    - owner: CompVis
+      name: stable-diffusion
+      languages:
+      - python
+      max_files: 3000
+    - owner: CompVis
+      name: taming-transformers
+      languages:
+      - python
+      max_files: 1500
+    - owner: CompVis
+      name: latent-diffusion
+      languages:
+      - python
+      max_files: 1500
+    - owner: stabilityai
+      name: generative-models
+      languages:
+      - python
+      max_files: 2000
+    - owner: stabilityai
+      name: stable-diffusion-3
+      languages:
+      - python
+      max_files: 1500
+    - owner: huggingface
+      name: diffusers
+      languages:
+      - python
+      max_files: 4000
+    - owner: huggingface
+      name: safetensors
+      languages:
+      - python
+      - rust
+      max_files: 800
+    - owner: huggingface
+      name: trl
+      languages:
+      - python
+      max_files: 1500
+    - owner: huggingface
+      name: alignment-handbook
+      languages:
+      - python
+      max_files: 1000
+    - owner: huggingface
+      name: optimum
+      languages:
+      - python
+      max_files: 1500
+    - owner: huggingface
+      name: text-generation-inference
+      languages:
+      - python
+      - rust
+      max_files: 2500
+    - owner: facebookresearch
+      name: segment-anything
+      languages:
+      - python
+      max_files: 1500
+    - owner: facebookresearch
+      name: detectron2
+      languages:
+      - python
+      max_files: 4000
+    - owner: facebookresearch
+      name: pytorch3d
+      languages:
+      - python
+      max_files: 3000
+    - owner: facebookresearch
+      name: metaseq
+      languages:
+      - python
+      max_files: 2000
+    - owner: facebookresearch
+      name: xformers
+      languages:
+      - python
+      - cuda
+      max_files: 2000
+    - owner: facebookresearch
+      name: hydra
+      languages:
+      - python
+      max_files: 2000
+    - owner: facebookresearch
+      name: fvcore
+      languages:
+      - python
+      max_files: 1000
+    - owner: facebookresearch
+      name: slowfast
+      languages:
+      - python
+      max_files: 1500
+    - owner: facebookresearch
+      name: ClassyVision
+      languages:
+      - python
+      max_files: 2000
+    - owner: facebookresearch
+      name: dlrm
+      languages:
+      - python
+      max_files: 1000
+    - owner: facebookresearch
+      name: ReAgent
+      languages:
+      - python
+      max_files: 1500
+  python_tools:
+    description: Python tooling (black, mypy, ruff, pytest)
+    repos:
+    - owner: psf
+      name: black
+      languages:
+      - python
+      max_files: 2000
+    - owner: psf
+      name: requests
+      languages:
+      - python
+      max_files: 1500
+    - owner: psf
+      name: urllib3
+      languages:
+      - python
+      max_files: 1500
+    - owner: pycqa
+      name: pylint
+      languages:
+      - python
+      max_files: 3000
+    - owner: pycqa
+      name: flake8
+      languages:
+      - python
+      max_files: 1500
+    - owner: pycqa
+      name: isort
+      languages:
+      - python
+      max_files: 500
+    - owner: pycqa
+      name: bandit
+      languages:
+      - python
+      max_files: 800
+    - owner: pycqa
+      name: coveragepy
+      languages:
+      - python
+      max_files: 2000
+    - owner: astral-sh
+      name: ruff
+      languages:
+      - rust
+      max_files: 1500
+    - owner: astral-sh
+      name: uv
+      languages:
+      - rust
+      max_files: 1500
+    - owner: pre-commit
+      name: pre-commit
+      languages:
+      - python
+      max_files: 1000
+    - owner: pytest
+      name: pytest
+      languages:
+      - python
+      max_files: 3000
+    - owner: pytest-dev
+      name: pytest-cov
+      languages:
+      - python
+      max_files: 500
+    - owner: pytest-dev
+      name: pytest-asyncio
+      languages:
+      - python
+      max_files: 500
+    - owner: pytest-dev
+      name: pytest-xdist
+      languages:
+      - python
+      max_files: 800
+    - owner: pytest-dev
+      name: pytest-mock
+      languages:
+      - python
+      max_files: 500
+    - owner: pytest-dev
+      name: pytest-flask
+      languages:
+      - python
+      max_files: 400
+    - owner: pytest-dev
+      name: pytest-django
+      languages:
+      - python
+      max_files: 800
+    - owner: tox-dev
+      name: tox
+      languages:
+      - python
+      max_files: 1500
+    - owner: python-poetry
+      name: poetry
+      languages:
+      - python
+      max_files: 4000
+    - owner: pipx
+      name: pipx
+      languages:
+      - python
+      max_files: 800
+    - owner: pypa
+      name: twine
+      languages:
+      - python
+      max_files: 800
+    - owner: pypa
+      name: warehouse
+      languages:
+      - python
+      max_files: 5000
+    - owner: conda
+      name: conda
+      languages:
+      - python
+      max_files: 5000
+    - owner: conda
+      name: conda-build
+      languages:
+      - python
+      max_files: 2000
+    - owner: pyenv
+      name: pyenv
+      languages:
+      - shell
+      max_files: 800
+    - owner: asdf-vm
+      name: asdf
+      languages:
+      - shell
+      max_files: 500
+    - owner: spulec
+      name: moto
+      languages:
+      - python
+      max_files: 3000
+    - owner: getsentry
+      name: sentry-python
+      languages:
+      - python
+      max_files: 1500
+    - owner: open-telemetry
+      name: opentelemetry-python
+      languages:
+      - python
+      max_files: 2500
+  javascript_core:
+    description: JS/TS core (node, deno, v8, typescript)
+    repos:
+    - owner: nodejs
+      name: node
+      languages:
+      - javascript
+      - cpp
+      max_files: 8000
+    - owner: denoland
+      name: deno
+      languages:
+      - rust
+      - typescript
+      max_files: 5000
+    - owner: oven-sh
+      name: bun
+      languages:
+      - zig
+      - typescript
+      max_files: 3000
+    - owner: microsoft
+      name: TypeScript
+      languages:
+      - typescript
+      max_files: 10000
+    - owner: babel
+      name: babel
+      languages:
+      - javascript
+      max_files: 6000
+    - owner: eslint
+      name: eslint
+      languages:
+      - javascript
+      max_files: 5000
+    - owner: eslint
+      name: espree
+      languages:
+      - javascript
+      max_files: 1000
+    - owner: jquery
+      name: jquery
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: lodash
+      name: lodash
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: documentcloud
+      name: underscore
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: moment
+      name: moment
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: date-fns
+      name: date-fns
+      languages:
+      - typescript
+      max_files: 2000
+    - owner: axios
+      name: axios
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: ReactiveX
+      name: rxjs
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: immutable-js
+      name: immutable-js
+      languages:
+      - typescript
+      max_files: 2000
+    - owner: immerjs
+      name: immer
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: prettier
+      name: prettier
+      languages:
+      - typescript
+      max_files: 4000
+    - owner: webpack
+      name: webpack
+      languages:
+      - javascript
+      - typescript
+      max_files: 5000
+    - owner: webpack
+      name: webpack-cli
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: webpack
+      name: webpack-dev-server
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: evanw
+      name: esbuild
+      languages:
+      - go
+      - javascript
+      max_files: 1500
+    - owner: rollup
+      name: rollup
+      languages:
+      - javascript
+      - typescript
+      max_files: 2500
+    - owner: vitejs
+      name: vite
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: parcel-bundler
+      name: parcel
+      languages:
+      - javascript
+      - rust
+      max_files: 4000
+    - owner: swc-project
+      name: swc
+      languages:
+      - rust
+      max_files: 3000
+    - owner: denoland
+      name: deno_std
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: denoland
+      name: deno_lint
+      languages:
+      - rust
+      max_files: 1000
+    - owner: microsoft
+      name: ts-node
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: typestack
+      name: class-transformer
+      languages:
+      - typescript
+      max_files: 800
+    - owner: typestack
+      name: class-validator
+      languages:
+      - typescript
+      max_files: 800
+    - owner: nestjs
+      name: nest
+      languages:
+      - typescript
+      max_files: 5000
+    - owner: nestjs
+      name: nx
+      languages:
+      - typescript
+      max_files: 4000
+    - owner: trpc
+      name: trpc
+      languages:
+      - typescript
+      max_files: 2500
+    - owner: prisma
+      name: prisma
+      languages:
+      - typescript
+      - rust
+      max_files: 5000
+  javascript_frameworks:
+    description: JS frameworks (React, Vue, Angular, ...)
+    repos:
+    - owner: facebook
+      name: react
+      languages:
+      - javascript
+      - typescript
+      max_files: 8000
+    - owner: facebook
+      name: react-native
+      languages:
+      - javascript
+      max_files: 8000
+    - owner: facebook
+      name: relay
+      languages:
+      - javascript
+      max_files: 3000
+    - owner: facebook
+      name: flux
+      languages:
+      - javascript
+      max_files: 1000
+    - owner: facebook
+      name: jest
+      languages:
+      - javascript
+      - typescript
+      max_files: 5000
+    - owner: facebook
+      name: docusaurus
+      languages:
+      - javascript
+      - typescript
+      max_files: 3000
+    - owner: facebook
+      name: create-react-app
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: facebook
+      name: react-devtools
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: vuejs
+      name: vue
+      languages:
+      - javascript
+      - typescript
+      max_files: 5000
+    - owner: vuejs
+      name: vue-next
+      languages:
+      - typescript
+      max_files: 4000
+    - owner: vuejs
+      name: vite
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: vuejs
+      name: vue-router
+      languages:
+      - typescript
+      max_files: 1500
+    - owner: vuejs
+      name: vuex
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: vuejs
+      name: pinia
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: vuejs
+      name: vue-cli
+      languages:
+      - javascript
+      max_files: 3000
+    - owner: vuejs
+      name: vuepress
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: vuejs
+      name: vue-test-utils
+      languages:
+      - typescript
+      max_files: 800
+    - owner: vuejs
+      name: volar
+      languages:
+      - typescript
+      max_files: 1500
+    - owner: angular
+      name: angular
+      languages:
+      - typescript
+      max_files: 10000
+    - owner: angular
+      name: angular-cli
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: angular
+      name: angular.js
+      languages:
+      - javascript
+      max_files: 5000
+    - owner: angular
+      name: material
+      languages:
+      - typescript
+      max_files: 4000
+    - owner: angular
+      name: universal
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: sveltejs
+      name: svelte
+      languages:
+      - javascript
+      max_files: 3000
+    - owner: sveltejs
+      name: kit
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: sveltejs
+      name: language-tools
+      languages:
+      - typescript
+      max_files: 800
+    - owner: solidjs
+      name: solid
+      languages:
+      - typescript
+      max_files: 1500
+    - owner: solidjs
+      name: solid-start
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: preactjs
+      name: preact
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: emberjs
+      name: ember.js
+      languages:
+      - javascript
+      max_files: 4000
+    - owner: emberjs
+      name: data
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: emberjs
+      name: ember-cli
+      languages:
+      - javascript
+      max_files: 2000
+    - owner: backbonejs
+      name: backbone
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: jashkenas
+      name: backbone
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: aurelia
+      name: framework
+      languages:
+      - typescript
+      max_files: 2000
+    - owner: meteor
+      name: meteor
+      languages:
+      - javascript
+      max_files: 5000
+    - owner: polymer
+      name: polymer
+      languages:
+      - javascript
+      max_files: 3000
+    - owner: PolymerLabs
+      name: lit-html
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: lit
+      name: lit
+      languages:
+      - typescript
+      max_files: 1500
+    - owner: vercel
+      name: next.js
+      languages:
+      - javascript
+      - typescript
+      max_files: 5000
+    - owner: vercel
+      name: swr
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: vercel
+      name: ai
+      languages:
+      - typescript
+      max_files: 2000
+    - owner: vercel
+      name: turborepo
+      languages:
+      - rust
+      - typescript
+      max_files: 2500
+    - owner: nuxt
+      name: nuxt.js
+      languages:
+      - javascript
+      - typescript
+      max_files: 4000
+    - owner: nuxt
+      name: framework
+      languages:
+      - typescript
+      max_files: 2500
+    - owner: remix-run
+      name: remix
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: remix-run
+      name: react-router
+      languages:
+      - typescript
+      max_files: 2000
+    - owner: gatsbyjs
+      name: gatsby
+      languages:
+      - javascript
+      - typescript
+      max_files: 5000
+    - owner: withastro
+      name: astro
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: withastro
+      name: compiler
+      languages:
+      - rust
+      max_files: 800
+    - owner: 11ty
+      name: eleventy
+      languages:
+      - javascript
+      max_files: 1500
+    - owner: storybookjs
+      name: storybook
+      languages:
+      - javascript
+      - typescript
+      max_files: 8000
+    - owner: mui-org
+      name: material-ui
+      languages:
+      - javascript
+      - typescript
+      max_files: 5000
+    - owner: ant-design
+      name: ant-design
+      languages:
+      - typescript
+      max_files: 5000
+    - owner: ant-design
+      name: ant-design-pro
+      languages:
+      - typescript
+      max_files: 2500
+    - owner: chakra-ui
+      name: chakra-ui
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: tailwindlabs
+      name: tailwindcss
+      languages:
+      - javascript
+      - typescript
+      max_files: 3000
+    - owner: tailwindlabs
+      name: headlessui
+      languages:
+      - javascript
+      - typescript
+      max_files: 1500
+    - owner: tailwindlabs
+      name: heroicons
+      languages:
+      - javascript
+      max_files: 500
+    - owner: twbs
+      name: bootstrap
+      languages:
+      - javascript
+      - scss
+      max_files: 5000
+    - owner: chartjs
+      name: Chart.js
+      languages:
+      - javascript
+      max_files: 3000
+    - owner: apexcharts
+      name: apexcharts.js
+      languages:
+      - javascript
+      max_files: 3000
+    - owner: d3
+      name: d3
+      languages:
+      - javascript
+      max_files: 5000
+    - owner: d3
+      name: d3-array
+      languages:
+      - javascript
+      max_files: 800
+    - owner: d3
+      name: d3-scale
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-shape
+      languages:
+      - javascript
+      max_files: 800
+    - owner: d3
+      name: d3-format
+      languages:
+      - javascript
+      max_files: 300
+    - owner: d3
+      name: d3-time
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-color
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-interpolate
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-selection
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-transition
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-axis
+      languages:
+      - javascript
+      max_files: 300
+    - owner: d3
+      name: d3-drag
+      languages:
+      - javascript
+      max_files: 300
+    - owner: d3
+      name: d3-zoom
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-fetch
+      languages:
+      - javascript
+      max_files: 200
+    - owner: d3
+      name: d3-dsv
+      languages:
+      - javascript
+      max_files: 300
+    - owner: d3
+      name: d3-random
+      languages:
+      - javascript
+      max_files: 300
+    - owner: d3
+      name: d3-quadtree
+      languages:
+      - javascript
+      max_files: 300
+    - owner: d3
+      name: d3-hierarchy
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-geo
+      languages:
+      - javascript
+      max_files: 800
+    - owner: d3
+      name: d3-voronoi
+      languages:
+      - javascript
+      max_files: 300
+    - owner: d3
+      name: d3-force
+      languages:
+      - javascript
+      max_files: 500
+    - owner: d3
+      name: d3-delaunay
+      languages:
+      - javascript
+      max_files: 500
+    - owner: recharts
+      name: recharts
+      languages:
+      - javascript
+      max_files: 2500
+    - owner: plotly
+      name: plotly.js
+      languages:
+      - javascript
+      max_files: 5000
+    - owner: vega
+      name: vega
+      languages:
+      - javascript
+      max_files: 2500
+    - owner: vega
+      name: vega-lite
+      languages:
+      - javascript
+      - typescript
+      max_files: 3000
+    - owner: vega
+      name: vega-embed
+      languages:
+      - javascript
+      max_files: 500
+  rust_core:
+    description: Rust core, std, ecosystem
+    repos:
+    - owner: rust-lang
+      name: rust
+      languages:
+      - rust
+      max_files: 20000
+    - owner: rust-lang
+      name: cargo
+      languages:
+      - rust
+      max_files: 4000
+    - owner: rust-lang
+      name: book
+      languages:
+      - markdown
+      - rust
+      max_files: 1500
+    - owner: rust-lang
+      name: rustlings
+      languages:
+      - rust
+      max_files: 800
+    - owner: rust-lang
+      name: rustup
+      languages:
+      - rust
+      max_files: 2000
+    - owner: rust-lang
+      name: rustfmt
+      languages:
+      - rust
+      max_files: 1500
+    - owner: rust-lang
+      name: rust-clippy
+      languages:
+      - rust
+      max_files: 2500
+    - owner: rust-lang
+      name: miri
+      languages:
+      - rust
+      max_files: 1500
+    - owner: rust-lang
+      name: rust-analyzer
+      languages:
+      - rust
+      max_files: 5000
+    - owner: rust-lang
+      name: chalk
+      languages:
+      - rust
+      max_files: 1500
+    - owner: rust-lang
+      name: rfcs
+      languages:
+      - markdown
+      max_files: 1000
+    - owner: rust-lang
+      name: crates.io
+      languages:
+      - rust
+      max_files: 4000
+    - owner: rust-lang-nursery
+      name: rand
+      languages:
+      - rust
+      max_files: 1500
+    - owner: rust-random
+      name: rand
+      languages:
+      - rust
+      max_files: 1500
+    - owner: rust-itertools
+      name: itertools
+      languages:
+      - rust
+      max_files: 1000
+    - owner: serde-rs
+      name: serde
+      languages:
+      - rust
+      max_files: 2000
+    - owner: serde-rs
+      name: serde-json
+      languages:
+      - rust
+      max_files: 1500
+    - owner: serde-rs
+      name: serde-yaml
+      languages:
+      - rust
+      max_files: 500
+    - owner: tokio-rs
+      name: tokio
+      languages:
+      - rust
+      max_files: 4000
+    - owner: tokio-rs
+      name: tokio-util
+      languages:
+      - rust
+      max_files: 800
+    - owner: tokio-rs
+      name: bytes
+      languages:
+      - rust
+      max_files: 800
+    - owner: tokio-rs
+      name: mio
+      languages:
+      - rust
+      max_files: 1500
+    - owner: tokio-rs
+      name: tracing
+      languages:
+      - rust
+      max_files: 2000
+    - owner: tokio-rs
+      name: tracing-subscriber
+      languages:
+      - rust
+      max_files: 800
+    - owner: tokio-rs
+      name: axum
+      languages:
+      - rust
+      max_files: 1500
+    - owner: tokio-rs
+      name: tower
+      languages:
+      - rust
+      max_files: 1500
+    - owner: tokio-rs
+      name: tower-http
+      languages:
+      - rust
+      max_files: 800
+    - owner: hyperium
+      name: hyper
+      languages:
+      - rust
+      max_files: 3000
+    - owner: hyperium
+      name: tonic
+      languages:
+      - rust
+      max_files: 2000
+    - owner: hyperium
+      name: h2
+      languages:
+      - rust
+      max_files: 1500
+    - owner: hyperium
+      name: http
+      languages:
+      - rust
+      max_files: 800
+    - owner: actix
+      name: actix-web
+      languages:
+      - rust
+      max_files: 3000
+    - owner: actix
+      name: actix
+      languages:
+      - rust
+      max_files: 1500
+    - owner: actix
+      name: actix-http
+      languages:
+      - rust
+      max_files: 1000
+    - owner: actix
+      name: actix-rt
+      languages:
+      - rust
+      max_files: 400
+    - owner: BurntSushi
+      name: ripgrep
+      languages:
+      - rust
+      max_files: 1500
+    - owner: BurntSushi
+      name: toml-rs
+      languages:
+      - rust
+      max_files: 800
+    - owner: BurntSushi
+      name: csv
+      languages:
+      - rust
+      max_files: 1000
+    - owner: BurntSushi
+      name: regex
+      languages:
+      - rust
+      max_files: 1500
+    - owner: clap-rs
+      name: clap
+      languages:
+      - rust
+      max_files: 2000
+    - owner: rayon-rs
+      name: rayon
+      languages:
+      - rust
+      max_files: 1500
+    - owner: crossbeam-rs
+      name: crossbeam
+      languages:
+      - rust
+      max_files: 2000
+    - owner: crossbeam-rs
+      name: crossbeam-channel
+      languages:
+      - rust
+      max_files: 800
+    - owner: rust-windowing
+      name: winit
+      languages:
+      - rust
+      max_files: 2500
+    - owner: rust-windowing
+      name: glutin
+      languages:
+      - rust
+      max_files: 1500
+    - owner: gfx-rs
+      name: wgpu
+      languages:
+      - rust
+      max_files: 4000
+    - owner: bevyengine
+      name: bevy
+      languages:
+      - rust
+      max_files: 8000
+    - owner: amethyst
+      name: amethyst
+      languages:
+      - rust
+      max_files: 4000
+    - owner: ggez
+      name: ggez
+      languages:
+      - rust
+      max_files: 1500
+    - owner: image-rs
+      name: image
+      languages:
+      - rust
+      max_files: 2500
+    - owner: image-rs
+      name: imageproc
+      languages:
+      - rust
+      max_files: 1500
+    - owner: rust-ml
+      name: linfa
+      languages:
+      - rust
+      max_files: 2000
+    - owner: rust-ml
+      name: smartcore
+      languages:
+      - rust
+      max_files: 1500
+    - owner: tract
+      name: tract
+      languages:
+      - rust
+      max_files: 2500
+    - owner: dtolnay
+      name: anyhow
+      languages:
+      - rust
+      max_files: 500
+    - owner: dtolnay
+      name: thiserror
+      languages:
+      - rust
+      max_files: 500
+    - owner: dtolnay
+      name: syn
+      languages:
+      - rust
+      max_files: 2500
+    - owner: dtolnay
+      name: quote
+      languages:
+      - rust
+      max_files: 400
+    - owner: dtolnay
+      name: proc-macro2
+      languages:
+      - rust
+      max_files: 500
+  go_core:
+    description: Go core, stdlib, ecosystem
+    repos:
+    - owner: golang
+      name: go
+      languages:
+      - go
+      - c
+      max_files: 15000
+    - owner: golang
+      name: tools
+      languages:
+      - go
+      max_files: 3000
+    - owner: golang
+      name: mock
+      languages:
+      - go
+      max_files: 800
+    - owner: golang
+      name: lint
+      languages:
+      - go
+      max_files: 800
+    - owner: golang
+      name: proposal
+      languages:
+      - markdown
+      max_files: 800
+    - owner: golang
+      name: vuln
+      languages:
+      - go
+      max_files: 500
+    - owner: golang
+      name: example
+      languages:
+      - go
+      max_files: 1500
+    - owner: golang
+      name: playground
+      languages:
+      - go
+      max_files: 500
+    - owner: golang
+      name: oauth2
+      languages:
+      - go
+      max_files: 800
+    - owner: golang
+      name: net
+      languages:
+      - go
+      max_files: 2000
+    - owner: golang
+      name: crypto
+      languages:
+      - go
+      max_files: 1500
+    - owner: golang
+      name: sys
+      languages:
+      - go
+      max_files: 1500
+    - owner: golang
+      name: text
+      languages:
+      - go
+      max_files: 1500
+    - owner: golang
+      name: image
+      languages:
+      - go
+      max_files: 1000
+    - owner: golang
+      name: exp
+      languages:
+      - go
+      max_files: 1500
+    - owner: golang
+      name: mobile
+      languages:
+      - go
+      max_files: 800
+    - owner: golang
+      name: protobuf
+      languages:
+      - go
+      max_files: 1500
+    - owner: golang
+      name: grpc-go
+      languages:
+      - go
+      max_files: 2500
+    - owner: gin-gonic
+      name: gin
+      languages:
+      - go
+      max_files: 2000
+    - owner: labstack
+      name: echo
+      languages:
+      - go
+      max_files: 2000
+    - owner: gofiber
+      name: fiber
+      languages:
+      - go
+      max_files: 2000
+    - owner: go-chi
+      name: chi
+      languages:
+      - go
+      max_files: 1000
+    - owner: gorilla
+      name: mux
+      languages:
+      - go
+      max_files: 800
+    - owner: gorilla
+      name: websocket
+      languages:
+      - go
+      max_files: 800
+    - owner: gorilla
+      name: handlers
+      languages:
+      - go
+      max_files: 300
+    - owner: gorilla
+      name: context
+      languages:
+      - go
+      max_files: 200
+    - owner: gorilla
+      name: sessions
+      languages:
+      - go
+      max_files: 500
+    - owner: gorilla
+      name: securecookie
+      languages:
+      - go
+      max_files: 200
+    - owner: gorilla
+      name: csrf
+      languages:
+      - go
+      max_files: 300
+    - owner: emicklei
+      name: go-restful
+      languages:
+      - go
+      max_files: 1500
+    - owner: go-kit
+      name: kit
+      languages:
+      - go
+      max_files: 2000
+    - owner: micro
+      name: go-micro
+      languages:
+      - go
+      max_files: 3000
+    - owner: micro
+      name: micro
+      languages:
+      - go
+      max_files: 4000
+    - owner: go-kratos
+      name: kratos
+      languages:
+      - go
+      max_files: 3000
+    - owner: zeromicro
+      name: go-zero
+      languages:
+      - go
+      max_files: 2500
+    - owner: flamego
+      name: flamego
+      languages:
+      - go
+      max_files: 1000
+    - owner: gobuffalo
+      name: buffalo
+      languages:
+      - go
+      max_files: 2500
+    - owner: gobuffalo
+      name: pop
+      languages:
+      - go
+      max_files: 1500
+    - owner: spf13
+      name: cobra
+      languages:
+      - go
+      max_files: 2000
+    - owner: spf13
+      name: viper
+      languages:
+      - go
+      max_files: 2000
+    - owner: spf13
+      name: cast
+      languages:
+      - go
+      max_files: 300
+    - owner: spf13
+      name: afero
+      languages:
+      - go
+      max_files: 800
+    - owner: spf13
+      name: pflag
+      languages:
+      - go
+      max_files: 500
+    - owner: urfave
+      name: cli
+      languages:
+      - go
+      max_files: 2000
+    - owner: mitchellh
+      name: mapstructure
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: consul
+      languages:
+      - go
+      max_files: 5000
+    - owner: hashicorp
+      name: vault
+      languages:
+      - go
+      max_files: 6000
+    - owner: hashicorp
+      name: terraform
+      languages:
+      - go
+      max_files: 8000
+    - owner: hashicorp
+      name: nomad
+      languages:
+      - go
+      max_files: 5000
+    - owner: hashicorp
+      name: packer
+      languages:
+      - go
+      max_files: 4000
+    - owner: hashicorp
+      name: hcl
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: go-plugin
+      languages:
+      - go
+      max_files: 1000
+    - owner: hashicorp
+      name: go-getter
+      languages:
+      - go
+      max_files: 1000
+    - owner: hashicorp
+      name: raft
+      languages:
+      - go
+      max_files: 2000
+    - owner: hashicorp
+      name: memberlist
+      languages:
+      - go
+      max_files: 1000
+    - owner: hashicorp
+      name: serf
+      languages:
+      - go
+      max_files: 1500
+    - owner: docker
+      name: docker
+      languages:
+      - go
+      max_files: 10000
+    - owner: docker
+      name: compose
+      languages:
+      - go
+      max_files: 5000
+    - owner: docker
+      name: distribution
+      languages:
+      - go
+      max_files: 3000
+    - owner: docker
+      name: cli
+      languages:
+      - go
+      max_files: 3000
+    - owner: docker
+      name: buildx
+      languages:
+      - go
+      max_files: 1500
+    - owner: docker
+      name: swarmkit
+      languages:
+      - go
+      max_files: 3000
+    - owner: moby
+      name: moby
+      languages:
+      - go
+      max_files: 12000
+    - owner: moby
+      name: buildkit
+      languages:
+      - go
+      max_files: 4000
+    - owner: containerd
+      name: containerd
+      languages:
+      - go
+      max_files: 6000
+    - owner: containerd
+      name: nerdctl
+      languages:
+      - go
+      max_files: 1500
+    - owner: k3s-io
+      name: k3s
+      languages:
+      - go
+      max_files: 3000
+    - owner: rancher
+      name: rke2
+      languages:
+      - go
+      max_files: 1500
+    - owner: rancher
+      name: rancher
+      languages:
+      - go
+      max_files: 5000
+    - owner: rancher
+      name: fleet
+      languages:
+      - go
+      max_files: 2000
+    - owner: opencontainers
+      name: runc
+      languages:
+      - go
+      max_files: 3000
+    - owner: opencontainers
+      name: image-spec
+      languages:
+      - go
+      - markdown
+      max_files: 800
+    - owner: opencontainers
+      name: runtime-spec
+      languages:
+      - go
+      - markdown
+      max_files: 800
+    - owner: opencontainers
+      name: selinux
+      languages:
+      - go
+      max_files: 200
+    - owner: opencontainers
+      name: go-digest
+      languages:
+      - go
+      max_files: 200
+    - owner: opencontainers
+      name: storage
+      languages:
+      - go
+      max_files: 1500
+  java_core:
+    description: Java core, Spring, Hibernate, Quarkus
+    repos:
+    - owner: openjdk
+      name: jdk
+      languages:
+      - java
+      - c
+      max_files: 15000
+    - owner: openjdk
+      name: jol
+      languages:
+      - java
+      max_files: 800
+    - owner: openjdk
+      name: skara
+      languages:
+      - java
+      max_files: 800
+    - owner: eclipse-ee4j
+      name: jpa-api
+      languages:
+      - java
+      max_files: 500
+    - owner: eclipse-ee4j
+      name: jaxrs-api
+      languages:
+      - java
+      max_files: 500
+    - owner: eclipse-ee4j
+      name: servlet-api
+      languages:
+      - java
+      max_files: 500
+    - owner: spring-projects
+      name: spring-framework
+      languages:
+      - java
+      max_files: 8000
+    - owner: spring-projects
+      name: spring-boot
+      languages:
+      - java
+      max_files: 8000
+    - owner: spring-projects
+      name: spring-data-jpa
+      languages:
+      - java
+      max_files: 2000
+    - owner: spring-projects
+      name: spring-data-mongodb
+      languages:
+      - java
+      max_files: 1500
+    - owner: spring-projects
+      name: spring-data-redis
+      languages:
+      - java
+      max_files: 1500
+    - owner: spring-projects
+      name: spring-data-elasticsearch
+      languages:
+      - java
+      max_files: 1500
+    - owner: spring-projects
+      name: spring-security
+      languages:
+      - java
+      max_files: 5000
+    - owner: spring-projects
+      name: spring-cloud
+      languages:
+      - java
+      max_files: 3000
+    - owner: spring-projects
+      name: spring-graphql
+      languages:
+      - java
+      max_files: 1500
+    - owner: spring-projects
+      name: spring-kafka
+      languages:
+      - java
+      max_files: 1500
+    - owner: spring-projects
+      name: spring-amqp
+      languages:
+      - java
+      max_files: 1000
+    - owner: spring-projects
+      name: spring-session
+      languages:
+      - java
+      max_files: 1500
+    - owner: spring-projects
+      name: spring-batch
+      languages:
+      - java
+      max_files: 2500
+    - owner: spring-projects
+      name: spring-integration
+      languages:
+      - java
+      max_files: 3000
+    - owner: spring-projects
+      name: spring-shell
+      languages:
+      - java
+      max_files: 800
+    - owner: spring-projects
+      name: spring-hateoas
+      languages:
+      - java
+      max_files: 800
+    - owner: spring-projects
+      name: spring-vault
+      languages:
+      - java
+      max_files: 800
+    - owner: spring-projects
+      name: spring-statemachine
+      languages:
+      - java
+      max_files: 1500
+    - owner: hibernate
+      name: hibernate-orm
+      languages:
+      - java
+      max_files: 5000
+    - owner: hibernate
+      name: hibernate-validator
+      languages:
+      - java
+      max_files: 2000
+    - owner: hibernate
+      name: hibernate-search
+      languages:
+      - java
+      max_files: 2500
+    - owner: hibernate
+      name: hibernate-reactive
+      languages:
+      - java
+      max_files: 1500
+    - owner: quarkusio
+      name: quarkus
+      languages:
+      - java
+      max_files: 8000
+    - owner: quarkusio
+      name: quarkus-quickstarts
+      languages:
+      - java
+      max_files: 1500
+    - owner: eclipse-vertx
+      name: vert.x
+      languages:
+      - java
+      max_files: 5000
+    - owner: micronaut-projects
+      name: micronaut-core
+      languages:
+      - java
+      - groovy
+      max_files: 5000
+    - owner: micronaut-projects
+      name: micronaut-spring
+      languages:
+      - java
+      max_files: 800
+    - owner: micronaut-projects
+      name: micronaut-data
+      languages:
+      - java
+      max_files: 1500
+    - owner: micronaut-projects
+      name: micronaut-security
+      languages:
+      - java
+      max_files: 1500
+    - owner: apache
+      name: kafka
+      languages:
+      - java
+      - scala
+      max_files: 8000
+    - owner: apache
+      name: camel
+      languages:
+      - java
+      max_files: 10000
+    - owner: apache
+      name: spark
+      languages:
+      - scala
+      - java
+      max_files: 15000
+    - owner: apache
+      name: flink
+      languages:
+      - java
+      max_files: 10000
+    - owner: apache
+      name: beam
+      languages:
+      - java
+      - python
+      max_files: 10000
+    - owner: apache
+      name: hadoop
+      languages:
+      - java
+      - shell
+      max_files: 8000
+    - owner: apache
+      name: hbase
+      languages:
+      - java
+      max_files: 5000
+    - owner: apache
+      name: cassandra
+      languages:
+      - java
+      max_files: 8000
+    - owner: apache
+      name: tomcat
+      languages:
+      - java
+      max_files: 5000
+    - owner: apache
+      name: maven
+      languages:
+      - java
+      max_files: 5000
+    - owner: apache
+      name: groovy
+      languages:
+      - java
+      - groovy
+      max_files: 5000
+    - owner: apache
+      name: jmeter
+      languages:
+      - java
+      max_files: 5000
+    - owner: apache
+      name: lucene
+      languages:
+      - java
+      max_files: 5000
+    - owner: apache
+      name: solr
+      languages:
+      - java
+      max_files: 5000
+    - owner: apache
+      name: commons-lang
+      languages:
+      - java
+      max_files: 1500
+    - owner: apache
+      name: commons-io
+      languages:
+      - java
+      max_files: 1000
+    - owner: apache
+      name: commons-collections
+      languages:
+      - java
+      max_files: 1500
+    - owner: apache
+      name: commons-codec
+      languages:
+      - java
+      max_files: 500
+    - owner: apache
+      name: commons-compress
+      languages:
+      - java
+      max_files: 1500
+    - owner: apache
+      name: commons-math
+      languages:
+      - java
+      max_files: 2500
+    - owner: apache
+      name: commons-net
+      languages:
+      - java
+      max_files: 800
+    - owner: apache
+      name: commons-text
+      languages:
+      - java
+      max_files: 800
+    - owner: apache
+      name: commons-csv
+      languages:
+      - java
+      max_files: 500
+    - owner: apache
+      name: commons-dbutils
+      languages:
+      - java
+      max_files: 300
+    - owner: apache
+      name: commons-fileupload
+      languages:
+      - java
+      max_files: 500
+    - owner: apache
+      name: commons-beanutils
+      languages:
+      - java
+      max_files: 800
+    - owner: apache
+      name: commons-validator
+      languages:
+      - java
+      max_files: 800
+    - owner: apache
+      name: commons-exec
+      languages:
+      - java
+      max_files: 400
+    - owner: apache
+      name: commons-configuration
+      languages:
+      - java
+      max_files: 1000
+    - owner: apache
+      name: httpcomponents-client
+      languages:
+      - java
+      max_files: 2000
+    - owner: apache
+      name: httpcomponents-core
+      languages:
+      - java
+      max_files: 1500
+    - owner: google
+      name: guava
+      languages:
+      - java
+      max_files: 5000
+    - owner: google
+      name: gson
+      languages:
+      - java
+      max_files: 1500
+    - owner: google
+      name: protobuf
+      languages:
+      - java
+      - c++
+      - python
+      max_files: 5000
+    - owner: google
+      name: dagger
+      languages:
+      - java
+      max_files: 1500
+    - owner: google
+      name: auto
+      languages:
+      - java
+      max_files: 1500
+    - owner: google
+      name: tink
+      languages:
+      - java
+      - go
+      - python
+      max_files: 2500
+    - owner: google
+      name: closure-compiler
+      languages:
+      - java
+      - javascript
+      max_files: 5000
+    - owner: google
+      name: error-prone
+      languages:
+      - java
+      max_files: 2000
+    - owner: google
+      name: flogger
+      languages:
+      - java
+      max_files: 1000
+    - owner: google
+      name: guice
+      languages:
+      - java
+      max_files: 3000
+    - owner: google
+      name: google-java-format
+      languages:
+      - java
+      max_files: 1000
+    - owner: JetBrains
+      name: kotlin
+      languages:
+      - kotlin
+      - java
+      max_files: 15000
+    - owner: JetBrains
+      name: Exposed
+      languages:
+      - kotlin
+      max_files: 1500
+    - owner: JetBrains
+      name: compose-jb
+      languages:
+      - kotlin
+      max_files: 3000
+    - owner: JetBrains
+      name: intellij-community
+      languages:
+      - java
+      - kotlin
+      max_files: 15000
+    - owner: Kotlin
+      name: kotlinx.coroutines
+      languages:
+      - kotlin
+      max_files: 2000
+    - owner: Kotlin
+      name: kotlinx.serialization
+      languages:
+      - kotlin
+      max_files: 2000
+    - owner: Kotlin
+      name: kotlinx.html
+      languages:
+      - kotlin
+      max_files: 800
+    - owner: Kotlin
+      name: kotlinx.atomicfu
+      languages:
+      - kotlin
+      max_files: 500
+    - owner: Kotlin
+      name: kotlinx-datetime
+      languages:
+      - kotlin
+      max_files: 500
+    - owner: Kotlin
+      name: kotlinx-io
+      languages:
+      - kotlin
+      max_files: 800
+  c_cpp:
+    description: C / C++ (gcc, llvm, boost, postgres)
+    repos:
+    - owner: gcc
+      name: gcc
+      languages:
+      - c
+      - c++
+      max_files: 15000
+    - owner: gcc
+      name: glibc
+      languages:
+      - c
+      max_files: 8000
+    - owner: llvm
+      name: llvm-project
+      languages:
+      - c++
+      max_files: 30000
+    - owner: llvm
+      name: compiler-rt
+      languages:
+      - c++
+      max_files: 2000
+    - owner: llvm
+      name: libcxx
+      languages:
+      - c++
+      max_files: 2500
+    - owner: llvm
+      name: libcxxabi
+      languages:
+      - c++
+      max_files: 800
+    - owner: llvm
+      name: libunwind
+      languages:
+      - c++
+      max_files: 800
+    - owner: llvm
+      name: openmp
+      languages:
+      - c++
+      max_files: 1500
+    - owner: llvm
+      name: lld
+      languages:
+      - c++
+      max_files: 1500
+    - owner: llvm
+      name: lldb
+      languages:
+      - c++
+      max_files: 3000
+    - owner: llvm
+      name: polly
+      languages:
+      - c++
+      max_files: 1000
+    - owner: llvm
+      name: mlir
+      languages:
+      - c++
+      max_files: 3000
+    - owner: llvm
+      name: flang
+      languages:
+      - c++
+      - fortran
+      max_files: 1500
+    - owner: llvm
+      name: bolt
+      languages:
+      - c++
+      max_files: 1000
+    - owner: boostorg
+      name: boost
+      languages:
+      - c++
+      max_files: 15000
+    - owner: boostorg
+      name: beast
+      languages:
+      - c++
+      max_files: 1500
+    - owner: boostorg
+      name: asio
+      languages:
+      - c++
+      max_files: 1500
+    - owner: boostorg
+      name: system
+      languages:
+      - c++
+      max_files: 300
+    - owner: boostorg
+      name: core
+      languages:
+      - c++
+      max_files: 500
+    - owner: boostorg
+      name: config
+      languages:
+      - c++
+      max_files: 800
+    - owner: boostorg
+      name: preprocessor
+      languages:
+      - c++
+      max_files: 800
+    - owner: boostorg
+      name: mpl
+      languages:
+      - c++
+      max_files: 1000
+    - owner: boostorg
+      name: fusion
+      languages:
+      - c++
+      max_files: 1500
+    - owner: boostorg
+      name: hana
+      languages:
+      - c++
+      max_files: 1000
+    - owner: boostorg
+      name: geometry
+      languages:
+      - c++
+      max_files: 3000
+    - owner: boostorg
+      name: multiprecision
+      languages:
+      - c++
+      max_files: 1500
+    - owner: boostorg
+      name: math
+      languages:
+      - c++
+      max_files: 3000
+    - owner: boostorg
+      name: random
+      languages:
+      - c++
+      max_files: 500
+    - owner: boostorg
+      name: filesystem
+      languages:
+      - c++
+      max_files: 500
+    - owner: boostorg
+      name: thread
+      languages:
+      - c++
+      max_files: 1500
+    - owner: boostorg
+      name: log
+      languages:
+      - c++
+      max_files: 2000
+    - owner: boostorg
+      name: program_options
+      languages:
+      - c++
+      max_files: 800
+    - owner: boostorg
+      name: test
+      languages:
+      - c++
+      max_files: 2000
+    - owner: boostorg
+      name: regex
+      languages:
+      - c++
+      max_files: 1000
+    - owner: boostorg
+      name: property_tree
+      languages:
+      - c++
+      max_files: 500
+    - owner: boostorg
+      name: json
+      languages:
+      - c++
+      max_files: 800
+    - owner: boostorg
+      name: url
+      languages:
+      - c++
+      max_files: 500
+    - owner: boostorg
+      name: nowide
+      languages:
+      - c++
+      max_files: 300
+    - owner: boostorg
+      name: leaf
+      languages:
+      - c++
+      max_files: 300
+    - owner: boostorg
+      name: pfr
+      languages:
+      - c++
+      max_files: 500
+    - owner: boostorg
+      name: spirit
+      languages:
+      - c++
+      max_files: 3000
+    - owner: boostorg
+      name: proto
+      languages:
+      - c++
+      max_files: 1500
+    - owner: catchorg
+      name: Catch2
+      languages:
+      - c++
+      max_files: 1500
+    - owner: catchorg
+      name: Clara
+      languages:
+      - c++
+      max_files: 300
+    - owner: google
+      name: googletest
+      languages:
+      - c++
+      max_files: 3000
+    - owner: google
+      name: googlemock
+      languages:
+      - c++
+      max_files: 1000
+    - owner: google
+      name: benchmark
+      languages:
+      - c++
+      max_files: 1500
+    - owner: google
+      name: abseil-cpp
+      languages:
+      - c++
+      max_files: 3000
+    - owner: google
+      name: boringssl
+      languages:
+      - c
+      - c++
+      max_files: 2500
+    - owner: facebook
+      name: folly
+      languages:
+      - c++
+      max_files: 5000
+    - owner: facebook
+      name: rocksdb
+      languages:
+      - c++
+      max_files: 4000
+    - owner: facebook
+      name: fbthrift
+      languages:
+      - c++
+      max_files: 2000
+    - owner: facebook
+      name: proxygen
+      languages:
+      - c++
+      max_files: 2000
+    - owner: facebook
+      name: wangle
+      languages:
+      - c++
+      max_files: 1500
+    - owner: facebook
+      name: mcrouter
+      languages:
+      - c++
+      max_files: 1500
+    - owner: facebook
+      name: mvfst
+      languages:
+      - c++
+      max_files: 2000
+    - owner: facebook
+      name: hhvm
+      languages:
+      - c++
+      - php
+      max_files: 5000
+    - owner: facebook
+      name: react-native
+      languages:
+      - c++
+      - javascript
+      max_files: 6000
+    - owner: facebook
+      name: yoga
+      languages:
+      - c++
+      - javascript
+      max_files: 1500
+    - owner: facebook
+      name: flipper
+      languages:
+      - c++
+      - javascript
+      max_files: 3000
+    - owner: facebook
+      name: hermes
+      languages:
+      - c++
+      max_files: 3000
+    - owner: facebookincubator
+      name: fbzmq
+      languages:
+      - c++
+      max_files: 500
+    - owner: facebookincubator
+      name: oomd
+      languages:
+      - c++
+      max_files: 800
+    - owner: facebookincubator
+      name: katran
+      languages:
+      - c++
+      max_files: 1000
+    - owner: facebookresearch
+      name: faiss
+      languages:
+      - c++
+      max_files: 4000
+    - owner: facebookresearch
+      name: flashlight
+      languages:
+      - c++
+      max_files: 3000
+    - owner: NVIDIA
+      name: cutlass
+      languages:
+      - c++
+      max_files: 2500
+    - owner: NVIDIA
+      name: cub
+      languages:
+      - c++
+      max_files: 1500
+    - owner: NVIDIA
+      name: thrust
+      languages:
+      - c++
+      max_files: 2500
+    - owner: NVIDIA
+      name: nccl
+      languages:
+      - c++
+      - cuda
+      max_files: 1500
+    - owner: NVIDIA
+      name: nvbench
+      languages:
+      - c++
+      max_files: 500
+    - owner: NVIDIA
+      name: FasterTransformer
+      languages:
+      - c++
+      - cuda
+      max_files: 2500
+    - owner: NVIDIA
+      name: apex
+      languages:
+      - python
+      - c++
+      - cuda
+      max_files: 1500
+    - owner: NVIDIA
+      name: DeepLearningExamples
+      languages:
+      - python
+      max_files: 3000
+    - owner: NVIDIA
+      name: DALI
+      languages:
+      - c++
+      - python
+      max_files: 3000
+    - owner: NVIDIA
+      name: TensorRT-LLM
+      languages:
+      - c++
+      - python
+      max_files: 2500
+    - owner: NVIDIA
+      name: cuda-samples
+      languages:
+      - c++
+      - cuda
+      max_files: 1500
+    - owner: torvalds
+      name: linux
+      languages:
+      - c
+      max_files: 20000
+    - owner: git
+      name: git
+      languages:
+      - c
+      - shell
+      max_files: 5000
+    - owner: redis
+      name: redis
+      languages:
+      - c
+      max_files: 4000
+    - owner: redis
+      name: hiredis
+      languages:
+      - c
+      max_files: 800
+    - owner: redis
+      name: jedis
+      languages:
+      - java
+      max_files: 2000
+    - owner: redis
+      name: lettuce
+      languages:
+      - java
+      max_files: 2500
+    - owner: antirez
+      name: kilo
+      languages:
+      - c
+      max_files: 500
+    - owner: antirez
+      name: sd
+      languages:
+      - c
+      max_files: 800
+    - owner: antirez
+      name: disque
+      languages:
+      - c
+      max_files: 800
+    - owner: sqlite
+      name: sqlite
+      languages:
+      - c
+      max_files: 5000
+    - owner: sqlite
+      name: fossil
+      languages:
+      - c
+      max_files: 3000
+    - owner: PostgreSQL
+      name: postgresql
+      languages:
+      - c
+      max_files: 10000
+    - owner: postgres
+      name: pgvector
+      languages:
+      - c
+      max_files: 800
+    - owner: mysql
+      name: mysql-server
+      languages:
+      - c
+      - c++
+      max_files: 10000
+    - owner: mongodb
+      name: mongo
+      languages:
+      - c++
+      max_files: 8000
+    - owner: mongodb
+      name: mongo-c-driver
+      languages:
+      - c
+      max_files: 2500
+    - owner: mongodb
+      name: mongo-cxx-driver
+      languages:
+      - c++
+      max_files: 2500
+    - owner: elastic
+      name: elasticsearch
+      languages:
+      - java
+      max_files: 8000
+    - owner: elastic
+      name: kibana
+      languages:
+      - typescript
+      max_files: 8000
+    - owner: elastic
+      name: logstash
+      languages:
+      - java
+      - ruby
+      max_files: 5000
+    - owner: elastic
+      name: beats
+      languages:
+      - go
+      max_files: 5000
+  devops:
+    description: DevOps (k8s, helm, prometheus, grafana)
+    repos:
+    - owner: kubernetes
+      name: kubernetes
+      languages:
+      - go
+      max_files: 20000
+    - owner: kubernetes
+      name: client-go
+      languages:
+      - go
+      max_files: 3000
+    - owner: kubernetes
+      name: api
+      languages:
+      - go
+      max_files: 2000
+    - owner: kubernetes
+      name: dashboard
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: kubernetes
+      name: ingress-nginx
+      languages:
+      - go
+      max_files: 2500
+    - owner: kubernetes
+      name: ingress-gce
+      languages:
+      - go
+      max_files: 1000
+    - owner: kubernetes
+      name: kube-aggregator
+      languages:
+      - go
+      max_files: 800
+    - owner: kubernetes
+      name: metrics
+      languages:
+      - go
+      max_files: 500
+    - owner: kubernetes
+      name: kube-state-metrics
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes
+      name: node-problem-detector
+      languages:
+      - go
+      max_files: 800
+    - owner: kubernetes
+      name: autoscaler
+      languages:
+      - go
+      max_files: 3000
+    - owner: kubernetes
+      name: minikube
+      languages:
+      - go
+      max_files: 4000
+    - owner: kubernetes
+      name: kind
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes
+      name: kops
+      languages:
+      - go
+      max_files: 4000
+    - owner: kubernetes
+      name: cluster-autoscaler
+      languages:
+      - go
+      max_files: 2000
+    - owner: kubernetes
+      name: kompose
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes
+      name: kube-openapi
+      languages:
+      - go
+      max_files: 800
+    - owner: kubernetes
+      name: examples
+      languages:
+      - go
+      max_files: 800
+    - owner: kubernetes
+      name: website
+      languages:
+      - markdown
+      - html
+      max_files: 5000
+    - owner: kubernetes
+      name: enhancements
+      languages:
+      - markdown
+      max_files: 1500
+    - owner: kubernetes
+      name: community
+      languages:
+      - markdown
+      max_files: 3000
+    - owner: kubernetes
+      name: test-infra
+      languages:
+      - go
+      max_files: 3000
+    - owner: kubernetes-sigs
+      name: cluster-api
+      languages:
+      - go
+      max_files: 3000
+    - owner: kubernetes-sigs
+      name: controller-runtime
+      languages:
+      - go
+      max_files: 2000
+    - owner: kubernetes-sigs
+      name: kubebuilder
+      languages:
+      - go
+      max_files: 2000
+    - owner: kubernetes-sigs
+      name: kustomize
+      languages:
+      - go
+      max_files: 2500
+    - owner: kubernetes-sigs
+      name: kind
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes-sigs
+      name: krew
+      languages:
+      - go
+      max_files: 800
+    - owner: kubernetes-sigs
+      name: cluster-api-provider-aws
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes-sigs
+      name: cluster-api-provider-azure
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes-sigs
+      name: cluster-api-provider-vsphere
+      languages:
+      - go
+      max_files: 1000
+    - owner: kubernetes-sigs
+      name: cluster-api-provider-gcp
+      languages:
+      - go
+      max_files: 800
+    - owner: kubernetes-sigs
+      name: external-dns
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes-sigs
+      name: aws-load-balancer-controller
+      languages:
+      - go
+      max_files: 1000
+    - owner: kubernetes-sigs
+      name: azure-service-operator
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes-sigs
+      name: secrets-store-csi-driver
+      languages:
+      - go
+      max_files: 800
+    - owner: kubernetes-sigs
+      name: gateway-api
+      languages:
+      - go
+      max_files: 1000
+    - owner: kubernetes-sigs
+      name: kueue
+      languages:
+      - go
+      max_files: 1500
+    - owner: kubernetes-sigs
+      name: training-operator
+      languages:
+      - go
+      max_files: 1000
+    - owner: kubernetes-sigs
+      name: karpenter
+      languages:
+      - go
+      max_files: 2500
+    - owner: helm
+      name: helm
+      languages:
+      - go
+      max_files: 4000
+    - owner: helm
+      name: charts
+      languages:
+      - yaml
+      max_files: 5000
+    - owner: prometheus
+      name: prometheus
+      languages:
+      - go
+      max_files: 8000
+    - owner: prometheus
+      name: alertmanager
+      languages:
+      - go
+      max_files: 2000
+    - owner: prometheus
+      name: node_exporter
+      languages:
+      - go
+      max_files: 1500
+    - owner: prometheus
+      name: blackbox_exporter
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: pushgateway
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: statsd_exporter
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: mysqld_exporter
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: postgres_exporter
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: redis_exporter
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: mongodb_exporter
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: consul_exporter
+      languages:
+      - go
+      max_files: 500
+    - owner: prometheus
+      name: elasticsearch_exporter
+      languages:
+      - go
+      max_files: 500
+    - owner: prometheus
+      name: kafka_exporter
+      languages:
+      - go
+      max_files: 500
+    - owner: prometheus
+      name: snmp_exporter
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: ipmi_exporter
+      languages:
+      - go
+      max_files: 500
+    - owner: prometheus
+      name: jmx_exporter
+      languages:
+      - java
+      max_files: 1500
+    - owner: prometheus
+      name: client_golang
+      languages:
+      - go
+      max_files: 1500
+    - owner: prometheus
+      name: client_python
+      languages:
+      - python
+      max_files: 800
+    - owner: prometheus
+      name: client_java
+      languages:
+      - java
+      max_files: 1500
+    - owner: prometheus
+      name: client_ruby
+      languages:
+      - ruby
+      max_files: 500
+    - owner: prometheus
+      name: client_nodejs
+      languages:
+      - typescript
+      max_files: 500
+    - owner: prometheus
+      name: client_php
+      languages:
+      - php
+      max_files: 300
+    - owner: prometheus
+      name: client_csharp
+      languages:
+      - c#
+      max_files: 800
+    - owner: prometheus
+      name: common
+      languages:
+      - go
+      max_files: 800
+    - owner: prometheus
+      name: procfs
+      languages:
+      - go
+      max_files: 1000
+    - owner: prometheus
+      name: docs
+      languages:
+      - markdown
+      max_files: 2000
+    - owner: grafana
+      name: grafana
+      languages:
+      - typescript
+      - go
+      max_files: 15000
+    - owner: grafana
+      name: loki
+      languages:
+      - go
+      max_files: 8000
+    - owner: grafana
+      name: tempo
+      languages:
+      - go
+      max_files: 3000
+    - owner: grafana
+      name: mimir
+      languages:
+      - go
+      max_files: 4000
+    - owner: grafana
+      name: cortex
+      languages:
+      - go
+      max_files: 3000
+    - owner: grafana
+      name: agent
+      languages:
+      - go
+      max_files: 2500
+    - owner: grafana
+      name: oncall
+      languages:
+      - python
+      max_files: 2500
+    - owner: grafana
+      name: grafana-plugin-sdk-go
+      languages:
+      - go
+      max_files: 1000
+    - owner: grafana
+      name: grafana-plugin-sdk-python
+      languages:
+      - python
+      max_files: 500
+    - owner: grafana
+      name: terraform-provider-grafana
+      languages:
+      - go
+      max_files: 1500
+    - owner: grafana
+      name: helm-charts
+      languages:
+      - yaml
+      max_files: 1500
+    - owner: grafana
+      name: k6
+      languages:
+      - go
+      - javascript
+      max_files: 4000
+    - owner: grafana
+      name: xk6
+      languages:
+      - go
+      max_files: 300
+    - owner: grafana
+      name: xk6-browser
+      languages:
+      - go
+      max_files: 800
+    - owner: ansible
+      name: ansible
+      languages:
+      - python
+      max_files: 15000
+    - owner: ansible
+      name: awx
+      languages:
+      - python
+      - typescript
+      max_files: 5000
+    - owner: ansible
+      name: ansible-builder
+      languages:
+      - python
+      max_files: 500
+    - owner: ansible
+      name: ansible-compat
+      languages:
+      - python
+      max_files: 300
+    - owner: ansible
+      name: ansible-navigator
+      languages:
+      - python
+      max_files: 1500
+    - owner: ansible
+      name: ansible-runner
+      languages:
+      - python
+      max_files: 1500
+    - owner: ansible-collections
+      name: community.general
+      languages:
+      - python
+      max_files: 1500
+    - owner: ansible-collections
+      name: community.kubernetes
+      languages:
+      - python
+      max_files: 500
+    - owner: ansible-collections
+      name: community.docker
+      languages:
+      - python
+      max_files: 500
+    - owner: ansible-collections
+      name: community.aws
+      languages:
+      - python
+      max_files: 800
+    - owner: ansible-collections
+      name: community.azure
+      languages:
+      - python
+      max_files: 500
+    - owner: ansible-collections
+      name: community.crypto
+      languages:
+      - python
+      max_files: 500
+    - owner: ansible-collections
+      name: community.mysql
+      languages:
+      - python
+      max_files: 400
+    - owner: ansible-collections
+      name: community.postgresql
+      languages:
+      - python
+      max_files: 400
+    - owner: ansible-collections
+      name: community.rabbitmq
+      languages:
+      - python
+      max_files: 300
+    - owner: ansible-collections
+      name: community.redis
+      languages:
+      - python
+      max_files: 400
+    - owner: ansible-collections
+      name: community.mongodb
+      languages:
+      - python
+      max_files: 400
+    - owner: ansible-collections
+      name: community.grafana
+      languages:
+      - python
+      max_files: 500
+    - owner: ansible-collections
+      name: community.hashi_vault
+      languages:
+      - python
+      max_files: 400
+    - owner: ansible-collections
+      name: community.windows
+      languages:
+      - powershell
+      max_files: 500
+    - owner: ansible-collections
+      name: community.network
+      languages:
+      - python
+      max_files: 800
+    - owner: ansible-collections
+      name: community.vmware
+      languages:
+      - python
+      max_files: 800
+    - owner: ansible-collections
+      name: amazon.aws
+      languages:
+      - python
+      max_files: 1500
+    - owner: ansible-collections
+      name: ansible.netcommon
+      languages:
+      - python
+      max_files: 800
+    - owner: ansible-collections
+      name: ansible.posix
+      languages:
+      - python
+      max_files: 300
+    - owner: ansible-collections
+      name: ansible.utils
+      languages:
+      - python
+      max_files: 500
+    - owner: ansible-collections
+      name: ansible.windows
+      languages:
+      - powershell
+      max_files: 500
+    - owner: hashicorp
+      name: terraform-provider-aws
+      languages:
+      - go
+      max_files: 5000
+    - owner: hashicorp
+      name: terraform-provider-google
+      languages:
+      - go
+      max_files: 3000
+    - owner: hashicorp
+      name: terraform-provider-azurerm
+      languages:
+      - go
+      max_files: 4000
+    - owner: hashicorp
+      name: terraform-provider-kubernetes
+      languages:
+      - go
+      max_files: 2000
+    - owner: hashicorp
+      name: terraform-provider-helm
+      languages:
+      - go
+      max_files: 1000
+    - owner: hashicorp
+      name: terraform-provider-vault
+      languages:
+      - go
+      max_files: 2000
+    - owner: hashicorp
+      name: terraform-provider-consul
+      languages:
+      - go
+      max_files: 1000
+    - owner: hashicorp
+      name: terraform-provider-nomad
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-null
+      languages:
+      - go
+      max_files: 200
+    - owner: hashicorp
+      name: terraform-provider-random
+      languages:
+      - go
+      max_files: 200
+    - owner: hashicorp
+      name: terraform-provider-local
+      languages:
+      - go
+      max_files: 200
+    - owner: hashicorp
+      name: terraform-provider-tls
+      languages:
+      - go
+      max_files: 300
+    - owner: hashicorp
+      name: terraform-provider-external
+      languages:
+      - go
+      max_files: 200
+    - owner: hashicorp
+      name: terraform-provider-archive
+      languages:
+      - go
+      max_files: 300
+    - owner: hashicorp
+      name: terraform-provider-dns
+      languages:
+      - go
+      max_files: 500
+    - owner: hashicorp
+      name: terraform-provider-http
+      languages:
+      - go
+      max_files: 200
+    - owner: hashicorp
+      name: terraform-provider-gitlab
+      languages:
+      - go
+      max_files: 1000
+    - owner: hashicorp
+      name: terraform-provider-github
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-datadog
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-newrelic
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-snowflake
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-mongodbatlas
+      languages:
+      - go
+      max_files: 1000
+    - owner: hashicorp
+      name: terraform-provider-digitalocean
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-linode
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-vultr
+      languages:
+      - go
+      max_files: 500
+    - owner: hashicorp
+      name: terraform-provider-scaleway
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-heroku
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-pagerduty
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-cloudflare
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-fastly
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-akamai
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-auth0
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-okta
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-azuread
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-azurestack
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-azapi
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-awscc
+      languages:
+      - go
+      max_files: 1500
+    - owner: hashicorp
+      name: terraform-provider-boundary
+      languages:
+      - go
+      max_files: 800
+    - owner: hashicorp
+      name: terraform-provider-rancher2
+      languages:
+      - go
+      max_files: 1500
+  security:
+    description: Security (yara, snort, metasploit, nmap)
+    repos:
+    - owner: Yara-Rules
+      name: yara
+      languages:
+      - c
+      max_files: 2500
+    - owner: VirusTotal
+      name: yara
+      languages:
+      - c
+      max_files: 2500
+    - owner: snort
+      name: snort3
+      languages:
+      - c++
+      max_files: 3000
+    - owner: snort
+      name: snort
+      languages:
+      - c
+      max_files: 5000
+    - owner: OISF
+      name: suricata
+      languages:
+      - c
+      max_files: 5000
+    - owner: OISF
+      name: libhtp
+      languages:
+      - c
+      max_files: 800
+    - owner: rapid7
+      name: metasploit-framework
+      languages:
+      - ruby
+      max_files: 8000
+    - owner: rapid7
+      name: metasploit-omnibus
+      languages:
+      - ruby
+      max_files: 500
+    - owner: nmap
+      name: nmap
+      languages:
+      - c
+      - c++
+      - lua
+      - python
+      max_files: 5000
+    - owner: nmap
+      name: ncat
+      languages:
+      - c
+      max_files: 800
+    - owner: nmap
+      name: nping
+      languages:
+      - c++
+      max_files: 800
+    - owner: nmap
+      name: nsock
+      languages:
+      - c
+      max_files: 500
+    - owner: nmap
+      name: libdnet-stripped
+      languages:
+      - c
+      max_files: 300
+    - owner: nmap
+      name: libpcap
+      languages:
+      - c
+      max_files: 1500
+    - owner: nmap
+      name: libpcre
+      languages:
+      - c
+      max_files: 500
+    - owner: nmap
+      name: libssh2
+      languages:
+      - c
+      max_files: 500
+    - owner: nmap
+      name: libz
+      languages:
+      - c
+      max_files: 500
+    - owner: nmap
+      name: liblua
+      languages:
+      - c
+      max_files: 500
+    - owner: nmap
+      name: nmap-nse-scripts
+      languages:
+      - lua
+      max_files: 1500
+    - owner: OpenSCAP
+      name: openscap
+      languages:
+      - c
+      max_files: 3000
+    - owner: OpenSCAP
+      name: scap-security-guide
+      languages:
+      - yaml
+      max_files: 3000
+    - owner: OpenSCAP
+      name: openscap-daemon
+      languages:
+      - python
+      max_files: 300
+    - owner: OpenSCAP
+      name: scap-workbench
+      languages:
+      - c++
+      max_files: 800
+    - owner: cisagov
+      name: Malcolm
+      languages:
+      - python
+      max_files: 1500
+    - owner: cisagov
+      name: Cyber-Security
+      languages:
+      - python
+      max_files: 500
+    - owner: cisagov
+      name: ncats-data
+      languages:
+      - python
+      max_files: 300
+    - owner: cisagov
+      name: pshtt
+      languages:
+      - python
+      max_files: 400
+    - owner: cisagov
+      name: trustymail
+      languages:
+      - python
+      max_files: 300
+    - owner: CISOfy
+      name: lynis
+      languages:
+      - shell
+      max_files: 1500
+    - owner: aquasecurity
+      name: kube-bench
+      languages:
+      - go
+      max_files: 1500
+    - owner: aquasecurity
+      name: kube-hunter
+      languages:
+      - python
+      max_files: 800
+    - owner: aquasecurity
+      name: trivy
+      languages:
+      - go
+      max_files: 3000
+    - owner: aquasecurity
+      name: tfsec
+      languages:
+      - go
+      max_files: 2500
+    - owner: aquasecurity
+      name: starboard
+      languages:
+      - go
+      max_files: 1500
+    - owner: aquasecurity
+      name: kubeclarity
+      languages:
+      - go
+      max_files: 1500
+    - owner: aquasecurity
+      name: tracee
+      languages:
+      - go
+      max_files: 2000
+    - owner: aquasecurity
+      name: vulnerability-db
+      languages:
+      - go
+      max_files: 500
+    - owner: aquasecurity
+      name: kubeaudit
+      languages:
+      - go
+      max_files: 800
+    - owner: aquasecurity
+      name: prowler
+      languages:
+      - python
+      max_files: 2000
+  ai_tools:
+    description: AI tooling (LangChain, LlamaIndex, ...)
+    repos:
+    - owner: langchain-ai
+      name: langchain
+      languages:
+      - python
+      - typescript
+      max_files: 12000
+    - owner: langchain-ai
+      name: langgraph
+      languages:
+      - python
+      max_files: 2500
+    - owner: langchain-ai
+      name: langsmith-sdk
+      languages:
+      - python
+      - typescript
+      max_files: 1500
+    - owner: langchain-ai
+      name: langchainjs
+      languages:
+      - typescript
+      max_files: 5000
+    - owner: langchain-ai
+      name: langserve
+      languages:
+      - python
+      max_files: 800
+    - owner: langchain-ai
+      name: langchain-experimental
+      languages:
+      - python
+      max_files: 1000
+    - owner: langchain-ai
+      name: langchain-core
+      languages:
+      - python
+      max_files: 2000
+    - owner: langchain-ai
+      name: langchain-community
+      languages:
+      - python
+      max_files: 4000
+    - owner: langchain-ai
+      name: langchain-openai
+      languages:
+      - python
+      max_files: 500
+    - owner: langchain-ai
+      name: langchain-anthropic
+      languages:
+      - python
+      max_files: 400
+    - owner: langchain-ai
+      name: langchain-google-genai
+      languages:
+      - python
+      max_files: 500
+    - owner: langchain-ai
+      name: langchain-google-vertexai
+      languages:
+      - python
+      max_files: 800
+    - owner: langchain-ai
+      name: langchain-aws
+      languages:
+      - python
+      max_files: 800
+    - owner: langchain-ai
+      name: langchain-mistralai
+      languages:
+      - python
+      max_files: 500
+    - owner: langchain-ai
+      name: langchain-cohere
+      languages:
+      - python
+      max_files: 500
+    - owner: langchain-ai
+      name: langchain-huggingface
+      languages:
+      - python
+      max_files: 500
+    - owner: langchain-ai
+      name: langchain-together
+      languages:
+      - python
+      max_files: 300
+    - owner: langchain-ai
+      name: langchain-fireworks
+      languages:
+      - python
+      max_files: 300
+    - owner: langchain-ai
+      name: langchain-groq
+      languages:
+      - python
+      max_files: 300
+    - owner: langchain-ai
+      name: langchain-ollama
+      languages:
+      - python
+      max_files: 400
+    - owner: langchain-ai
+      name: langchain-text-splitters
+      languages:
+      - python
+      max_files: 400
+    - owner: run-llama
+      name: llama_index
+      languages:
+      - python
+      max_files: 8000
+    - owner: run-llama
+      name: llama_index.ts
+      languages:
+      - typescript
+      max_files: 3000
+    - owner: run-llama
+      name: llama_datasets
+      languages:
+      - python
+      max_files: 500
+    - owner: explodinggradients
+      name: ragas
+      languages:
+      - python
+      max_files: 1500
+    - owner: microsoft
+      name: autogen
+      languages:
+      - python
+      max_files: 5000
+    - owner: microsoft
+      name: autogen-typescript
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: microsoft
+      name: FLAML
+      languages:
+      - python
+      max_files: 2000
+    - owner: microsoft
+      name: taskweaver
+      languages:
+      - python
+      max_files: 1500
+    - owner: microsoft
+      name: promptflow
+      languages:
+      - python
+      max_files: 3000
+    - owner: crewAIInc
+      name: crewAI
+      languages:
+      - python
+      max_files: 2500
+    - owner: crewAIInc
+      name: crewAI-tools
+      languages:
+      - python
+      max_files: 500
+    - owner: crewAIInc
+      name: crewAI-examples
+      languages:
+      - python
+      max_files: 800
+    - owner: haystack
+      name: haystack
+      languages:
+      - python
+      max_files: 3000
+    - owner: deepset-ai
+      name: haystack
+      languages:
+      - python
+      max_files: 4000
+    - owner: deepset-ai
+      name: FARM
+      languages:
+      - python
+      max_files: 2000
+    - owner: UKPLab
+      name: sentence-transformers
+      languages:
+      - python
+      max_files: 3000
+    - owner: bigscience-workshop
+      name: promptsource
+      languages:
+      - python
+      max_files: 2000
+    - owner: EleutherAI
+      name: lm-evaluation-harness
+      languages:
+      - python
+      max_files: 2000
+    - owner: lmsys
+      name: FastChat
+      languages:
+      - python
+      max_files: 3000
+    - owner: openai
+      name: openai-cookbook
+      languages:
+      - python
+      - typescript
+      max_files: 3000
+    - owner: openai
+      name: tiktoken
+      languages:
+      - python
+      - rust
+      max_files: 800
+    - owner: openai
+      name: whisper
+      languages:
+      - python
+      max_files: 1500
+    - owner: openai
+      name: whisper.cpp
+      languages:
+      - c++
+      max_files: 1500
+    - owner: openai
+      name: CLIP
+      languages:
+      - python
+      max_files: 1000
+  scientific:
+    description: Scientific (scipy, sympy, astropy, ...)
+    repos:
+    - owner: scipy
+      name: scipy
+      languages:
+      - python
+      - c
+      - fortran
+      max_files: 5000
+    - owner: numpy
+      name: numpy
+      languages:
+      - python
+      - c
+      max_files: 5000
+    - owner: matplotlib
+      name: matplotlib
+      languages:
+      - python
+      max_files: 8000
+    - owner: sympy
+      name: sympy
+      languages:
+      - python
+      max_files: 8000
+    - owner: astropy
+      name: astropy
+      languages:
+      - python
+      - c
+      max_files: 8000
+    - owner: sunpy
+      name: sunpy
+      languages:
+      - python
+      max_files: 3000
+    - owner: biopython
+      name: biopython
+      languages:
+      - python
+      max_files: 5000
+    - owner: openmm
+      name: openmm
+      languages:
+      - c++
+      - python
+      max_files: 3000
+    - owner: mdtraj
+      name: mdtraj
+      languages:
+      - python
+      - c++
+      max_files: 2000
+    - owner: mdanalysis
+      name: MDAnalysis
+      languages:
+      - python
+      - c
+      max_files: 3000
+    - owner: openbabel
+      name: openbabel
+      languages:
+      - c++
+      max_files: 4000
+    - owner: rdkit
+      name: rdkit
+      languages:
+      - c++
+      - python
+      max_files: 5000
+    - owner: deepchem
+      name: deepchem
+      languages:
+      - python
+      max_files: 2500
+    - owner: choderalab
+      name: openmmtools
+      languages:
+      - python
+      max_files: 1500
+    - owner: choderalab
+      name: yank
+      languages:
+      - python
+      max_files: 1000
+    - owner: choderalab
+      name: perses
+      languages:
+      - python
+      max_files: 800
+    - owner: openforcefield
+      name: openff-toolkit
+      languages:
+      - python
+      max_files: 1500
+    - owner: openforcefield
+      name: openff-interchange
+      languages:
+      - python
+      max_files: 800
+    - owner: openforcefield
+      name: openff-evaluator
+      languages:
+      - python
+      max_files: 500
+    - owner: MolSSI
+      name: QCElemental
+      languages:
+      - python
+      max_files: 800
+    - owner: MolSSI
+      name: QCPortal
+      languages:
+      - python
+      max_files: 800
+    - owner: MolSSI
+      name: QCFractal
+      languages:
+      - python
+      max_files: 1500
+    - owner: MolSSI
+      name: QCEngine
+      languages:
+      - python
+      max_files: 1000
+    - owner: psi4
+      name: psi4
+      languages:
+      - c++
+      - python
+      max_files: 4000
+    - owner: psi4
+      name: psi4numpy
+      languages:
+      - python
+      max_files: 500
+    - owner: geometric
+      name: geomeTRIC
+      languages:
+      - python
+      max_files: 1000
+    - owner: materialsproject
+      name: pymatgen
+      languages:
+      - python
+      max_files: 5000
+    - owner: materialsproject
+      name: atomate
+      languages:
+      - python
+      max_files: 1500
+    - owner: materialsproject
+      name: atomate2
+      languages:
+      - python
+      max_files: 1500
+    - owner: materialsproject
+      name: fireworks
+      languages:
+      - python
+      max_files: 1500
+    - owner: materialsproject
+      name: monty
+      languages:
+      - python
+      max_files: 400
+    - owner: materialsproject
+      name: custodian
+      languages:
+      - python
+      max_files: 500
+    - owner: materialsproject
+      name: mp-api
+      languages:
+      - python
+      max_files: 800
+    - owner: materialsproject
+      name: emmet
+      languages:
+      - python
+      max_files: 1000
+    - owner: materialsproject
+      name: jobflow
+      languages:
+      - python
+      max_files: 800
+    - owner: materialsproject
+      name: maggma
+      languages:
+      - python
+      max_files: 1000
+    - owner: hackingmaterials
+      name: matminer
+      languages:
+      - python
+      max_files: 1500
+    - owner: hackingmaterials
+      name: automatminer
+      languages:
+      - python
+      max_files: 800
+    - owner: hackingmaterials
+      name: matbench
+      languages:
+      - python
+      max_files: 500
+  systems:
+    description: Systems (Linux, GNOME, KDE, .NET)
+    repos:
+    - owner: torvalds
+      name: linux
+      languages:
+      - c
+      max_files: 30000
+    - owner: golang
+      name: go
+      languages:
+      - go
+      max_files: 15000
+    - owner: rust-lang
+      name: rust
+      languages:
+      - rust
+      max_files: 20000
+    - owner: python
+      name: cpython
+      languages:
+      - python
+      - c
+      max_files: 8000
+    - owner: python
+      name: pypy
+      languages:
+      - python
+      - c
+      max_files: 5000
+    - owner: jruby
+      name: jruby
+      languages:
+      - java
+      - ruby
+      max_files: 5000
+    - owner: ruby
+      name: ruby
+      languages:
+      - c
+      max_files: 5000
+    - owner: php
+      name: php-src
+      languages:
+      - c
+      max_files: 8000
+    - owner: perl
+      name: perl5
+      languages:
+      - c
+      max_files: 4000
+    - owner: JuliaLang
+      name: julia
+      languages:
+      - julia
+      - c
+      max_files: 8000
+    - owner: JuliaLang
+      name: Pkg.jl
+      languages:
+      - julia
+      max_files: 1000
+    - owner: JuliaLang
+      name: Downloads.jl
+      languages:
+      - julia
+      max_files: 300
+    - owner: JuliaLang
+      name: juliaup
+      languages:
+      - rust
+      max_files: 500
+    - owner: JuliaLang
+      name: julia-vscode
+      languages:
+      - typescript
+      max_files: 1000
+    - owner: JuliaLang
+      name: Compat.jl
+      languages:
+      - julia
+      max_files: 200
+    - owner: openjdk
+      name: jdk
+      languages:
+      - java
+      - c
+      max_files: 15000
+    - owner: dotnet
+      name: runtime
+      languages:
+      - c#
+      - c++
+      max_files: 8000
+    - owner: dotnet
+      name: aspnetcore
+      languages:
+      - c#
+      max_files: 10000
+    - owner: dotnet
+      name: efcore
+      languages:
+      - c#
+      max_files: 5000
+    - owner: dotnet
+      name: roslyn
+      languages:
+      - c#
+      max_files: 8000
+    - owner: dotnet
+      name: sdk
+      languages:
+      - c#
+      max_files: 4000
+    - owner: dotnet
+      name: maui
+      languages:
+      - c#
+      max_files: 5000
+    - owner: dotnet
+      name: fsharp
+      languages:
+      - f#
+      max_files: 3000
+    - owner: dotnet
+      name: ilspy
+      languages:
+      - c#
+      max_files: 2000
+    - owner: mono
+      name: mono
+      languages:
+      - c
+      max_files: 5000
+    - owner: swig
+      name: swig
+      languages:
+      - c
+      - python
+      max_files: 1500
+    - owner: gnome
+      name: glib
+      languages:
+      - c
+      max_files: 5000
+    - owner: gnome
+      name: gtk
+      languages:
+      - c
+      max_files: 8000
+    - owner: gnome
+      name: vala
+      languages:
+      - vala
+      - c
+      max_files: 3000
+    - owner: gnome
+      name: librsvg
+      languages:
+      - rust
+      max_files: 1500
+    - owner: gnome
+      name: gnome-shell
+      languages:
+      - javascript
+      - c
+      max_files: 5000
+    - owner: gnome
+      name: mutter
+      languages:
+      - c
+      max_files: 4000
+    - owner: gnome
+      name: gnome-settings-daemon
+      languages:
+      - c
+      max_files: 2000
+    - owner: gnome
+      name: gnome-control-center
+      languages:
+      - c
+      max_files: 3000
+    - owner: gnome
+      name: gnome-software
+      languages:
+      - c
+      max_files: 2500
+    - owner: gnome
+      name: nautilus
+      languages:
+      - c
+      max_files: 3000
+    - owner: gnome
+      name: gnome-boxes
+      languages:
+      - vala
+      max_files: 1500
+    - owner: gnome
+      name: gnome-terminal
+      languages:
+      - c
+      max_files: 1500
+    - owner: gnome
+      name: libsoup
+      languages:
+      - c
+      max_files: 1500
+    - owner: gnome
+      name: gvfs
+      languages:
+      - c
+      max_files: 2000
+    - owner: gnome
+      name: gnome-keyring
+      languages:
+      - c
+      max_files: 2000
+    - owner: kde
+      name: plasma-desktop
+      languages:
+      - cpp
+      max_files: 5000
+    - owner: kde
+      name: plasma-framework
+      languages:
+      - cpp
+      max_files: 2000
+    - owner: kde
+      name: kio
+      languages:
+      - cpp
+      max_files: 2500
+    - owner: kde
+      name: kwin
+      languages:
+      - cpp
+      max_files: 5000
+    - owner: kde
+      name: kirigami
+      languages:
+      - cpp
+      max_files: 1500
+    - owner: kde
+      name: baloo
+      languages:
+      - cpp
+      max_files: 1500
+    - owner: kde
+      name: kdelibs
+      languages:
+      - cpp
+      max_files: 8000
+    - owner: kde
+      name: kdevelop
+      languages:
+      - cpp
+      max_files: 5000
+    - owner: kde
+      name: konsole
+      languages:
+      - cpp
+      max_files: 2000
+    - owner: kde
+      name: okular
+      languages:
+      - cpp
+      max_files: 3000
+    - owner: kde
+      name: dolphin
+      languages:
+      - cpp
+      max_files: 2000
+    - owner: kde
+      name: kate
+      languages:
+      - cpp
+      max_files: 3000

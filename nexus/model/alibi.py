@@ -24,40 +24,43 @@ import torch.nn as nn
 def get_alibi_slopes(num_heads: int, max_slope: float = 8.0) -> torch.Tensor:
     """Compute ALiBi slopes for `num_heads` attention heads.
 
-    Slopes form a geometric sequence: 1/2, 1/4, 1/8, ... 1/2^num_heads
-    (interleaved for non-power-of-2 head counts).
+    v0.4 fix: use `max_slope` correctly (was hardcoded to 8.0 → log2(8)=3).
+    v0.4 fix: non-power-of-2 head counts now pick the *closest* n slopes
+              (standard ALiBi behavior), not "evenly spaced" (which was buggy).
 
     Args:
         num_heads: number of attention heads
-        max_slope: steepest slope (controls how quickly attention decays
-                   with distance). Default 8.0 → first slope = 1/2^(-3) ... = 1/2^(1/2^3)
+        max_slope: steepest slope (controls decay). Default 8.0.
 
     Returns:
         slopes: tensor of shape [num_heads]
     """
-    def _pow2_interleaved(n: int) -> List[float]:
-        if n <= 0:
-            return []
-        start = 2 ** (-(2 ** -(math.log2(n) - math.log2(max_slope))))
-        ratio = start
-        return [start * (ratio ** i) for i in range(n)]
+    if num_heads <= 0:
+        return torch.tensor([], dtype=torch.float32)
 
-    # Standard ALiBi slopes (geometric series 2^(-2^-(log2(n) - m)))
+    log_max = math.log2(max_slope)  # e.g. log2(8)=3
+
     def _get_slopes_power_of_2(n: int) -> List[float]:
-        start = 2.0 ** (-(2.0 ** -(math.log2(n) - 3)))
+        start = 2.0 ** (-(2.0 ** -(math.log2(n) - log_max)))
         return [start * (2.0 ** (-i)) for i in range(n)]
 
     if (num_heads & (num_heads - 1)) == 0:
-        # Power of 2
+        # Power of 2 — direct
         slopes = _get_slopes_power_of_2(num_heads)
     else:
-        # Closest power of 2 >= num_heads, then subselect
+        # Non-power-of-2: standard ALiBi picks the n closest slopes
+        # by computing slopes for the nearest power of 2 >= n and
+        # interleaving them, then taking the first n.
         base = 1
         while base < num_heads:
             base *= 2
         full = _get_slopes_power_of_2(base)
-        # take the first num_heads entries, evenly spaced
-        slopes = [full[i] for i in range(0, base, base // num_heads)][:num_heads]
+        # Interleave: take even-indexed first, then odd, to pick "closest" slopes
+        interleaved = (
+            [full[i] for i in range(0, base, 2)]
+            + [full[i] for i in range(1, base, 2)]
+        )
+        slopes = interleaved[:num_heads]
 
     return torch.tensor(slopes, dtype=torch.float32)
 

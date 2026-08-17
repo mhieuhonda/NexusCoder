@@ -124,20 +124,34 @@ class GitHubCollector:
     def _collect_repo(self, repo: GitHubRepo) -> Iterator[CodeSample]:
         """Collect từ một repo."""
         cache_path = os.path.join(self.cache_dir, f"{repo.owner}_{repo.name}")
-        
+
         # Clone if not cached
         if not os.path.exists(cache_path):
             logger.info(f"Cloning {repo.url}...")
             try:
-                subprocess.run(
-                    ["git", "clone", "--depth", "1", "--branch", repo.branch, repo.url, cache_path],
-                    check=True,
-                    capture_output=True,
-                    timeout=300,
-                )
-            except subprocess.CalledProcessError as e:
-                logger.error(f"Clone failed for {repo.url}: {e.stderr.decode()[:200]}")
-                return
+                # v0.4 fix: try main, then fall back to master, then default branch.
+                # Many older repos use `master` as their default branch.
+                clone_ok = False
+                last_err = ""
+                for branch in (repo.branch, "main", "master"):
+                    try:
+                        subprocess.run(
+                            ["git", "clone", "--depth", "1", "--branch", branch, repo.url, cache_path],
+                            check=True,
+                            capture_output=True,
+                            timeout=300,
+                        )
+                        clone_ok = True
+                        break
+                    except subprocess.CalledProcessError as e:
+                        last_err = (e.stderr or b"").decode(errors="replace")[:200]
+                        # Clean up partial clone for next attempt
+                        if os.path.exists(cache_path):
+                            import shutil
+                            shutil.rmtree(cache_path, ignore_errors=True)
+                if not clone_ok:
+                    logger.error(f"Clone failed for {repo.url} (tried main & master): {last_err}")
+                    return
             except subprocess.TimeoutExpired:
                 logger.error(f"Clone timeout for {repo.url}")
                 return
@@ -355,7 +369,7 @@ CURATED_REPOS: List[GitHubRepo] = [
     GitHubRepo("angular", "angular", languages=["typescript"], max_files=2000),
     GitHubRepo("vercel", "next.js", languages=["javascript", "typescript"], max_files=2000),
     GitHubRepo("microsoft", "TypeScript", languages=["typescript"], max_files=2000),
-    GitHubRepo("nodejs", "node", languages=["javascript", "c++"], max_files=2000),
+    GitHubRepo("nodejs", "node", languages=["javascript", "cpp"], max_files=2000),
     GitHubRepo("expressjs", "express", languages=["javascript"]),
     GitHubRepo("lodash", "lodash", languages=["javascript"]),
     GitHubRepo("axios", "axios", languages=["javascript"]),

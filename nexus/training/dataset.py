@@ -210,8 +210,12 @@ class StreamingNexusDataset(IterableDataset):
         max_length: int = 512,
         shuffle_buffer: int = 10000,
         seed: int = 42,
+        pad_token_id: int = 0,
     ):
         super().__init__()
+        # v0.4 fix: use real pad_token_id (was hardcoded 0 which collides
+        # with token_id 0 in the tokenizer if pad_id is changed by the user).
+        self.pad_token_id = int(pad_token_id)
         self.tokenizer = tokenizer
         self.data_dir = data_dir
         self.max_length = max_length
@@ -259,9 +263,10 @@ class StreamingNexusDataset(IterableDataset):
         if len(input_ids) > self.max_length:
             input_ids = input_ids[: self.max_length]
         else:
-            input_ids = input_ids + [0] * (self.max_length - len(input_ids))
-        labels = [-100 if t == 0 else t for t in input_ids]
-        attn = [0 if t == 0 else 1 for t in input_ids]
+            input_ids = input_ids + [self.pad_token_id] * (self.max_length - len(input_ids))
+        # v0.4 fix: mask out pad_token_id (not hardcoded 0)
+        labels = [-100 if t == self.pad_token_id else t for t in input_ids]
+        attn = [0 if t == self.pad_token_id else 1 for t in input_ids]
         return {
             "input_ids": torch.tensor(input_ids, dtype=torch.long),
             "labels": torch.tensor(labels, dtype=torch.long),
@@ -291,10 +296,13 @@ class NexusDataset(Dataset):
         include_external: bool = False,
         external_data_dir: str = "./data/processed",
         augment: bool = False,
+        pad_token_id: int = 0,
     ):
         self.tokenizer = tokenizer
         self.max_length = max_length
         self.augment = augment
+        # v0.4 fix: configurable pad_token_id (was hardcoded 0)
+        self.pad_token_id = int(pad_token_id)
 
         if data is not None:
             self.data = data
@@ -319,9 +327,10 @@ class NexusDataset(Dataset):
             if len(input_ids) > self.max_length:
                 input_ids = input_ids[: self.max_length]
             else:
-                input_ids = input_ids + [0] * (self.max_length - len(input_ids))
-            labels = [-100 if t == 0 else t for t in input_ids]
-            attn = [0 if t == 0 else 1 for t in input_ids]
+                input_ids = input_ids + [self.pad_token_id] * (self.max_length - len(input_ids))
+            # v0.4 fix: mask out pad_token_id (not hardcoded 0)
+            labels = [-100 if t == self.pad_token_id else t for t in input_ids]
+            attn = [0 if t == self.pad_token_id else 1 for t in input_ids]
             examples.append({
                 "input_ids": torch.tensor(input_ids, dtype=torch.long),
                 "labels": torch.tensor(labels, dtype=torch.long),

@@ -82,10 +82,10 @@ class NexusDecoderLayer(nn.Module):
         )
         hidden_states = residual + attn_output
 
-        # Pre-norm + MoE FFN
+        # Pre-norm + MoE FFN (v0.4 fix: forward attention_mask for proper aux loss)
         residual = hidden_states
         hidden_states = self.post_attention_norm(hidden_states)
-        moe_output, aux_loss = self.moe(hidden_states)
+        moe_output, aux_loss = self.moe(hidden_states, attention_mask=attention_mask)
         hidden_states = residual + moe_output
 
         return hidden_states, new_kv, aux_loss

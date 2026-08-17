@@ -95,8 +95,8 @@ class SimpleBPETokenizer:
                 self.vocab[c] = next_id
                 next_id += 1
 
-        # Thêm các ký tự tiếng Việt có dấu
-        vietnamese_chars = "àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẲÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ"
+        # Thêm các ký tự tiếng Việt có dấu (v0.4 fix: Ẵ was duplicated as Ẳ)
+        vietnamese_chars = "àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ"
         for c in vietnamese_chars:
             if c not in self.vocab:
                 self.vocab[c] = next_id
@@ -135,7 +135,13 @@ class SimpleBPETokenizer:
                 break
 
             best_pair = max(pairs, key=pairs.get)
-            new_token = best_pair[0] + best_pair[1].replace("</w>", "") + ("</w>" if "</w>" in best_pair[1] else "")
+            # v0.4 fix: preserve </w> marker correctly. The merged token carries
+            # </w> if the SECOND symbol has it (last char of pair determines word boundary).
+            first, second = best_pair
+            second_has_end = "</w>" in second
+            first_clean = first.replace("</w>", "") if first.endswith("</w>") else first
+            second_clean = second.replace("</w>", "") if second_has_end else second
+            new_token = first_clean + second_clean + ("</w>" if second_has_end else "")
 
             if new_token in self.vocab:
                 # Đã tồn tại, skip
@@ -246,12 +252,22 @@ class SimpleBPETokenizer:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
     def load(self, path: str) -> None:
-        """Load tokenizer từ file JSON."""
+        """Load tokenizer từ file JSON (v0.4: robust separator)."""
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         self.vocab_size = data["vocab_size"]
         self.vocab = data["vocab"]
-        self.merges = {tuple(k.split("|")): v for k, v in data["merges"].items()}
+        # v0.4 fix: handle the | separator robustly. Each key was saved as
+        # "first|second" — split on the FIRST "|" only so tokens containing "|"
+        # do not break lookups.
+        self.merges = {}
+        for k, v in data["merges"].items():
+            if "|" in k:
+                parts = k.split("|", 1)  # split on first | only
+                self.merges[(parts[0], parts[1])] = v
+            else:
+                # Legacy / single-token: skip
+                continue
         self.id_to_token = {v: k for k, v in self.vocab.items()}
         self._is_trained = True
 

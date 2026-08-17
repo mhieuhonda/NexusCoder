@@ -94,31 +94,57 @@ class ArxivCollector:
             return []
     
     def _build_query(self, query: str, category: Optional[str]) -> str:
-        """Build arXiv query string."""
+        """Build arXiv query string (URL-encoded for safety)."""
+        # v0.4 fix: use urllib.parse.quote so special chars in query don't break URL.
+        import urllib.parse
         parts = []
         if query:
-            # Search in title and abstract
-            parts.append(f"abs:\"{query}\"+OR+ti:\"{query}\"")
+            q = urllib.parse.quote(query, safe='')
+            parts.append(f'(abs:"{q}" OR ti:"{q}")')
         if category:
             parts.append(f"cat:{category}")
-        return "+AND+".join(parts) if parts else "all:*"
-    
+        return " AND ".join(parts) if parts else "all:*"
+
     def _parse_response(self, xml_data: str) -> List[ArxivPaper]:
         """Parse arXiv API XML response."""
         ns = {
             "atom": "http://www.w3.org/2005/Atom",
             "arxiv": "http://arxiv.org/schemas/atom",
         }
-        
+
         papers = []
         try:
             root = ET.fromstring(xml_data)
             for entry in root.findall("atom:entry", ns):
-                arxiv_id = entry.find("atom:id", ns).text.split("/")[-1]
-                title = entry.find("atom:title", ns).text.strip().replace("\n", " ")
-                abstract = entry.find("atom:summary", ns).text.strip().replace("\n", " ")
-                published = entry.find("atom:published", ns).text
-                
+                # v0.4 fix: None-safe access for each field
+                id_el = entry.find("atom:id", ns)
+                arxiv_id = (
+                    id_el.text.split("/")[-1]
+                    if id_el is not None and id_el.text
+                    else ""
+                )
+
+                title_el = entry.find("atom:title", ns)
+                title = (
+                    title_el.text.strip().replace("\n", " ")
+                    if title_el is not None and title_el.text
+                    else ""
+                )
+
+                summary_el = entry.find("atom:summary", ns)
+                abstract = (
+                    summary_el.text.strip().replace("\n", " ")
+                    if summary_el is not None and summary_el.text
+                    else ""
+                )
+
+                published_el = entry.find("atom:published", ns)
+                published = (
+                    published_el.text
+                    if published_el is not None and published_el.text
+                    else ""
+                )
+
                 authors = []
                 for author in entry.findall("atom:author", ns):
                     name = author.find("atom:name", ns)

@@ -1,0 +1,162 @@
+============================================================================
+                  NEXUS CODER v0.4 — CYBERFORGE EDITION
+                   AI Code & Security Engine — Open Source
+============================================================================
+
+  Created by: Hieu Louis
+  GitHub:     https://github.com/mhieuhonda/NexusCoder
+  Year:       2026
+  License:    NAL-1.0 (Attribution Required)
+  Version:    0.4.0
+  Python:     3.12.13
+
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│   NEXUS CODER — SIÊU AI MÃ NGUỒN MỞ CHO CODE & BẢO MẬT                  │
+│                                                                          │
+│   • 423 tỷ tham số tổng, 39 tỷ tham số kích hoạt mỗi token              │
+│   • Cửa sổ ngữ cảnh 3 TRIỆU tokens                                      │
+│   • 60+ kỹ năng (skills) tích hợp                                        │
+│   • 80+ công cụ (tools) tự động đăng ký                                  │
+│   • Kiến trúc MoE Transformer thế hệ mới                                 │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+TẠI SAO NEXUS CODER KHÁC BIỆT?
+==============================
+
+Nexus Coder v0.4 là một kiến trúc AI mã nguồn mở hoàn chỉnh, được Hieu Louis
+thiết kế từ con số không. Repository này cung cấp:
+
+  ✓ Toàn bộ mã nguồn kiến trúc model (Python/PyTorch)
+  ✓ Pipeline thu thập và xử lý dữ liệu code từ hàng nghìn GitHub repos
+  ✓ Framework huấn luyện đa giai đoạn
+  ✓ 60+ skills (code generation, debugging, security audit, ...)
+  ✓ 80+ tools (file ops, exec, web, database, devops, ...)
+  ✓ Tương thích Python 3.12.13 (strict)
+
+
+TRUNG THỰC VỀ TRẠNG THÁI MODEL
+================================
+
+  ⚠  REPO NÀY KHÔNG CHỨA MODEL ĐÃ ĐƯỢC TRAIN.
+
+  Nexus Coder v0.4 phân phối MÃ NGUỒN của kiến trúc, pipeline dữ liệu,
+  và framework huấn luyện. Người dùng tự huấn luyện mô hình trên dữ
+  liệu của mình. Mọi thông tin quảng cáo về "performance" hay "benchmark"
+  chỉ là ước tính lý thuyết dựa trên kích thước kiến trúc — chưa có
+  model thực tế nào được train và đánh giá chính thức.
+
+  Khi bạn thấy ai đó chia sẻ "Nexus Coder đã đạt X điểm benchmark Y", hãy
+  hỏi xem họ có train model thực tế hay không, và với dữ liệu gì.
+
+
+TÍNH NĂNG KỸ THUẬT CHÍNH
+==========================
+
+• Kiến trúc MoE Transformer với GQA (Grouped Query Attention)
+• RoPE + YaRN scaling cho context window cực dài (3M tokens)
+• FlashAttention-2 + SDPA + manual fallback
+• Sliding Window Attention cho long-context efficiency
+• QK-norm (Llama-3 style) cho training stability
+• KV cache quantization (int8 / fp8) cho inference memory
+• MLP-parallel (gate + up fuses thành 1 matmul)
+• Gradient checkpointing cho training VRAM tiết kiệm
+• Adaptive Density Routing (top-2 → top-8 experts theo input)
+• 48 experts chuyên biệt hóa theo domain code (Python, JS, Rust, ...)
+
+• 8 nguồn dữ liệu: GitHub curated corpus (1000+ repos), HuggingFace,
+  arXiv, Wikipedia, StackOverflow, The-Stack v2, StarCoder2-data,
+  Python-Alpaca
+
+• Tích hợp 5 framework tham chiếu: litgpt, LlamaFactory, axolotl,
+  OpenHands, omp-gym (xem ATTRIBUTIONS.md)
+
+
+CẤU HÌNH VARIANTS
+=================
+
+  tiny    — 5M params (CPU demo)
+  small   — 125M params (1 GPU)
+  medium  — 1B params (4-8 GPU)
+  large   — 10B params (32+ GPU) — backward-compat với v0.3
+  xlarge  — ~30B params (64+ GPU)
+  30b     — 30B/3B (64-128 GPU, H100 cluster)
+  70b     — ~70B/~12B (research only)
+  423b    — 423B/39B + 3M context (DEFAULT v0.4) — frontier scale
+
+
+CÀI ĐẶT
+========
+
+  git clone https://github.com/mhieuhonda/NexusCoder.git
+  cd NexusCoder
+  python3.12.13 -m venv venv
+  source venv/bin/activate
+  pip install -r requirements.txt
+
+
+SỬ DỤNG
+========
+
+  # Xem tóm tắt cấu hình
+  python -c "from nexus.config import print_config_summary; print_config_summary()"
+
+  # Tiny demo
+  python scripts/train.py --config tiny --steps 100
+
+  # Train (cần GPU)
+  python scripts/train.py --config large --steps 5000 --use-amp
+
+  # Chat với Nexus Agent
+  python scripts/chat.py
+
+
+GIẤY PHÉP — NAL-1.0 (ATTRIBUTION REQUIRED)
+==========================================
+
+  Nexus Coder v0.4 được phát hành dưới giấy phép NexusCoder Attribution
+  License v1.0 (NAL-1.0). Bạn được phép:
+
+    ✓ Sử dụng cho bất kỳ mục đích nào (commercial hoặc non-commercial)
+    ✓ Sửa đổi, phân phối, sublicense
+    ✓ Train, fine-tune, distill, quantize, ...
+    ✓ Build sản phẩm, dịch vụ, nghiên cứu trên nền Nexus Coder
+
+  BẮT BUỘC:
+
+    • Phải ghi danh tác giả gốc: "Hieu Louis"
+    • Phải kèm link: https://github.com/mhieuhonda/NexusCoder
+    • Trong model cards, README, UI, About pages, API responses,
+      research citations — bất cứ nơi nào hợp lý và thông dụng.
+
+  Không được:
+    ✗ Xóa hoặc làm mờ attribution notices
+    ✗ Cầm quyền tác giả của người khác
+    ✗ Implement technical measures để erase embedded authorship
+
+  Xem LICENSE để biết chi tiết đầy đủ.
+
+
+TÁC GIẢ
+========
+
+  Hieu Louis — 2026
+  GitHub:    https://github.com/mhieuhonda
+  Project:   https://github.com/mhieuhonda/NexusCoder
+  License:   NAL-1.0 (Attribution Required)
+
+
+KẾT LUẬN
+========
+
+  Nexus Coder v0.4 là một dự án mã nguồn mở cá nhân, được xây dựng với
+  tinh thần minh bạch: đây là CODE của kiến trúc AI, KHÔNG PHẢI model đã
+  train. Bạn có thể dùng nó để tự train model của mình, học hỏi kiến trúc,
+  hoặc build sản phẩm riêng. Hãy ghi danh Hieu Louis khi làm vậy.
+
+  Cảm ơn bạn đã quan tâm đến Nexus Coder.
+
+  — Hieu Louis, 2026

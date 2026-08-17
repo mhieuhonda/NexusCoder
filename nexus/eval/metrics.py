@@ -75,6 +75,12 @@ def compute_bleu(
     
     # Brevity penalty
     ref_lens = [len(r.split()) for r in references]
+    # v0.4 fix: guard against empty references list
+    if not ref_lens:
+        result = {"bleu": 0.0, "brevity_penalty": 0.0}
+        for i in range(1, max_n + 1):
+            result[f"precision_{i}"] = 0.0
+        return result
     closest_ref_len = min(ref_lens, key=lambda l: abs(l - len(hyp_tokens)))
     bp = 1.0 if len(hyp_tokens) > closest_ref_len else math.exp(1 - closest_ref_len / max(len(hyp_tokens), 1))
     
@@ -103,17 +109,29 @@ def compute_rouge(
     ref_tokens = reference.lower().split()
     hyp_tokens = hypothesis.lower().split()
     
-    # ROUGE-1 (unigram)
+    # ROUGE-1 (unigram) — v0.4 fix: recall (÷ ref length), not precision (÷ hyp)
     ref_1 = get_ngrams(ref_tokens, 1)
     hyp_1 = get_ngrams(hyp_tokens, 1)
     overlap_1 = sum((ref_1 & hyp_1).values())
-    rouge_1 = overlap_1 / max(len(hyp_tokens), 1)
-    
+    rouge_1_recall = overlap_1 / max(len(ref_tokens), 1)
+    rouge_1_precision = overlap_1 / max(len(hyp_tokens), 1)
+    rouge_1 = (
+        2 * rouge_1_recall * rouge_1_precision / max(rouge_1_recall + rouge_1_precision, 1e-9)
+        if (rouge_1_recall + rouge_1_precision) > 0
+        else 0.0
+    )
+
     # ROUGE-2 (bigram)
     ref_2 = get_ngrams(ref_tokens, 2)
     hyp_2 = get_ngrams(hyp_tokens, 2)
     overlap_2 = sum((ref_2 & hyp_2).values())
-    rouge_2 = overlap_2 / max(sum(hyp_2.values()), 1)
+    rouge_2_recall = overlap_2 / max(sum(ref_2.values()), 1)
+    rouge_2_precision = overlap_2 / max(sum(hyp_2.values()), 1)
+    rouge_2 = (
+        2 * rouge_2_recall * rouge_2_precision / max(rouge_2_recall + rouge_2_precision, 1e-9)
+        if (rouge_2_recall + rouge_2_precision) > 0
+        else 0.0
+    )
     
     # ROUGE-L (LCS)
     def lcs_length(a: List, b: List) -> int:

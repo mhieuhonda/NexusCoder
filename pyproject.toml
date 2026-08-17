@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nexus-coder"
-version = "0.3.0"
-description = "Nexus Coder v0.3 - AI Agent với MoE 10B/1.5B + FlashAttention-2 + ALiBi + Sliding Window, 60+ skills, 80+ tools, do Hieu Louis tạo ra"
+version = "0.4.0"
+description = "Nexus Coder v0.4 - CyberForge edition. MoE 423B/39B + 3M context + CyberGym training. Created by Hieu Louis."
 readme = "README.md"
 license = {file = "LICENSE"}
 authors = [
@@ -21,12 +21,12 @@ dependencies = [
     "requests>=2.31.0",
     "cryptography>=41.0.0",
 ]
-keywords = ["ai", "llm", "moe", "mixture-of-experts", "transformer", "nexus", "agent", "skills", "tools"]
+keywords = ["ai", "llm", "moe", "mixture-of-experts", "transformer", "nexus", "agent", "skills", "tools", "cyberforge", "cybergym"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
+    "License :: Other/Proprietary License",
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]

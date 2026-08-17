@@ -43,12 +43,13 @@ from nexus.optim.lora import apply_lora, LoRAConfig, count_lora_params
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Nexus Coder v0.2 Training")
+    parser = argparse.ArgumentParser(description="Nexus Coder v0.4 Training (CyberForge)")
     parser.add_argument(
         "--config",
         type=str,
         default="tiny",
-        choices=["tiny", "small", "medium", "large", "xlarge"],
+        # v0.4 fix: add 30b / 70b / 423b (supreme) choices
+        choices=["tiny", "small", "medium", "large", "xlarge", "30b", "70b", "423b", "supreme"],
         help="Model config variant",
     )
     parser.add_argument("--output", type=str, default="./checkpoints", help="Output directory")

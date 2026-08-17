@@ -129,15 +129,25 @@ class Quantizer:
         
         # FP8 conversion (when torch supports it natively)
         try:
+            # v0.4 fix: skip_layers should match either "name." OR "name" prefix.
+            skip_set = set(self.config.skip_layers)
             # Convert model to float8_e4m3fn
             for name, param in model.named_parameters():
-                if name not in [f"{s}." for s in self.config.skip_layers]:
-                    param.data = param.data.to(torch.float8_e4m3fn)
+                # Skip if name starts with any skip layer prefix
+                if any(
+                    name == s or name.startswith(s + ".") or name.startswith(s)
+                    for s in skip_set
+                ):
+                    continue
+                # Also skip embeddings/lm_head typically
+                if "embed_tokens" in name or "lm_head" in name:
+                    continue
+                param.data = param.data.to(torch.float8_e4m3fn)
             logger.info("FP8 quantization done. Memory reduced ~2x.")
         except Exception as e:
             logger.warning(f"FP8 conversion failed: {e}. Falling back to INT8.")
             return self._quantize_int8(model, calibration_data)
-        
+
         return model
     
     def estimate_memory_savings(self, model: nn.Module) -> Dict[str, float]:
