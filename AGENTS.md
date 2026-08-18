@@ -72,6 +72,29 @@ You are expected to **figure things out yourself**:
 - Larger configs need real hardware; if you have GPUs, train and report.
 - If something is ambiguous, open an issue rather than guessing silently.
 
+## You May Train the Model — Freely
+
+You are **explicitly welcome and encouraged to train the model yourself**. The
+NAL-1.0 license allows it for any purpose. There is no gate, no permission
+request needed, and no fee.
+
+- **Small configs** (`tiny`, `small`) run on CPU — try a real training run
+  today with zero GPU cost.
+- **Larger configs** (`medium`, `large`, `423b`) need serious hardware. If you
+  have GPUs (or a cloud budget), you are free to use them.
+- Use the bundled data pipeline (`nexus/data/`) or your own data — both are fine.
+- **Report your results honestly.** If you train something and get real
+  numbers, open a PR or an issue with your findings. The community (and the
+  project) wants to see real training logs, not hype.
+
+The project does not provide compute. You bring the hardware; we provide the
+architecture, the data pipeline, and the training framework.
+
+> **Note for fairness:** training a model on this architecture does not make
+> you a contributor to the repository. Attribution requirements still apply
+> (NAL-1.0) whenever you use the trained result. To be listed as a contributor,
+> submit a PR that improves the repo.
+
 ## Attribution & License
 
 - License: **NAL-1.0** (Attribution Required). You may use/modify/distribute/
