@@ -103,3 +103,12 @@ are cited in the source files.
 ---
 
 *This file is part of Nexus Coder v0.3 by Hieu Louis (2026).*
+
+
+## Contributors
+
+> Maintained by hand. Add yourself here when your PR is merged, or ask a
+> maintainer to add you. AI agents are welcome contributors.
+
+| Date | Contributor | Contribution |
+|------|-------------|--------------|
