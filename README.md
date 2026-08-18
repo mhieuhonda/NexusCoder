@@ -1,49 +1,55 @@
 <div align="center">
 
-# Nexus Coder
+# 🧠 Nexus Coder
 
 ### AI Code & Security Engine — CyberForge Edition
 
-**423B total · 39B active · 3M context · 60+ skills · 80+ tools**
+**An open architecture for next‑generation code generation and security analysis**
 
 [![Python](https://img.shields.io/badge/Python-3.12.13-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-NAL--1.0--Attribution Required-orange.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-0.4.0-brightgreen.svg)]()
+[![License: NAL-1.0](https://img.shields.io/badge/License-NAL--1.0-orange.svg)](LICENSE)
+[![Status: In Development](https://img.shields.io/badge/Status-In%20Development-yellow.svg)]()
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
+[![GitHub stars](https://img.shields.io/github/stars/mhieuhonda/NexusCoder?style=social)](https://github.com/mhieuhonda/NexusCoder)
+[![GitHub forks](https://img.shields.io/github/forks/mhieuhonda/NexusCoder?style=social)](https://github.com/mhieuhonda/NexusCoder)
+[![GitHub last commit](https://img.shields.io/github/last-commit/mhieuhonda/NexusCoder)](https://github.com/mhieuhonda/NexusCoder)
 
 **Created by [Hieu Louis](https://github.com/mhieuhonda)** · 2026
 
 </div>
 
----
+## 📖 Introduction
 
-# Nexus Coder v0.4
+**Nexus Coder** is an open‑source AI architecture, designed from the ground up by **Hieu Louis**, focused on two core capabilities:
 
-Nexus Coder là một kiến trúc AI mã nguồn mở do **Hieu Louis** thiết kế từ con số không,
-tập trung vào hai năng lực cốt lõi: **sinh code chất lượng cao** và **phân tích bảo mật**.
+- **High‑quality code generation** powered by a large‑scale Mixture‑of‑Experts (MoE) Transformer.
+- **Deep security analysis** for source code and systems.
 
-Bản v0.4 giới thiệu một kiến trúc được tổ chức lại theo hướng modular, tối ưu dung
-lượng nhưng tăng cường sức mạnh thông qua cấu hình MoE (Mixture of Experts) lớn hơn,
-cửa sổ ngữ cảnh dài hơn, và một pipeline huấn luyện đa giai đoạn.
+The project is under **active development**. This repository provides:
 
-> **Lưu ý quan trọng:** Repository này phân phối mã nguồn của kiến trúc mô hình,
-> pipeline dữ liệu, và framework huấn luyện. Mô hình **chưa được huấn luyện trước**
-> (untrained). Người dùng tự huấn luyện trên dữ liệu của mình theo giấy phép NAL-1.0.
+- The complete **model architecture source code** (Python/PyTorch).
+- A **data collection and processing pipeline** for code from multiple sources.
+- A **multi‑stage training framework** designed to scale.
+- **60+ skills** and **80+ tools** with automatic registration.
+- Configurations ranging from `tiny` (5M) to `423b` (423B parameters).
 
-## Đặc điểm tổng quan
+> **Important:** The model is **not pretrained** yet. We distribute only the architecture source and training pipeline. Users need to train their own models on their own data, in compliance with the NAL‑1.0 license.
 
-| Hạng mục | Giá trị |
-|----------|---------|
-| Tổng tham số | ~423 tỷ (423B) |
-| Tham số kích hoạt | ~39 tỷ (39B) |
-| Cửa sổ ngữ cảnh | 3.000.000 tokens (3M) |
-| Kiến trúc | MoE Transformer (GQA + RoPE/YaRN + RMSNorm + SwiGLU + FlashAttention-2 + Sliding Window + QK-norm + KV cache quantization + MLP-parallel + Gradient checkpointing) |
+## 📊 Key Technical Specifications
+
+| Item | Value |
+|------|-------|
+| Total parameters | ~423B |
+| Active parameters per token | ~39B |
+| Context window | 3,000,000 tokens (3M) |
+| Architecture | MoE Transformer (GQA + RoPE/YaRN + RMSNorm + SwiGLU + FlashAttention‑2 + Sliding Window + QK‑norm + KV cache quantization + MLP‑parallel + Gradient checkpointing) |
 | Skills | 60+ (code, devops, ML, data, security, cloud, system, blockchain, language) |
 | Tools | 80+ (file, exec, web, code analysis, database, devops, crypto, math, network) |
-| Nguồn dữ liệu | 8+ (GitHub curated corpus, HuggingFace, arXiv, Wikipedia, StackOverflow, The-Stack v2, StarCoder2-data, Python-Alpaca) |
+| Data sources | 8+ (GitHub curated corpus, HuggingFace, arXiv, Wikipedia, StackOverflow, The‑Stack v2, StarCoder2‑data, Python‑Alpaca) |
 | Python version | 3.12.13 (strict) |
 
-## Cài đặt
+## 🚀 Quick Install
 
 ```bash
 git clone https://github.com/mhieuhonda/NexusCoder.git
@@ -51,40 +57,40 @@ cd NexusCoder
 python3.12.13 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-# hoặc: pip install -e ".[all]"
+# or: pip install -e ".[all]"
 ```
 
-## Sử dụng nhanh
+💻 Usage
 
 ```bash
-# Xem tóm tắt cấu hình
+# Print configuration summary
 python -c "from nexus.config import print_config_summary; print_config_summary()"
 
 # Tiny demo (CPU)
 python scripts/train.py --config tiny --steps 100
 
-# Huấn luyện các cấu hình lớn hơn (cần GPU)
+# Train larger configurations (requires GPU)
 python scripts/train.py --config large --steps 5000 --use-amp
 python scripts/train.py --config 423b --steps 50000 --use-amp --deepspeed
 ```
 
-## Cấu trúc dự án
+📁 Project Structure
 
 ```
 NexusCoder/
-├── nexus/                 # Package chính
+├── nexus/                 # Main package
 │   ├── model/             # MoE Transformer (attention, MoE, layers, ...)
 │   ├── tokenizer/
 │   ├── training/          # Trainer + Dataset
 │   ├── inference/
 │   ├── agent/             # Planner, Router, Memory, Safety
-│   ├── skills/            # 60+ skills (auto-discovery)
-│   ├── tools/             # 80+ tools (auto-discovery)
+│   ├── skills/            # 60+ skills (auto‑discovery)
+│   ├── tools/             # 80+ tools (auto‑discovery)
 │   ├── data/              # Collectors + Processors
 │   ├── optim/             # Quantize, LoRA, Distill, Prune
 │   ├── safety/            # Filters, Guardrails
 │   ├── eval/              # Benchmarks, Metrics
-│   ├── integrations/      # litgpt, LlamaFactory, axolotl, OpenHands, omp-gym
+│   ├── integrations/      # litgpt, LlamaFactory, axolotl, OpenHands, omp‑gym
 │   └── utils/
 ├── configs/               # YAML configs (tiny → 423B)
 ├── scripts/              # CLI scripts
@@ -92,40 +98,36 @@ NexusCoder/
 ├── tests/
 ├── ATTRIBUTIONS.md
 ├── CHANGELOG.md
-├── LICENSE                # NAL-1.0 (Attribution Required)
-├── ADVERTISEMENT.txt
+├── LICENSE                # NAL‑1.0 (Attribution Required)
 ├── requirements.txt
 ├── pyproject.toml
 ├── setup.py
 └── README.md
 ```
 
-## Giấy phép
+⚖️ License
 
-Nexus Coder v0.4 được phát hành dưới giấy phép **NexusCoder Attribution License v1.0 (NAL-1.0)**.
+Released under the NexusCoder Attribution License v1.0 (NAL‑1.0).
 
-- Bạn có thể sử dụng, sửa đổi, phân phối, và huấn luyện mô hình cho bất kỳ mục đích nào.
-- **Bắt buộc** phải ghi danh tác giả gốc: **Hieu Louis** ([github.com/mhieuhonda](https://github.com/mhieuhonda)).
-- Không có bảo hành. Xem [LICENSE](LICENSE) để biết chi tiết.
+· You may use, modify, distribute, and train models for any purpose.
+· Attribution is required to the original author: Hieu Louis (github.com/mhieuhonda).
+· No warranty. See LICENSE for details.
 
-## Tác giả
+👤 Author
 
 <div align="center">
 
-**Hieu Louis** · 2026
+Hieu Louis · 2026
 
-- GitHub: [@mhieuhonda](https://github.com/mhieuhonda)
-- Project: NexusCoder
-- Year: 2026
-- License: NAL-1.0 (Attribution Required)
+· GitHub: @mhieuhonda
+· Project: NexusCoder
+· License: NAL‑1.0 (Attribution Required)
 
 </div>
 
----
-
 <div align="center">
 
-**Nexus Coder v0.4.0** — CyberForge Edition
+Nexus Coder — CyberForge Edition
 
 Made by Hieu Louis · 2026
 
